@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estúdio Rosane Matos — Especialista em Cabelos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-logo-dot"></span>
+      Rosane Matos
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links">
+      <a href="#servicos" onclick="toggleMenu()">Serviços</a>
+      <a href="#produtos" onclick="toggleMenu()">Produtos</a>
+      <a href="#agendar" onclick="toggleMenu()">Agendar</a>
+      <a href="#galeria" onclick="toggleMenu()">Galeria</a>
+      <a href="#contato" onclick="toggleMenu()">Contato</a>
+    </div>
+    <button class="nav-admin-btn" onclick="abrirLogin()">Área da Dona</button>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-lines"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-ring" style="width:500px;height:500px;"></div>
+    <div class="hero-ring" style="width:750px;height:750px;opacity:0.5;"></div>
+    <div class="hero-ring" style="width:1000px;height:1000px;opacity:0.25;"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Estúdio de Beleza</div>
+      <h1 class="hero-name"><span class="gold">Rosane</span><br>MATOS</h1>
+      <p class="hero-sub">Especialista em Cabelos &nbsp;·&nbsp; Queimados, RJ</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('agendar').scrollIntoView({behavior:'smooth'})">Agendar Agora</button>
+        <button class="btn-outline" onclick="document.getElementById('servicos').scrollIntoView({behavior:'smooth'})">Ver Serviços</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val">8+</div>
+          <div class="hero-stat-label">Anos de experiência</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">500+</div>
+          <div class="hero-stat-label">Clientes atendidas</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">8</div>
+          <div class="hero-stat-label">Serviços especializados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="container">
+      <div class="section-eyebrow">O que oferecemos</div>
+      <h2 class="section-title">Nossos <em>Serviços</em></h2>
+      <p class="section-desc">Cada serviço é realizado com produtos premium e técnica especializada para transformar e nutrir os seus cabelos.</p>
+      <div class="servicos-grid">
+        <div class="servico-card">
+          <div class="servico-icon">✂</div>
+          <div class="servico-nome">Escova + Prancha</div>
+          <div class="servico-desc">Alinhamento perfeito com finalização profissional, deixando os fios lisos, brilhantes e sedosos.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <div class="servico-preco">R$ 35,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Escova + Prancha — R$ 35')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">💧</div>
+          <div class="servico-nome">Hidratação + Finalização</div>
+          <div class="servico-desc">Tratamento intensivo de hidratação que restaura o brilho e a maciez dos fios ressecados.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <div class="servico-preco">R$ 40,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Hidratação + Finalização — R$ 40')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">⚗</div>
+          <div class="servico-nome">Reconstrução + Finalização</div>
+          <div class="servico-desc">Recomposição da estrutura capilar danificada com proteínas e aminoácidos de alta concentração.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <div class="servico-preco">R$ 55,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Reconstrução + Finalização — R$ 55')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🎨</div>
+          <div class="servico-nome">Coloração</div>
+          <div class="servico-desc">Coloração profissional com técnica precisa para realçar a beleza natural dos seus fios.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <div class="servico-preco">R$ 20,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Coloração — R$ 20')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">📅</div>
+          <div class="servico-nome">Cronograma Capilar</div>
+          <div class="servico-desc">Programa de 3 sessões personalizadas de hidratação, nutrição e reconstrução para cabelos saudáveis.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <span class="servico-partir">a partir de</span>
+              <div class="servico-preco">R$ 170,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Cronograma Capilar (3 sessões) — a partir de R$ 170')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">✨</div>
+          <div class="servico-nome">Botox Capilar</div>
+          <div class="servico-desc">Tratamento que elimina frizz, sela os fios e devolve brilho intenso sem alterar a estrutura.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <span class="servico-partir">a partir de</span>
+              <div class="servico-preco">R$ 80,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Botox Capilar — a partir de R$ 80')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">💆</div>
+          <div class="servico-nome">Progressiva</div>
+          <div class="servico-desc">Alisamento duradouro com fórmula de alta performance que elimina frizz e proporciona maciez.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <span class="servico-partir">a partir de</span>
+              <div class="servico-preco">R$ 110,00</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Progressiva — a partir de R$ 110')">Agendar</button>
+          </div>
+        </div>
+        <div class="servico-card">
+          <div class="servico-icon">🌿</div>
+          <div class="servico-nome">Tratamento Personalizado</div>
+          <div class="servico-desc">Diagnóstico personalizado e tratamento sob medida para as necessidades únicas do seu cabelo.</div>
+          <div class="servico-footer">
+            <div class="servico-preco-wrap">
+              <div class="servico-preco">Consulte</div>
+            </div>
+            <button class="btn-agendar-card" onclick="selecionarServico('Tratamento Capilar Personalizado')">Agendar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="produtos">
+    <div class="container">
+      <div class="section-eyebrow">Utilizados no estúdio</div>
+      <h2 class="section-title">Produtos <em>Premium</em></h2>
+      <p class="section-desc">Trabalhamos apenas com linhas profissionais selecionadas para garantir o melhor resultado nos seus cabelos.</p>
+      <div class="produtos-grid">
+        <div class="produto-card"><h4>Wella Professionals</h4><p>Linha de coloração e cuidados capilares de referência mundial, com pigmentos de longa duração.</p></div>
+        <div class="produto-card"><h4>Inoar Botox</h4><p>Fórmula de Botox capilar sem formol que sela cutículas e proporciona brilho espelhado.</p></div>
+        <div class="produto-card"><h4>Cadiveu Plástica dos Fios</h4><p>Tratamento progressivo de alta performance que combina alisamento e nutrição profunda.</p></div>
+        <div class="produto-card"><h4>L'Oréal Professionnel</h4><p>Máscaras e tratamentos de reconstrução com tecnologia francesa para fios danificados.</p></div>
+        <div class="produto-card"><h4>Kérastase Nutritive</h4><p>Linha de nutrição intensiva para cabelos secos, devolvendo maciez e luminosidade.</p></div>
+        <div class="produto-card"><h4>Redken Extreme</h4><p>Linha de reconstrução com proteínas interligadas que repara a estrutura dos fios.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="agendar">
+    <div class="container">
+      <div class="agendar-layout">
+        <div>
+          <div class="section-eyebrow" style="color:var(--gold);">Marque seu horário</div>
+          <h2 class="section-title">Agende <em style="color:var(--gold-bright);">Online</em></h2>
+          <p class="section-desc">Escolha o dia, o horário e o serviço. Confirmaremos via WhatsApp em até 1 hora.</p>
+          <div class="agendar-steps">
+            <div class="agendar-step"><div class="step-num">1</div><div class="step-text">Escolha o serviço desejado no campo abaixo</div></div>
+            <div class="agendar-step"><div class="step-num">2</div><div class="step-text">Selecione a data e um horário disponível</div></div>
+            <div class="agendar-step"><div class="step-num">3</div><div class="step-text">Preencha seu nome e WhatsApp para contato</div></div>
+            <div class="agendar-step"><div class="step-num">4</div><div class="step-text">Aguarde a confirmação via WhatsApp em até 1h</div></div>
+          </div>
+          <div class="agendar-horario-info">
+            <p>Horário de atendimento:<br><span>Segunda a Sábado — 8h às 19h</span></p>
+          </div>
+        </div>
+        <div class="agendamento-box" id="agendamento-box">
+          <div class="loading-overlay" id="loading-overlay">
+            <div class="loading-spinner"></div>
+          </div>
+          <div id="form-success" class="form-success">✓ Agendamento enviado com sucesso! Confirmaremos via WhatsApp em breve.</div>
+          <div id="form-error" class="form-error"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Seu Nome *</label>
+              <input type="text" id="ag-nome" placeholder="Maria Silva">
+            </div>
+            <div class="form-group">
+              <label>WhatsApp *</label>
+              <input type="text" id="ag-tel" placeholder="(21) 99999-9999">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Serviço *</label>
+              <select id="ag-servico">
+                <option value="">— Selecione o serviço —</option>
+                <option>Escova + Prancha — R$ 35</option>
+                <option>Hidratação + Finalização — R$ 40</option>
+                <option>Reconstrução + Finalização — R$ 55</option>
+                <option>Coloração — R$ 20</option>
+                <option>Cronograma Capilar (3 sessões) — a partir de R$ 170</option>
+                <option>Botox Capilar — a partir de R$ 80</option>
+                <option>Progressiva — a partir de R$ 110</option>
+                <option>Tratamento Capilar Personalizado</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Data *</label>
+              <input type="date" id="ag-data" onchange="atualizarHorarios()">
+            </div>
+            <div class="form-group">
+              <label>Horário selecionado</label>
+              <input type="text" id="ag-horario-display" placeholder="Escolha abaixo ↓" readonly style="cursor:default;">
+            </div>
+          </div>
+          <div class="form-group" style="margin-bottom:1rem;">
+            <label>Horários</label>
+            <div class="horarios-legenda">
+              <div class="legenda-item"><div class="legenda-dot disponivel"></div> Disponível</div>
+              <div class="legenda-item"><div class="legenda-dot ocupado"></div> Ocupado</div>
+              <div class="legenda-item"><div class="legenda-dot selecionado"></div> Selecionado</div>
+              <div class="legenda-item"><span style="font-size:0.65rem;">⚠</span> Bloqueado</div>
+            </div>
+            <div class="horarios-grid" id="horarios-grid">
+              <div class="horarios-placeholder">Selecione uma data para ver os horários</div>
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label>Observações (opcional)</label>
+              <textarea id="ag-obs" placeholder="Ex: cabelo tingido, comprimento médio..."></textarea>
+            </div>
+          </div>
+          <div class="form-submit">
+            <button class="btn-primary" style="width:100%;padding:16px;font-size:0.85rem;" onclick="enviarAgendamento()">Confirmar Agendamento →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria">
+    <div class="container">
+      <div class="section-eyebrow">Transformações reais</div>
+      <h2 class="section-title">Nossa <em>Galeria</em></h2>
+      <div class="galeria-grid">
+        <div class="galeria-item">
+          <div class="galeria-placeholder"><div class="icon">💇‍♀️</div>Botox + Coloração</div>
+          <div class="galeria-overlay"></div>
+          <div class="galeria-label">Botox + Coloração</div>
+        </div>
+        <div class="galeria-item">
+          <div class="galeria-placeholder"><div class="icon">✨</div>Progressiva</div>
+          <div class="galeria-overlay"></div>
+          <div class="galeria-label">Progressiva</div>
+        </div>
+        <div class="galeria-item">
+          <div class="galeria-placeholder"><div class="icon">🌟</div>Reconstrução + Escova</div>
+          <div class="galeria-overlay"></div>
+          <div class="galeria-label">Reconstrução + Escova</div>
+        </div>
+        <div class="galeria-item">
+          <div class="galeria-placeholder"><div class="icon">💫</div>Hidratação + Finalização</div>
+          <div class="galeria-overlay"></div>
+          <div class="galeria-label">Hidratação + Finalização</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="depoimentos">
+    <div class="container">
+      <div class="section-eyebrow">O que dizem nossas clientes</div>
+      <h2 class="section-title">Depoimentos</h2>
+      <div class="depoimentos-grid">
+        <div class="depoimento-card">
+          <div class="depoimento-stars">★★★★★</div>
+          <p class="depoimento-text">"Fiz a progressiva e ficou incrível! O cabelo ficou liso, brilhante e muito macio. A Rosane é super atenciosa e cuidadosa."</p>
+          <div class="depoimento-nome">Ana Paula · Progressiva</div>
+        </div>
+        <div class="depoimento-card">
+          <div class="depoimento-stars">★★★★★</div>
+          <p class="depoimento-text">"Realizei o cronograma de 3 sessões e a transformação foi absurda. Meu cabelo estava destruído e agora está cheio de vida."</p>
+          <div class="depoimento-nome">Fernanda · Cronograma Capilar</div>
+        </div>
+        <div class="depoimento-card">
+          <div class="depoimento-stars">★★★★★</div>
+          <p class="depoimento-text">"Melhor estúdio que já fui! Ambiente aconchegante, atendimento personalizado e resultado sempre impecável."</p>
+          <div class="depoimento-nome">Camila · Botox Capilar</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="container">
+      <div class="section-eyebrow" style="justify-content:center;">Fale conosco</div>
+      <h2 class="section-title" style="text-align:center;">Estamos <em style="color:var(--gold-bright);">aqui</em> para você</h2>
+      <div class="contato-infos">
+        <div class="contato-item">📍 Queimados, Rio de Janeiro — RJ</div>
+        <div class="contato-item">📱 <a href="tel:+5521985291781">(21) 98529-1781</a></div>
+        <div class="contato-item">🕐 Seg–Sáb: 8h às 19h</div>
+      </div>
+      <div style="text-align:center;">
+        <a class="whatsapp-btn" href="https://wa.me/5521985291781" target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.28 7.043L.787 23.246l4.306-1.478A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.034-1.387l-.36-.214-3.735 1.282 1.244-3.638-.234-.374A9.797 9.797 0 012.182 12C2.182 6.567 6.567 2.182 12 2.182S21.818 6.567 21.818 12 17.433 21.818 12 21.818z"/>
+          </svg>
+          Chamar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Estúdio Rosane Matos · Todos os direitos reservados · (21) 98529-1781
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modal-overlay" id="modal-login">
+    <div class="modal">
+      <button class="modal-close" onclick="fecharLogin()">×</button>
+      <div class="modal-title">Área Restrita</div>
+      <div class="modal-sub">Acesso exclusivo — Dona do estúdio</div>
+      <div class="modal-fg">
+        <label>Usuário</label>
+        <input type="text" id="login-user" placeholder="Rosane" autocomplete="off">
+      </div>
+      <div class="modal-fg">
+        <label>Senha</label>
+        <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')fazerLogin()">
+      </div>
+      <div id="login-error" class="modal-error">Usuário ou senha incorretos.</div>
+      <button class="btn-primary" style="width:100%;margin-top:1.2rem;padding:14px;" onclick="fazerLogin()">Entrar no Painel →</button>
+    </div>
+  </div>
+
+  <div id="admin-panel">
+    <div class="admin-header">
+      <div class="admin-logo">✦ Painel — Estúdio Rosane Matos</div>
+      <div class="admin-right">
+        <span class="admin-user-badge">👤 Rosane</span>
+        <button class="admin-close-btn" onclick="fecharAdmin()">Sair do painel ×</button>
+      </div>
+    </div>
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="dashboard" onclick="trocarTab(this,'dashboard')">Dashboard</button>
+        <button class="admin-tab" data-tab="agendamentos" onclick="trocarTab(this,'agendamentos')">Agendamentos</button>
+        <button class="admin-tab" data-tab="agenda" onclick="trocarTab(this,'agenda')">Agenda do Dia</button>
+        <button class="admin-tab" data-tab="horarios" onclick="trocarTab(this,'horarios')">Bloquear Horários</button>
+        <button class="admin-tab" data-tab="relatorio" onclick="trocarTab(this,'relatorio')">Relatórios</button>
+      </div>
+
+      <div id="tab-dashboard" class="admin-tab-panel active">
+        <div class="admin-section-title">📊 Visão Geral — Este mês</div>
+        <div class="kpi-grid">
+          <div class="kpi-card kpi-gold">
+            <div class="kpi-label">Faturamento</div>
+            <div class="kpi-value" id="kpi-fat">—</div>
+            <div class="kpi-sub">este mês</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Agendamentos</div>
+            <div class="kpi-value" id="kpi-ags">—</div>
+            <div class="kpi-sub">confirmados</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Ticket Médio</div>
+            <div class="kpi-value" id="kpi-ticket">—</div>
+            <div class="kpi-sub">por atendimento</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Pendentes</div>
+            <div class="kpi-value" id="kpi-pend">—</div>
+            <div class="kpi-sub">aguardando confirmação</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label">Serviço Top</div>
+            <div class="kpi-value" style="font-size:1.1rem;line-height:1.3;" id="kpi-top">—</div>
+            <div class="kpi-sub">mais solicitado</div>
+          </div>
+        </div>
+        <div class="admin-section-title">📈 Serviços Mais Populares</div>
+        <div class="chart-wrap" id="chart-servicos"></div>
+        <div class="admin-section-title">📅 Próximos Agendamentos</div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Data</th><th>Horário</th><th>Cliente</th><th>Serviço</th><th>Valor</th><th>Status</th></tr>
+            </thead>
+            <tbody id="tbody-proximos"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-agendamentos" class="admin-tab-panel">
+        <div class="admin-section-title">📋 Todos os Agendamentos</div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Data</th><th>Hora</th><th>Cliente</th><th>WhatsApp</th><th>Serviço</th><th>Obs.</th><th>Status</th><th>Ações</th></tr>
+            </thead>
+            <tbody id="tbody-todos"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-agenda" class="admin-tab-panel">
+        <div class="admin-section-title">📆 Agenda do Dia</div>
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+          <div>
+            <label style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.3rem;">Visualizar data</label>
+            <input type="date" id="agenda-data-view" style="padding:9px 12px;border:1px solid rgba(201,150,58,0.25);background:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;border-radius:var(--radius);" onchange="renderAgendaDia()">
+          </div>
+          <button class="btn-bloquear" onclick="irParaHoje()" style="margin-top:auto;">Ver Hoje</button>
+        </div>
+        <div id="agenda-dia-grid" class="agenda-horarios-grid"></div>
+      </div>
+
+      <div id="tab-horarios" class="admin-tab-panel">
+        <div class="admin-section-title">🔒 Bloquear Horários</div>
+        <div class="bloquear-form">
+          <div>
+            <label>Data</label>
+            <input type="date" id="blq-data">
+          </div>
+          <div>
+            <label>Horário</label>
+            <select id="blq-hora">
+              <option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+              <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option>
+              <option>16:00</option><option>17:00</option><option>18:00</option>
+            </select>
+          </div>
+          <div>
+            <label>Motivo</label>
+            <input type="text" id="blq-motivo" placeholder="Ex: compromisso pessoal" style="width:200px;">
+          </div>
+          <button class="btn-bloquear" onclick="bloquearHorario()">🔒 Bloquear</button>
+        </div>
+        <div class="admin-section-title">Horários Bloqueados</div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Data</th><th>Horário</th><th>Motivo</th><th>Ação</th></tr></thead>
+            <tbody id="tbody-bloqueados"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-relatorio" class="admin-tab-panel">
+        <div class="admin-section-title">📊 Relatório por Serviço</div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Serviço</th><th>Realizados</th><th>Faturamento</th><th>% do Total</th></tr></thead>
+            <tbody id="tbody-relatorio"></tbody>
+          </table>
+        </div>
+        <div class="admin-section-title">💰 Faturamento por Semana</div>
+        <div class="chart-wrap" id="chart-semanas"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
