@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Estúdio Rosane Matos — Especialista em Cabelos</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -33,6 +33,7 @@
             --radius: 3px;
             --shadow: 0 4px 24px rgba(30, 18, 9, 0.10);
             --shadow-lg: 0 12px 48px rgba(30, 18, 9, 0.18);
+            --nav-h: 60px;
         }
 
         * {
@@ -53,7 +54,7 @@
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
 
         ::-webkit-scrollbar-track {
@@ -65,6 +66,7 @@
             border-radius: 3px;
         }
 
+        /* ══ NAV ══ */
         nav {
             position: fixed;
             top: 0;
@@ -72,18 +74,18 @@
             z-index: 100;
             background: rgba(30, 18, 9, 0.97);
             backdrop-filter: blur(12px);
-            padding: 0 2.5rem;
+            padding: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 68px;
+            height: var(--nav-h);
             border-bottom: 1px solid rgba(201, 150, 58, 0.2);
         }
 
         .nav-logo {
             font-family: 'Cormorant Garamond', serif;
             color: var(--gold);
-            font-size: 1.35rem;
+            font-size: 1.25rem;
             letter-spacing: 0.06em;
             display: flex;
             align-items: center;
@@ -95,22 +97,21 @@
             height: 6px;
             border-radius: 50%;
             background: var(--gold);
-            display: inline-block;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
         }
 
         .nav-links a {
             color: var(--gold-pale);
             text-decoration: none;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            transition: color 0.2s;
             opacity: 0.75;
+            transition: color 0.2s;
         }
 
         .nav-links a:hover {
@@ -122,13 +123,14 @@
             background: transparent;
             border: 1px solid var(--gold);
             color: var(--gold);
-            padding: 7px 18px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             letter-spacing: 0.1em;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
             transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .nav-admin-btn:hover {
@@ -136,15 +138,68 @@
             color: var(--brown-dark);
         }
 
+        /* Mobile nav hamburger */
+        .nav-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            padding: 4px;
+        }
+
+        .nav-menu-btn span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            top: var(--nav-h);
+            left: 0;
+            right: 0;
+            background: rgba(22, 13, 6, 0.98);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+            z-index: 99;
+            flex-direction: column;
+            padding: 1.2rem 1.5rem 1.5rem;
+        }
+
+        .nav-mobile.open {
+            display: flex;
+        }
+
+        .nav-mobile a {
+            color: var(--gold-pale);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(201, 150, 58, 0.08);
+            opacity: 0.8;
+        }
+
+        .nav-mobile a:last-of-type {
+            border-bottom: none;
+        }
+
+        /* ══ HERO ══ */
         #hero {
-            min-height: 100vh;
+            min-height: 100svh;
             background: linear-gradient(135deg, #1e1209 0%, #3d2010 45%, #120b04 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding-top: 68px;
+            padding-top: var(--nav-h);
         }
 
         .hero-lines {
@@ -177,37 +232,36 @@
         .hero-content {
             text-align: center;
             z-index: 2;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             letter-spacing: 0.4em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .hero-eyebrow::before,
         .hero-eyebrow::after {
             content: '';
             display: block;
-            width: 48px;
+            width: 36px;
             height: 1px;
             background: var(--gold);
         }
 
         .hero-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(4rem, 10vw, 8rem);
+            font-size: clamp(3.5rem, 12vw, 8rem);
             font-weight: 300;
             line-height: 0.9;
             color: var(--white);
             margin-bottom: 0.5rem;
-            letter-spacing: -0.01em;
         }
 
         .hero-name .gold {
@@ -216,17 +270,17 @@
         }
 
         .hero-sub {
-            font-size: 0.78rem;
-            letter-spacing: 0.45em;
+            font-size: 0.72rem;
+            letter-spacing: 0.35em;
             text-transform: uppercase;
             color: var(--gold-pale);
             opacity: 0.6;
-            margin: 1.5rem 0 3rem;
+            margin: 1.2rem 0 2.5rem;
         }
 
         .hero-cta {
             display: inline-flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -235,15 +289,16 @@
             background: var(--gold);
             color: var(--brown-dark);
             border: none;
-            padding: 15px 40px;
+            padding: 13px 32px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             letter-spacing: 0.18em;
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
             border-radius: var(--radius);
             transition: all 0.25s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary:hover {
@@ -256,14 +311,15 @@
             background: transparent;
             color: var(--gold-pale);
             border: 1px solid rgba(201, 150, 58, 0.4);
-            padding: 15px 40px;
+            padding: 13px 32px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             letter-spacing: 0.18em;
             text-transform: uppercase;
             cursor: pointer;
             border-radius: var(--radius);
             transition: all 0.25s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-outline:hover {
@@ -273,23 +329,23 @@
 
         .hero-stats {
             display: flex;
-            gap: 3rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 4rem;
-            padding-top: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
             border-top: 1px solid rgba(201, 150, 58, 0.12);
         }
 
         .hero-stat-val {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: var(--gold);
             font-weight: 600;
         }
 
         .hero-stat-label {
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
             color: var(--gold-pale);
@@ -298,7 +354,7 @@
         }
 
         section {
-            padding: 6rem 2.5rem;
+            padding: 5rem 1.5rem;
         }
 
         .container {
@@ -310,7 +366,7 @@
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             letter-spacing: 0.35em;
             text-transform: uppercase;
             color: var(--gold);
@@ -320,18 +376,18 @@
         .section-eyebrow::before {
             content: '';
             display: block;
-            width: 24px;
+            width: 20px;
             height: 1px;
             background: var(--gold);
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-size: clamp(2rem, 6vw, 3.8rem);
             font-weight: 300;
             line-height: 1.05;
             color: var(--text);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .section-title em {
@@ -343,25 +399,26 @@
             color: var(--text-muted);
             max-width: 500px;
             line-height: 1.85;
-            font-size: 0.93rem;
+            font-size: 0.9rem;
         }
 
+        /* ══ SERVIÇOS ══ */
         #servicos {
             background: var(--white);
         }
 
         .servicos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1px;
-            margin-top: 3.5rem;
+            margin-top: 3rem;
             background: rgba(201, 150, 58, 0.12);
             border: 1px solid rgba(201, 150, 58, 0.12);
         }
 
         .servico-card {
             background: var(--white);
-            padding: 2.2rem 2rem;
+            padding: 2rem 1.8rem;
             cursor: pointer;
             transition: background 0.2s;
             position: relative;
@@ -390,17 +447,17 @@
         }
 
         .servico-icon {
-            width: 46px;
-            height: 46px;
+            width: 42px;
+            height: 42px;
             border: 1px solid rgba(201, 150, 58, 0.3);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.4rem;
-            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
             color: var(--gold);
-            transition: background 0.2s, border-color 0.2s;
+            transition: all 0.2s;
         }
 
         .servico-card:hover .servico-icon {
@@ -411,14 +468,14 @@
 
         .servico-nome {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--text);
         }
 
         .servico-desc {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             line-height: 1.65;
             margin-bottom: 1.2rem;
@@ -428,10 +485,11 @@
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
+            gap: 0.5rem;
         }
 
         .servico-partir {
-            font-size: 0.68rem;
+            font-size: 0.65rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-muted);
@@ -440,7 +498,7 @@
 
         .servico-preco {
             color: var(--gold);
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 600;
         }
 
@@ -448,15 +506,16 @@
             background: transparent;
             border: 1px solid rgba(201, 150, 58, 0.35);
             color: var(--gold);
-            padding: 8px 18px;
-            font-size: 0.74rem;
-            letter-spacing: 0.12em;
+            padding: 7px 14px;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
             border-radius: var(--radius);
             transition: all 0.2s;
             white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-agendar-card:hover {
@@ -464,13 +523,14 @@
             color: var(--brown-dark);
         }
 
+        /* ══ PRODUTOS ══ */
         #produtos {
             background: var(--cream);
         }
 
         .produtos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1rem;
             margin-top: 3rem;
         }
@@ -478,7 +538,7 @@
         .produto-card {
             background: var(--white);
             border: 1px solid rgba(201, 150, 58, 0.15);
-            padding: 1.6rem;
+            padding: 1.5rem;
             border-radius: var(--radius);
             transition: box-shadow 0.2s, transform 0.2s;
         }
@@ -490,17 +550,18 @@
 
         .produto-card h4 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.15rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
             color: var(--text);
         }
 
         .produto-card p {
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             line-height: 1.65;
         }
 
+        /* ══ AGENDAMENTO ══ */
         #agendar {
             background: var(--brown-dark);
         }
@@ -517,54 +578,54 @@
         .agendar-layout {
             display: grid;
             grid-template-columns: 1fr 1.1fr;
-            gap: 5rem;
+            gap: 4rem;
             align-items: start;
         }
 
         .agendar-steps {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: 1.2rem;
         }
 
         .agendar-step {
             display: flex;
-            gap: 1rem;
+            gap: 0.9rem;
             align-items: flex-start;
         }
 
         .step-num {
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             border: 1px solid rgba(201, 150, 58, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--gold);
             flex-shrink: 0;
         }
 
         .step-text {
             color: var(--gold-pale);
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             line-height: 1.6;
             opacity: 0.75;
-            padding-top: 0.3rem;
+            padding-top: 0.25rem;
         }
 
         .agendar-horario-info {
-            margin-top: 2.5rem;
-            padding-top: 2rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
             border-top: 1px solid rgba(201, 150, 58, 0.12);
         }
 
         .agendar-horario-info p {
             color: var(--gold-pale);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             opacity: 0.5;
             line-height: 1.8;
         }
@@ -578,15 +639,15 @@
             background: rgba(255, 255, 255, 0.035);
             border: 1px solid rgba(201, 150, 58, 0.18);
             border-radius: 4px;
-            padding: 2.5rem;
+            padding: 2rem;
             backdrop-filter: blur(4px);
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 0.9rem;
+            margin-bottom: 0.9rem;
         }
 
         .form-row.full {
@@ -600,7 +661,7 @@
         }
 
         .form-group label {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             letter-spacing: 0.16em;
             text-transform: uppercase;
             color: rgba(242, 223, 168, 0.6);
@@ -612,13 +673,14 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(201, 150, 58, 0.18);
             color: var(--white);
-            padding: 12px 14px;
+            padding: 11px 13px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             border-radius: var(--radius);
             outline: none;
             transition: border 0.2s;
             -webkit-appearance: none;
+            appearance: none;
         }
 
         .form-group input:focus,
@@ -634,7 +696,7 @@
 
         .form-group textarea {
             resize: vertical;
-            min-height: 85px;
+            min-height: 80px;
         }
 
         .form-group input::placeholder {
@@ -643,17 +705,17 @@
 
         .horarios-legenda {
             display: flex;
-            gap: 1.2rem;
+            gap: 1rem;
             flex-wrap: wrap;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.7rem;
             margin-top: 0.3rem;
         }
 
         .legenda-item {
             display: flex;
             align-items: center;
-            gap: 0.45rem;
-            font-size: 0.74rem;
+            gap: 0.4rem;
+            font-size: 0.72rem;
             color: rgba(242, 223, 168, 0.55);
         }
 
@@ -680,8 +742,8 @@
 
         .horarios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
-            gap: 0.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 0.45rem;
         }
 
         .horario-btn {
@@ -696,6 +758,7 @@
             transition: all 0.18s;
             text-align: center;
             font-weight: 500;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .horario-btn:hover:not(.ocupado) {
@@ -717,78 +780,42 @@
             color: rgba(248, 113, 113, 0.6);
             cursor: not-allowed;
             text-decoration: line-through;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
         }
 
         .horarios-placeholder {
             color: rgba(242, 223, 168, 0.3);
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             padding: 1rem 0;
             text-align: center;
             grid-column: 1/-1;
         }
 
         .form-submit {
-            margin-top: 1.5rem;
+            margin-top: 1.2rem;
         }
 
         .form-success {
             background: rgba(21, 128, 61, 0.12);
             color: #86efac;
             border: 1px solid rgba(134, 239, 172, 0.15);
-            padding: 0.9rem 1.1rem;
+            padding: 0.8rem 1rem;
             border-radius: var(--radius);
-            font-size: 0.85rem;
-            margin-bottom: 1.2rem;
+            font-size: 0.83rem;
+            margin-bottom: 1rem;
             display: none;
         }
 
-        /* ── GALERIA ATUALIZADA ── */
+        /* ══ GALERIA ══ */
         #galeria {
             background: var(--white);
-        }
-
-        .galeria-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-top: 3rem;
-        }
-
-        /* Item destaque: ocupa 2 colunas na primeira linha */
-        .galeria-item {
-            position: relative;
-            overflow: hidden;
-            background: var(--brown-mid);
-            border-radius: 2px;
-        }
-
-        .galeria-item.destaque {
-            grid-column: span 2;
-        }
-
-        .galeria-item img,
-        .galeria-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-            display: block;
-        }
-
-        /* Altura fixa para cada linha */
-        .galeria-row-1 .galeria-item {
-            height: 420px;
-        }
-
-        .galeria-row-2 .galeria-item {
-            height: 320px;
         }
 
         .galeria-grid {
             display: flex;
             flex-direction: column;
             gap: 6px;
+            margin-top: 2.5rem;
         }
 
         .galeria-row {
@@ -798,12 +825,29 @@
 
         .galeria-row-1 {
             grid-template-columns: 2fr 1fr;
-            height: 420px;
+            height: 380px;
         }
 
         .galeria-row-2 {
-            grid-template-columns: 1fr 1fr 1fr;
-            height: 300px;
+            grid-template-columns: repeat(5, 1fr);
+            height: 220px;
+        }
+
+        .galeria-item {
+            position: relative;
+            overflow: hidden;
+            background: var(--brown-mid);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .galeria-item img,
+        .galeria-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+            display: block;
         }
 
         .galeria-item:hover img,
@@ -830,9 +874,9 @@
             left: 0;
             right: 0;
             color: var(--gold-pale);
-            font-size: 0.82rem;
-            padding: 1.5rem 1rem 1rem;
-            letter-spacing: 0.08em;
+            font-size: 0.78rem;
+            padding: 1.2rem 0.9rem 0.9rem;
+            letter-spacing: 0.06em;
             transform: translateY(4px);
             transition: transform 0.3s;
             z-index: 2;
@@ -842,44 +886,230 @@
             transform: translateY(0);
         }
 
-        /* Badge de vídeo */
         .galeria-video-badge {
             position: absolute;
-            top: 12px;
-            left: 12px;
-            background: rgba(201, 150, 58, 0.9);
+            top: 10px;
+            left: 10px;
+            background: rgba(201, 150, 58, 0.92);
             color: var(--brown-dark);
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            padding: 4px 10px;
+            padding: 3px 9px;
             border-radius: 20px;
             z-index: 3;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
-        /* Controles de vídeo personalizados */
-        .galeria-item video {
+        /* hover hint */
+        .galeria-zoom-hint {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.68rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .galeria-item:hover .galeria-zoom-hint {
+            opacity: 1;
+        }
+
+        /* ══ LIGHTBOX ══ */
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            background: rgba(10, 5, 2, 0.96);
+            backdrop-filter: blur(10px);
+        }
+
+        #lightbox.open {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lb-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(201, 150, 58, 0.12);
+            flex-shrink: 0;
+        }
+
+        .lb-title {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--gold-pale);
+            font-size: 1rem;
+            letter-spacing: 0.06em;
+        }
+
+        .lb-counter {
+            font-size: 0.72rem;
+            color: rgba(201, 150, 58, 0.5);
+            letter-spacing: 0.1em;
+        }
+
+        .lb-close {
+            background: none;
+            border: 1px solid rgba(201, 150, 58, 0.3);
+            color: var(--gold-pale);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.1rem;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
 
+        .lb-close:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .lb-stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .lb-media {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+            border-radius: 2px;
+        }
+
+        .lb-video {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 2px;
+        }
+
+        .lb-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(30, 18, 9, 0.7);
+            border: 1px solid rgba(201, 150, 58, 0.25);
+            color: var(--gold-pale);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
+            z-index: 2;
+        }
+
+        .lb-nav:hover {
+            background: rgba(201, 150, 58, 0.15);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .lb-prev {
+            left: 1rem;
+        }
+
+        .lb-next {
+            right: 1rem;
+        }
+
+        .lb-info {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(201, 150, 58, 0.1);
+            flex-shrink: 0;
+        }
+
+        .lb-label-text {
+            color: var(--gold-pale);
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .lb-thumbs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding: 0.8rem 1.5rem 1rem;
+            flex-shrink: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold) transparent;
+            border-top: 1px solid rgba(201, 150, 58, 0.08);
+        }
+
+        .lb-thumbs::-webkit-scrollbar {
+            height: 4px;
+        }
+
+        .lb-thumbs::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        .lb-thumb {
+            width: 60px;
+            height: 50px;
+            flex-shrink: 0;
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .lb-thumb.active {
+            border-color: var(--gold);
+        }
+
+        .lb-thumb img,
+        .lb-thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ══ DEPOIMENTOS ══ */
         #depoimentos {
             background: var(--cream);
         }
 
         .depoimentos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 2.5rem;
         }
 
         .depoimento-card {
             background: var(--white);
-            padding: 2rem;
+            padding: 1.8rem;
             border-left: 3px solid var(--gold);
             border-radius: 0 var(--radius) var(--radius) 0;
             transition: box-shadow 0.2s;
@@ -893,25 +1123,26 @@
             color: var(--gold);
             font-size: 0.85rem;
             letter-spacing: 0.12em;
-            margin-bottom: 1rem;
+            margin-bottom: 0.9rem;
         }
 
         .depoimento-text {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             line-height: 1.75;
             color: var(--text-mid);
             font-style: italic;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.1rem;
         }
 
         .depoimento-nome {
-            font-size: 0.76rem;
+            font-size: 0.74rem;
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--text-muted);
         }
 
+        /* ══ CONTATO ══ */
         #contato {
             background: var(--brown-dark);
             text-align: center;
@@ -927,7 +1158,7 @@
 
         .contato-infos {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 2rem;
@@ -935,10 +1166,10 @@
 
         .contato-item {
             color: var(--gold-pale);
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
             opacity: 0.7;
         }
 
@@ -951,13 +1182,13 @@
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.75rem;
             background: #25D366;
             color: white;
-            padding: 15px 36px;
+            padding: 14px 32px;
             border-radius: var(--radius);
             text-decoration: none;
-            font-size: 0.84rem;
+            font-size: 0.82rem;
             font-weight: 600;
             margin-top: 2rem;
             letter-spacing: 0.05em;
@@ -973,12 +1204,38 @@
         footer {
             background: #0e0805;
             text-align: center;
-            padding: 1.8rem;
+            padding: 1.5rem;
             color: rgba(201, 150, 58, 0.3);
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             letter-spacing: 0.12em;
         }
 
+        /* ══ TOAST ══ */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 999;
+            background: var(--brown-dark);
+            border: 1px solid rgba(201, 150, 58, 0.3);
+            color: var(--gold-pale);
+            padding: 0.9rem 1.2rem;
+            border-radius: 5px;
+            font-size: 0.83rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(12px);
+            opacity: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+            max-width: calc(100vw - 3rem);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ══ MODAL LOGIN ══ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1000,8 +1257,8 @@
             border: 1px solid rgba(201, 150, 58, 0.25);
             border-radius: 6px;
             width: 100%;
-            max-width: 440px;
-            padding: 2.8rem;
+            max-width: 420px;
+            padding: 2.5rem;
             position: relative;
             box-shadow: var(--shadow-lg);
         }
@@ -1025,27 +1282,27 @@
 
         .modal-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             color: var(--white);
             margin-bottom: 0.3rem;
         }
 
         .modal-sub {
-            font-size: 0.75rem;
+            font-size: 0.73rem;
             color: var(--gold-pale);
             opacity: 0.5;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
         }
 
         .modal-fg {
-            margin-bottom: 1.1rem;
+            margin-bottom: 1rem;
         }
 
         .modal-fg label {
             display: block;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             color: rgba(242, 223, 168, 0.55);
@@ -1057,7 +1314,7 @@
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(201, 150, 58, 0.18);
             color: var(--white);
-            padding: 12px 14px;
+            padding: 11px 13px;
             font-family: 'DM Sans', sans-serif;
             font-size: 0.9rem;
             border-radius: var(--radius);
@@ -1071,7 +1328,7 @@
 
         .modal-error {
             color: #f87171;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             margin-top: 0.8rem;
             display: none;
             padding: 0.6rem 0.8rem;
@@ -1079,6 +1336,7 @@
             border-radius: var(--radius);
         }
 
+        /* ══ ADMIN PANEL ══ */
         #admin-panel {
             display: none;
             position: fixed;
@@ -1086,6 +1344,7 @@
             z-index: 300;
             background: var(--cream);
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         #admin-panel.open {
@@ -1094,8 +1353,8 @@
 
         .admin-header {
             background: var(--brown-dark);
-            padding: 0 2.5rem;
-            height: 64px;
+            padding: 0 1.2rem;
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1108,39 +1367,40 @@
         .admin-logo {
             font-family: 'Cormorant Garamond', serif;
             color: var(--gold);
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 0.5rem;
         }
 
         .admin-right {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.7rem;
         }
 
         .admin-user-badge {
             background: rgba(201, 150, 58, 0.1);
             border: 1px solid rgba(201, 150, 58, 0.2);
             color: var(--gold-pale);
-            padding: 5px 14px;
+            padding: 4px 11px;
             border-radius: 20px;
-            font-size: 0.73rem;
-            letter-spacing: 0.08em;
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
         }
 
         .admin-close-btn {
             background: none;
             border: 1px solid rgba(201, 150, 58, 0.3);
             color: var(--gold-pale);
-            padding: 7px 18px;
+            padding: 6px 14px;
             border-radius: 20px;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.74rem;
-            letter-spacing: 0.1em;
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
             transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .admin-close-btn:hover {
@@ -1151,29 +1411,40 @@
         .admin-body {
             max-width: 1160px;
             margin: 0 auto;
-            padding: 2.5rem 2.5rem;
+            padding: 1.5rem 1rem;
         }
 
+        /* Admin tabs — scrollable horizontal */
         .admin-tabs {
             display: flex;
             gap: 0;
             border-bottom: 2px solid rgba(201, 150, 58, 0.12);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .admin-tabs::-webkit-scrollbar {
+            display: none;
         }
 
         .admin-tab {
-            padding: 12px 22px;
+            padding: 10px 16px;
             background: none;
             border: none;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.08em;
+            font-size: 0.76rem;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             cursor: pointer;
             color: var(--text-muted);
             border-bottom: 2px solid transparent;
             margin-bottom: -2px;
             transition: all 0.2s;
+            white-space: nowrap;
+            flex-shrink: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .admin-tab.active {
@@ -1191,27 +1462,29 @@
 
         .admin-section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             color: var(--text);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.7rem;
             border-bottom: 1px solid rgba(201, 150, 58, 0.2);
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.7rem;
+            flex-wrap: wrap;
         }
 
+        /* KPIs */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
         }
 
         .kpi-card {
             background: var(--white);
             border: 1px solid rgba(201, 150, 58, 0.15);
-            padding: 1.6rem;
+            padding: 1.2rem;
             border-radius: 5px;
             transition: box-shadow 0.2s;
         }
@@ -1221,58 +1494,63 @@
         }
 
         .kpi-label {
-            font-size: 0.7rem;
-            letter-spacing: 0.16em;
+            font-size: 0.66rem;
+            letter-spacing: 0.14em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
         }
 
         .kpi-value {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.4rem;
+            font-size: 2rem;
             color: var(--text);
             font-weight: 600;
             line-height: 1;
         }
 
         .kpi-sub {
-            font-size: 0.76rem;
+            font-size: 0.72rem;
             color: var(--text-muted);
-            margin-top: 0.4rem;
+            margin-top: 0.3rem;
         }
 
         .kpi-card.kpi-gold .kpi-value {
             color: var(--gold);
         }
 
+        /* Tables — mobile scroll */
         .table-wrap {
             background: var(--white);
             border: 1px solid rgba(201, 150, 58, 0.12);
             border-radius: 5px;
             overflow: hidden;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .admin-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.84rem;
+            font-size: 0.82rem;
+            min-width: 500px;
         }
 
         .admin-table th {
             background: var(--brown-dark);
             color: var(--gold);
-            padding: 12px 16px;
+            padding: 11px 14px;
             text-align: left;
-            font-size: 0.7rem;
+            font-size: 0.67rem;
             letter-spacing: 0.14em;
             text-transform: uppercase;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         .admin-table td {
-            padding: 11px 16px;
+            padding: 10px 14px;
             border-bottom: 1px solid rgba(201, 150, 58, 0.08);
             color: var(--text-mid);
         }
@@ -1289,21 +1567,64 @@
             white-space: nowrap;
         }
 
+        /* Mobile card layout for agendamentos */
+        .ag-cards {
+            display: none;
+        }
+
+        .ag-card {
+            background: var(--white);
+            border: 1px solid rgba(201, 150, 58, 0.15);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .ag-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.6rem;
+        }
+
+        .ag-card-nome {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .ag-card-row {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            flex-wrap: wrap;
+        }
+
+        .ag-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.35rem;
-            padding: 3px 10px;
+            gap: 0.3rem;
+            padding: 3px 9px;
             border-radius: 20px;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             letter-spacing: 0.04em;
             font-weight: 600;
         }
 
         .badge::before {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background: currentColor;
             opacity: 0.8;
@@ -1324,20 +1645,21 @@
             color: var(--danger);
         }
 
+        /* Charts */
         .chart-wrap {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
         .chart-row {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 0.8rem;
+            gap: 0.75rem;
+            margin-bottom: 0.7rem;
         }
 
         .chart-label {
-            width: 160px;
-            font-size: 0.82rem;
+            width: 140px;
+            font-size: 0.78rem;
             color: var(--text-mid);
             flex-shrink: 0;
             white-space: nowrap;
@@ -1348,9 +1670,10 @@
         .chart-track {
             flex: 1;
             background: rgba(201, 150, 58, 0.08);
-            height: 22px;
+            height: 20px;
             border-radius: 2px;
             overflow: hidden;
+            min-width: 40px;
         }
 
         .chart-fill {
@@ -1361,44 +1684,48 @@
         }
 
         .chart-val {
-            width: 60px;
+            width: 52px;
             text-align: right;
             color: var(--text-muted);
-            font-size: 0.78rem;
+            font-size: 0.76rem;
+            flex-shrink: 0;
         }
 
+        /* Bloquear form */
         .bloquear-form {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
             align-items: flex-end;
             background: var(--white);
-            padding: 1.4rem;
+            padding: 1.2rem;
             border: 1px solid rgba(201, 150, 58, 0.15);
             border-radius: 5px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .bloquear-form label {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--text-muted);
             display: block;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .bloquear-form input,
         .bloquear-form select {
-            padding: 9px 12px;
+            padding: 9px 11px;
             border: 1px solid rgba(201, 150, 58, 0.25);
             background: var(--cream);
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.88rem;
+            font-size: 0.86rem;
             color: var(--text);
             border-radius: var(--radius);
             outline: none;
             transition: border 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         .bloquear-form input:focus,
@@ -1410,13 +1737,14 @@
             background: var(--brown-dark);
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 9px 22px;
+            padding: 9px 18px;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.78rem;
+            font-size: 0.76rem;
             letter-spacing: 0.1em;
             border-radius: var(--radius);
             transition: all 0.2s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-bloquear:hover {
@@ -1426,14 +1754,15 @@
 
         .btn-action {
             background: none;
-            padding: 4px 12px;
+            padding: 5px 11px;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 0.74rem;
+            font-size: 0.72rem;
             letter-spacing: 0.04em;
             font-family: 'DM Sans', sans-serif;
             transition: all 0.15s;
-            margin-right: 4px;
+            margin-right: 3px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-confirmar {
@@ -1468,24 +1797,25 @@
 
         .empty-state {
             text-align: center;
-            padding: 2.5rem;
+            padding: 2rem;
             color: var(--text-muted);
-            font-size: 0.88rem;
+            font-size: 0.86rem;
         }
 
+        /* Agenda dia */
         .agenda-horarios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 0.75rem;
             margin-top: 1rem;
         }
 
         .agenda-slot {
-            padding: 0.9rem;
+            padding: 0.8rem;
             border-radius: var(--radius);
             border: 1px solid;
             text-align: center;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
         }
 
         .agenda-slot.livre {
@@ -1508,41 +1838,28 @@
 
         .agenda-slot-hora {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             margin-bottom: 0.2rem;
         }
 
         .agenda-slot-info {
-            font-size: 0.73rem;
+            font-size: 0.72rem;
             opacity: 0.75;
         }
 
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 999;
-            background: var(--brown-dark);
-            border: 1px solid rgba(201, 150, 58, 0.3);
-            color: var(--gold-pale);
-            padding: 1rem 1.4rem;
-            border-radius: 5px;
-            font-size: 0.85rem;
-            box-shadow: var(--shadow-lg);
-            transform: translateY(12px);
-            opacity: 0;
-            transition: all 0.3s;
-            pointer-events: none;
-        }
-
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
+        /* ══ RESPONSIVE ══ */
         @media(max-width:900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-menu-btn {
+                display: flex;
+            }
+
             .agendar-layout {
                 grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
 
             .galeria-row-1 {
@@ -1555,60 +1872,107 @@
             }
 
             .galeria-row-2 {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(3, 1fr);
                 height: auto;
             }
 
             .galeria-row-2 .galeria-item {
-                height: 220px;
-            }
-        }
-
-        @media(max-width:600px) {
-            nav {
-                padding: 0 1.2rem;
-            }
-
-            .nav-links {
-                display: none;
+                height: 180px;
             }
 
             section {
                 padding: 4rem 1.2rem;
+            }
+        }
+
+        @media(max-width:640px) {
+            .galeria-row-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .galeria-row-2 .galeria-item {
+                height: 160px;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
             }
 
-            .admin-body {
-                padding: 1.5rem 1rem;
+            .kpi-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .admin-table {
+                font-size: 0.78rem;
+            }
+
+            /* Show card layout, hide table for agendamentos on mobile */
+            .mobile-table-hide {
+                display: none !important;
+            }
+
+            .ag-cards {
+                display: block;
+            }
+
+            .chart-label {
+                width: 100px;
+                font-size: 0.72rem;
+            }
+
+            .agenda-horarios-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .bloquear-form {
                 flex-direction: column;
             }
 
-            .contato-infos {
-                flex-direction: column;
-                align-items: center;
+            .bloquear-form input[type="text"] {
+                width: 100% !important;
             }
 
             .hero-stats {
-                gap: 1.5rem;
+                gap: 1.2rem;
             }
 
-            .agendar-layout {
-                gap: 3rem;
+            .contato-infos {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .lb-thumbs {
+                padding: 0.6rem 1rem 0.8rem;
+            }
+
+            .lb-thumb {
+                width: 50px;
+                height: 42px;
+            }
+
+            .lb-nav {
+                width: 38px;
+                height: 38px;
+                font-size: 0.9rem;
+            }
+
+            .lb-prev {
+                left: 0.5rem;
+            }
+
+            .lb-next {
+                right: 0.5rem;
+            }
+        }
+
+        @media(max-width:400px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
             }
 
             .galeria-row-2 {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-
-            .galeria-row-2 .galeria-item {
-                height: 240px;
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
@@ -1618,10 +1982,7 @@
 
     <!-- ══ NAV ══ -->
     <nav>
-        <div class="nav-logo">
-            <span class="nav-logo-dot"></span>
-            Rosane Matos
-        </div>
+        <div class="nav-logo"><span class="nav-logo-dot"></span>Rosane Matos</div>
         <div class="nav-links">
             <a href="#servicos">Serviços</a>
             <a href="#produtos">Produtos</a>
@@ -1629,8 +1990,20 @@
             <a href="#galeria">Galeria</a>
             <a href="#contato">Contato</a>
         </div>
-        <button class="nav-admin-btn" onclick="abrirLogin()">Área da Dona</button>
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+            <button class="nav-admin-btn" onclick="abrirLogin()">Área da Dona</button>
+            <button class="nav-menu-btn" onclick="toggleMenu()" id="menu-btn" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </nav>
+    <div class="nav-mobile" id="nav-mobile">
+        <a href="#servicos" onclick="fecharMenu()">Serviços</a>
+        <a href="#produtos" onclick="fecharMenu()">Produtos</a>
+        <a href="#agendar" onclick="fecharMenu()">Agendar</a>
+        <a href="#galeria" onclick="fecharMenu()">Galeria</a>
+        <a href="#contato" onclick="fecharMenu()">Contato</a>
+    </div>
 
     <!-- ══ HERO ══ -->
     <section id="hero">
@@ -1682,10 +2055,9 @@
                     <div class="servico-desc">Alinhamento perfeito com finalização profissional, deixando os fios lisos,
                         brilhantes e sedosos.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
+                        <div>
                             <div class="servico-preco">R$ 35,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Escova + Prancha — R$ 35')">Agendar</button>
                     </div>
                 </div>
@@ -1695,10 +2067,9 @@
                     <div class="servico-desc">Tratamento intensivo de hidratação que restaura o brilho e a maciez dos
                         fios ressecados.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
+                        <div>
                             <div class="servico-preco">R$ 40,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Hidratação + Finalização — R$ 40')">Agendar</button>
                     </div>
                 </div>
@@ -1708,10 +2079,9 @@
                     <div class="servico-desc">Recomposição da estrutura capilar danificada com proteínas e aminoácidos
                         de alta concentração.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
+                        <div>
                             <div class="servico-preco">R$ 55,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Reconstrução + Finalização — R$ 55')">Agendar</button>
                     </div>
                 </div>
@@ -1721,10 +2091,9 @@
                     <div class="servico-desc">Coloração profissional com técnica precisa para realçar a beleza natural
                         dos seus fios.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
+                        <div>
                             <div class="servico-preco">R$ 20,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Coloração — R$ 20')">Agendar</button>
                     </div>
                 </div>
@@ -1734,11 +2103,9 @@
                     <div class="servico-desc">Programa de 3 sessões personalizadas de hidratação, nutrição e
                         reconstrução para cabelos saudáveis.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
-                            <span class="servico-partir">a partir de</span>
+                        <div><span class="servico-partir">a partir de</span>
                             <div class="servico-preco">R$ 170,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Cronograma Capilar (3 sessões) — a partir de R$ 170')">Agendar</button>
                     </div>
                 </div>
@@ -1748,11 +2115,9 @@
                     <div class="servico-desc">Tratamento que elimina frizz, sela os fios e devolve brilho intenso sem
                         alterar a estrutura.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
-                            <span class="servico-partir">a partir de</span>
+                        <div><span class="servico-partir">a partir de</span>
                             <div class="servico-preco">R$ 80,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Botox Capilar — a partir de R$ 80')">Agendar</button>
                     </div>
                 </div>
@@ -1762,11 +2127,9 @@
                     <div class="servico-desc">Alisamento duradouro com fórmula de alta performance que elimina frizz e
                         proporciona maciez.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
-                            <span class="servico-partir">a partir de</span>
+                        <div><span class="servico-partir">a partir de</span>
                             <div class="servico-preco">R$ 110,00</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Progressiva — a partir de R$ 110')">Agendar</button>
                     </div>
                 </div>
@@ -1776,10 +2139,9 @@
                     <div class="servico-desc">Diagnóstico personalizado e tratamento sob medida para as necessidades
                         únicas do seu cabelo.</div>
                     <div class="servico-footer">
-                        <div class="servico-preco-wrap">
+                        <div>
                             <div class="servico-preco">Consulte</div>
-                        </div>
-                        <button class="btn-agendar-card"
+                        </div><button class="btn-agendar-card"
                             onclick="selecionarServico('Tratamento Capilar Personalizado')">Agendar</button>
                     </div>
                 </div>
@@ -1861,12 +2223,11 @@
                     <div class="form-row">
                         <div class="form-group"><label>Seu Nome *</label><input type="text" id="ag-nome"
                                 placeholder="Maria Silva"></div>
-                        <div class="form-group"><label>WhatsApp *</label><input type="text" id="ag-tel"
+                        <div class="form-group"><label>WhatsApp *</label><input type="tel" id="ag-tel"
                                 placeholder="(21) 99999-9999"></div>
                     </div>
                     <div class="form-row full">
-                        <div class="form-group">
-                            <label>Serviço *</label>
+                        <div class="form-group"><label>Serviço *</label>
                             <select id="ag-servico">
                                 <option value="">— Selecione o serviço —</option>
                                 <option>Escova + Prancha — R$ 35</option>
@@ -1909,7 +2270,7 @@
                                 placeholder="Ex: cabelo tingido, comprimento médio..."></textarea></div>
                     </div>
                     <div class="form-submit">
-                        <button class="btn-primary" style="width:100%;padding:16px;font-size:0.85rem;"
+                        <button class="btn-primary" style="width:100%;padding:15px;font-size:0.83rem;"
                             onclick="enviarAgendamento()">Confirmar Agendamento →</button>
                     </div>
                 </div>
@@ -1917,78 +2278,87 @@
         </div>
     </section>
 
-    <!-- ══ GALERIA — FOTOS E VÍDEO REAIS ══ -->
+    <!-- ══ GALERIA ══ -->
     <section id="galeria">
         <div class="container">
             <div class="section-eyebrow">Transformações reais</div>
             <h2 class="section-title">Nossa <em>Galeria</em></h2>
-
             <div class="galeria-grid">
-
-                <!-- LINHA 1: Vídeo destaque (maior) + 1 foto -->
+                <!-- LINHA 1 -->
                 <div class="galeria-row galeria-row-1">
-
-                    <!-- VÍDEO — item destaque -->
-                    <div class="galeria-item" style="cursor:pointer;" onclick="toggleVideo(this)">
+                    <div class="galeria-item" onclick="abrirLightbox(0)">
                         <video src="./photos/video 1.mp4" muted loop playsinline preload="metadata"
                             style="width:100%;height:100%;object-fit:cover;"></video>
                         <div class="galeria-video-badge">▶ Vídeo</div>
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Progressiva · Resultado Final</div>
+                        <div class="galeria-zoom-hint">Clique para ver</div>
                     </div>
-
-                    <!-- Foto 1: cabelo escuro longo liso -->
-                    <div class="galeria-item">
+                    <div class="galeria-item" onclick="abrirLightbox(1)">
                         <img src="./photos/img 1.jpg" alt="Progressiva cabelo longo">
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Progressiva</div>
+                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
                     </div>
-
                 </div>
-
-                <!-- LINHA 2: 4 fotos menores -->
+                <!-- LINHA 2 -->
                 <div class="galeria-row galeria-row-2">
-
-                    <!-- Foto 2: cabelo vermelho/vinho liso longo -->
-                    <div class="galeria-item">
+                    <div class="galeria-item" onclick="abrirLightbox(2)">
                         <img src="./photos/img 11.jpg" alt="Coloração vinho">
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Coloração + Progressiva</div>
+                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
                     </div>
-
-                    <!-- Foto 3: cabelo escuro com cachos nas pontas -->
-                    <div class="galeria-item">
+                    <div class="galeria-item" onclick="abrirLightbox(3)">
                         <img src="./photos/img 4.jpeg" alt="Escova com cachos">
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Escova com Finalização</div>
+                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
                     </div>
-
-                    <!-- Foto 4: chanel escuro liso (banner do estúdio ao fundo) -->
-                    <div class="galeria-item">
+                    <div class="galeria-item" onclick="abrirLightbox(4)">
                         <img src="./photos/img 5.jpeg" alt="Chanel liso escuro">
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Progressiva · Chanel</div>
+                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
                     </div>
-
-                    <!-- Foto 5: chanel castanho brilhoso -->
-                    <div class="galeria-item">
+                    <div class="galeria-item" onclick="abrirLightbox(5)">
                         <img src="./photos/img 6.jpeg" alt="Botox capilar brilho">
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Botox Capilar</div>
+                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
                     </div>
-
-                    <!-- Foto 6: escova/progressiva -->
-                    <div class="galeria-item">
+                    <div class="galeria-item" onclick="abrirLightbox(6)">
                         <img src="./photos/img 7.jpeg" alt="Hidratação + finalização">
                         <div class="galeria-overlay"></div>
                         <div class="galeria-label">Hidratação + Finalização</div>
+                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     </section>
+
+    <!-- ══ LIGHTBOX ══ -->
+    <div id="lightbox">
+        <div class="lb-header">
+            <div>
+                <div class="lb-title" id="lb-label">Galeria</div>
+                <div class="lb-counter" id="lb-counter">1 / 7</div>
+            </div>
+            <button class="lb-close" onclick="fecharLightbox()">×</button>
+        </div>
+        <div class="lb-stage">
+            <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+            <div id="lb-media-wrap"
+                style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:1rem;">
+            </div>
+            <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+        </div>
+        <div class="lb-info">
+            <div class="lb-label-text" id="lb-label-info"></div>
+        </div>
+        <div class="lb-thumbs" id="lb-thumbs"></div>
+    </div>
 
     <!-- ══ DEPOIMENTOS ══ -->
     <section id="depoimentos">
@@ -2043,10 +2413,8 @@
         </div>
     </section>
 
-    <!-- ══ FOOTER ══ -->
     <footer>© 2025 Estúdio Rosane Matos · Todos os direitos reservados · (21) 98529-1781</footer>
 
-    <!-- ══ TOAST ══ -->
     <div class="toast" id="toast"></div>
 
     <!-- ══ MODAL LOGIN ══ -->
@@ -2060,7 +2428,7 @@
             <div class="modal-fg"><label>Senha</label><input type="password" id="login-pass" placeholder="••••••••"
                     onkeydown="if(event.key==='Enter')fazerLogin()"></div>
             <div id="login-error" class="modal-error">Usuário ou senha incorretos.</div>
-            <button class="btn-primary" style="width:100%;margin-top:1.2rem;padding:14px;" onclick="fazerLogin()">Entrar
+            <button class="btn-primary" style="width:100%;margin-top:1.2rem;padding:13px;" onclick="fazerLogin()">Entrar
                 no Painel →</button>
         </div>
     </div>
@@ -2068,21 +2436,22 @@
     <!-- ══ ADMIN PANEL ══ -->
     <div id="admin-panel">
         <div class="admin-header">
-            <div class="admin-logo">✦ Painel — Estúdio Rosane Matos</div>
+            <div class="admin-logo">✦ Painel — Rosane Matos</div>
             <div class="admin-right">
                 <span class="admin-user-badge">👤 Rosane</span>
-                <button class="admin-close-btn" onclick="fecharAdmin()">Sair do painel ×</button>
+                <button class="admin-close-btn" onclick="fecharAdmin()">Sair ×</button>
             </div>
         </div>
         <div class="admin-body">
             <div class="admin-tabs">
-                <button class="admin-tab active" onclick="trocarTab(this,'dashboard')">Dashboard</button>
-                <button class="admin-tab" onclick="trocarTab(this,'agendamentos')">Agendamentos</button>
-                <button class="admin-tab" onclick="trocarTab(this,'agenda')">Agenda do Dia</button>
-                <button class="admin-tab" onclick="trocarTab(this,'horarios')">Bloquear Horários</button>
-                <button class="admin-tab" onclick="trocarTab(this,'relatorio')">Relatórios</button>
+                <button class="admin-tab active" onclick="trocarTab(this,'dashboard')">📊 Dashboard</button>
+                <button class="admin-tab" onclick="trocarTab(this,'agendamentos')">📋 Agendamentos</button>
+                <button class="admin-tab" onclick="trocarTab(this,'agenda')">📆 Agenda Dia</button>
+                <button class="admin-tab" onclick="trocarTab(this,'horarios')">🔒 Bloquear</button>
+                <button class="admin-tab" onclick="trocarTab(this,'relatorio')">📈 Relatórios</button>
             </div>
 
+            <!-- DASHBOARD -->
             <div id="tab-dashboard" class="admin-tab-panel active">
                 <div class="admin-section-title">📊 Visão Geral — Este mês</div>
                 <div class="kpi-grid">
@@ -2104,15 +2473,15 @@
                     <div class="kpi-card">
                         <div class="kpi-label">Pendentes</div>
                         <div class="kpi-value" id="kpi-pend">—</div>
-                        <div class="kpi-sub">aguardando confirmação</div>
+                        <div class="kpi-sub">aguardando</div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Serviço Top</div>
-                        <div class="kpi-value" style="font-size:1.1rem;line-height:1.3;" id="kpi-top">—</div>
+                        <div class="kpi-value" style="font-size:1rem;line-height:1.3;" id="kpi-top">—</div>
                         <div class="kpi-sub">mais solicitado</div>
                     </div>
                 </div>
-                <div class="admin-section-title">📈 Serviços Mais Populares</div>
+                <div class="admin-section-title">📈 Serviços Populares</div>
                 <div class="chart-wrap" id="chart-servicos"></div>
                 <div class="admin-section-title">📅 Próximos Agendamentos</div>
                 <div class="table-wrap">
@@ -2120,7 +2489,7 @@
                         <thead>
                             <tr>
                                 <th>Data</th>
-                                <th>Horário</th>
+                                <th>Hora</th>
                                 <th>Cliente</th>
                                 <th>Serviço</th>
                                 <th>Valor</th>
@@ -2132,9 +2501,11 @@
                 </div>
             </div>
 
+            <!-- AGENDAMENTOS -->
             <div id="tab-agendamentos" class="admin-tab-panel">
                 <div class="admin-section-title">📋 Todos os Agendamentos</div>
-                <div class="table-wrap">
+                <!-- Table (desktop) -->
+                <div class="table-wrap mobile-table-hide">
                     <table class="admin-table">
                         <thead>
                             <tr>
@@ -2151,24 +2522,28 @@
                         <tbody id="tbody-todos"></tbody>
                     </table>
                 </div>
+                <!-- Cards (mobile) -->
+                <div class="ag-cards" id="ag-cards-mobile"></div>
             </div>
 
+            <!-- AGENDA DIA -->
             <div id="tab-agenda" class="admin-tab-panel">
                 <div class="admin-section-title">📆 Agenda do Dia</div>
-                <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+                <div style="display:flex;align-items:flex-end;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;">
                     <div>
                         <label
-                            style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.3rem;">Visualizar
+                            style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.25rem;">Visualizar
                             data</label>
                         <input type="date" id="agenda-data-view"
-                            style="padding:9px 12px;border:1px solid rgba(201,150,58,0.25);background:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;border-radius:var(--radius);"
+                            style="padding:9px 12px;border:1px solid rgba(201,150,58,0.25);background:var(--white);font-family:'DM Sans',sans-serif;font-size:0.86rem;border-radius:var(--radius);"
                             onchange="renderAgendaDia()">
                     </div>
-                    <button class="btn-bloquear" onclick="irParaHoje()" style="margin-top:auto;">Ver Hoje</button>
+                    <button class="btn-bloquear" onclick="irParaHoje()">Ver Hoje</button>
                 </div>
                 <div id="agenda-dia-grid" class="agenda-horarios-grid"></div>
             </div>
 
+            <!-- BLOQUEAR -->
             <div id="tab-horarios" class="admin-tab-panel">
                 <div class="admin-section-title">🔒 Bloquear Horários</div>
                 <div class="bloquear-form">
@@ -2189,7 +2564,7 @@
                         </select>
                     </div>
                     <div><label>Motivo</label><input type="text" id="blq-motivo" placeholder="Ex: compromisso pessoal"
-                            style="width:200px;"></div>
+                            style="width:180px;"></div>
                     <button class="btn-bloquear" onclick="bloquearHorario()">🔒 Bloquear</button>
                 </div>
                 <div class="admin-section-title">Horários Bloqueados</div>
@@ -2208,6 +2583,7 @@
                 </div>
             </div>
 
+            <!-- RELATÓRIOS -->
             <div id="tab-relatorio" class="admin-tab-panel">
                 <div class="admin-section-title">📊 Relatório por Serviço</div>
                 <div class="table-wrap">
@@ -2217,7 +2593,7 @@
                                 <th>Serviço</th>
                                 <th>Realizados</th>
                                 <th>Faturamento</th>
-                                <th>% do Total</th>
+                                <th>% Total</th>
                             </tr>
                         </thead>
                         <tbody id="tbody-relatorio"></tbody>
@@ -2230,41 +2606,106 @@
     </div>
 
     <script>
-        // ── GALERIA: play/pause no vídeo ao clicar ──
-        function toggleVideo(container) {
-            const video = container.querySelector('video');
-            const badge = container.querySelector('.galeria-video-badge');
-            if (video.paused) {
-                video.play();
-                badge.innerHTML = '⏸ Vídeo';
-            } else {
-                video.pause();
-                badge.innerHTML = '▶ Vídeo';
-            }
+        // ── NAV MOBILE ──
+        function toggleMenu() {
+            const m = document.getElementById('nav-mobile');
+            m.classList.toggle('open');
         }
+        function fecharMenu() {
+            document.getElementById('nav-mobile').classList.remove('open');
+        }
+        document.addEventListener('click', function (e) {
+            const m = document.getElementById('nav-mobile');
+            const btn = document.getElementById('menu-btn');
+            if (m.classList.contains('open') && !m.contains(e.target) && !btn.contains(e.target)) fecharMenu();
+        });
 
-        // Autoplay suave ao entrar na viewport
+        // ── GALERIA VIDEO AUTOPLAY ──
         const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                const video = e.target;
-                if (e.isIntersecting) {
-                    video.play().catch(() => { });
-                } else {
-                    video.pause();
-                }
-            });
+            entries.forEach(e => { const v = e.target; if (e.isIntersecting) { v.play().catch(() => { }); } else { v.pause(); } });
         }, { threshold: 0.4 });
-
         document.querySelectorAll('.galeria-item video').forEach(v => videoObserver.observe(v));
 
-        // ══════════════════════════════════════════════
-        // BANCO DE DADOS
-        // ══════════════════════════════════════════════
+        // ── LIGHTBOX ──
+        const MEDIA = [
+            { type: 'video', src: './photos/video 1.mp4', label: 'Progressiva · Resultado Final' },
+            { type: 'img', src: './photos/img 1.jpg', label: 'Progressiva' },
+            { type: 'img', src: './photos/img 11.jpg', label: 'Coloração + Progressiva' },
+            { type: 'img', src: './photos/img 4.jpeg', label: 'Escova com Finalização' },
+            { type: 'img', src: './photos/img 5.jpeg', label: 'Progressiva · Chanel' },
+            { type: 'img', src: './photos/img 6.jpeg', label: 'Botox Capilar' },
+            { type: 'img', src: './photos/img 7.jpeg', label: 'Hidratação + Finalização' },
+        ];
+        let lbIdx = 0;
+        function abrirLightbox(i) {
+            lbIdx = i;
+            document.getElementById('lightbox').classList.add('open');
+            document.body.style.overflow = 'hidden';
+            renderLb();
+            buildThumbs();
+        }
+        function fecharLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+            // pause any video
+            lb.querySelectorAll('video').forEach(v => v.pause());
+        }
+        function lbNav(dir) {
+            lbIdx = (lbIdx + dir + MEDIA.length) % MEDIA.length;
+            renderLb();
+            scrollThumb();
+        }
+        function renderLb() {
+            const m = MEDIA[lbIdx];
+            const wrap = document.getElementById('lb-media-wrap');
+            // pause previous video
+            wrap.querySelectorAll('video').forEach(v => v.pause());
+            if (m.type === 'video') {
+                wrap.innerHTML = `<video class="lb-video" src="${m.src}" controls autoplay playsinline style="max-width:100%;max-height:calc(100svh - 220px);border-radius:2px;"></video>`;
+            } else {
+                wrap.innerHTML = `<img class="lb-media" src="${m.src}" alt="${m.label}" style="max-height:calc(100svh - 220px);">`;
+            }
+            document.getElementById('lb-label').textContent = m.label;
+            document.getElementById('lb-label-info').textContent = m.label;
+            document.getElementById('lb-counter').textContent = `${lbIdx + 1} / ${MEDIA.length}`;
+            document.querySelectorAll('.lb-thumb').forEach((t, i) => t.classList.toggle('active', i === lbIdx));
+        }
+        function buildThumbs() {
+            const c = document.getElementById('lb-thumbs');
+            c.innerHTML = MEDIA.map((m, i) => {
+                const el = m.type === 'video'
+                    ? `<video src="${m.src}" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
+                    : `<img src="${m.src}" alt="${m.label}" style="width:100%;height:100%;object-fit:cover;">`;
+                return `<div class="lb-thumb${i === lbIdx ? ' active' : ''}" onclick="lbGoTo(${i})">${el}</div>`;
+            }).join('');
+        }
+        function lbGoTo(i) { lbIdx = i; renderLb(); scrollThumb(); }
+        function scrollThumb() {
+            const c = document.getElementById('lb-thumbs');
+            const t = c.querySelectorAll('.lb-thumb')[lbIdx];
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+        // keyboard nav
+        document.addEventListener('keydown', function (e) {
+            if (!document.getElementById('lightbox').classList.contains('open')) return;
+            if (e.key === 'ArrowLeft') lbNav(-1);
+            else if (e.key === 'ArrowRight') lbNav(1);
+            else if (e.key === 'Escape') fecharLightbox();
+        });
+        // swipe support
+        let tsX = 0;
+        document.getElementById('lightbox').addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, { passive: true });
+        document.getElementById('lightbox').addEventListener('touchend', e => {
+            const dx = e.changedTouches[0].clientX - tsX;
+            if (Math.abs(dx) > 50) { lbNav(dx < 0 ? 1 : -1); }
+        }, { passive: true });
+
+        // ── DB ──
         const DB = {
             async get(key) { try { const r = await window.storage.get(key); return r ? JSON.parse(r.value) : null; } catch { return null; } },
-            async set(key, val) { try { await window.storage.set(key, JSON.stringify(val)); } catch (e) { console.warn('storage erro', e); } }
+            async set(key, val) { try { await window.storage.set(key, JSON.stringify(val)); } catch (e) { console.warn('storage', e); } }
         };
-
         const CRED = { user: 'Rosane', pass: 'Judite157751' };
         const HORARIOS = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
         let agendamentos = [], bloqueados = [];
@@ -2273,8 +2714,7 @@
             agendamentos = await DB.get('rm_agendamentos') || [];
             bloqueados = await DB.get('rm_bloqueados') || [];
             if (agendamentos.length === 0) {
-                const hoje = new Date();
-                const fmt = d => d.toISOString().split('T')[0];
+                const hoje = new Date(); const fmt = d => d.toISOString().split('T')[0];
                 agendamentos = [
                     { id: 1, data: fmt(new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1)), hora: '09:00', nome: 'Ana Paula', tel: '(21) 98765-4321', servico: 'Escova + Prancha — R$ 35', valor: 35, obs: '', status: 'confirmado' },
                     { id: 2, data: fmt(new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1)), hora: '11:00', nome: 'Fernanda Lima', tel: '(21) 97654-3210', servico: 'Progressiva — a partir de R$ 110', valor: 110, obs: 'cabelo longo', status: 'confirmado' },
@@ -2289,7 +2729,6 @@
             }
             document.getElementById('ag-data').min = new Date().toISOString().split('T')[0];
         }
-
         async function salvar() { await DB.set('rm_agendamentos', agendamentos); await DB.set('rm_bloqueados', bloqueados); }
         inicializar();
 
@@ -2301,7 +2740,6 @@
             for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value.startsWith(nome.split('—')[0].trim()) || sel.options[i].text.startsWith(nome.split('—')[0].trim())) { sel.selectedIndex = i; break; } }
             document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
         }
-
         function atualizarHorarios() {
             const data = document.getElementById('ag-data').value;
             const grid = document.getElementById('horarios-grid');
@@ -2319,7 +2757,6 @@
                 grid.appendChild(btn);
             });
         }
-
         async function enviarAgendamento() {
             const nome = document.getElementById('ag-nome').value.trim();
             const tel = document.getElementById('ag-tel').value.trim();
@@ -2330,8 +2767,7 @@
             const conflito = agendamentos.find(a => a.data === data && a.hora === horarioSel && a.status !== 'cancelado');
             const bloqConflito = bloqueados.find(b => b.data === data && b.hora === horarioSel);
             if (conflito || bloqConflito) { toast('⚠ Este horário não está mais disponível. Escolha outro.'); atualizarHorarios(); return; }
-            const match = servico.match(/R\$\s*(\d+)/);
-            const valor = match ? parseInt(match[1]) : 0;
+            const match = servico.match(/R\$\s*(\d+)/); const valor = match ? parseInt(match[1]) : 0;
             agendamentos.push({ id: Date.now(), data, hora: horarioSel, nome, tel, servico, valor, obs, status: 'pendente' });
             await salvar(); atualizarHorarios();
             ['ag-nome', 'ag-tel', 'ag-obs', 'ag-horario-display'].forEach(id => document.getElementById(id).value = '');
@@ -2377,7 +2813,24 @@
 
         function carregarTodos() {
             const sorted = [...agendamentos].sort((a, b) => b.data.localeCompare(a.data) || b.hora.localeCompare(a.hora));
-            document.getElementById('tbody-todos').innerHTML = sorted.map(a => `<tr><td>${fmtData(a.data)}</td><td>${a.hora}</td><td><strong>${a.nome}</strong></td><td>${a.tel}</td><td>${a.servico.split('—')[0].trim()}</td><td>${a.obs || '—'}</td><td><span class="badge ${badgeCls(a.status)}">${a.status}</span></td><td class="actions">${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓ Confirmar</button>` : ''} ${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕ Cancelar</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty-state">Nenhum agendamento</td></tr>';
+            // Desktop table
+            document.getElementById('tbody-todos').innerHTML = sorted.map(a => `<tr><td>${fmtData(a.data)}</td><td>${a.hora}</td><td><strong>${a.nome}</strong></td><td>${a.tel}</td><td>${a.servico.split('—')[0].trim()}</td><td>${a.obs || '—'}</td><td><span class="badge ${badgeCls(a.status)}">${a.status}</span></td><td class="actions">${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓</button>` : ''}${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty-state">Nenhum agendamento</td></tr>';
+            // Mobile cards
+            document.getElementById('ag-cards-mobile').innerHTML = sorted.map(a => `
+        <div class="ag-card">
+            <div class="ag-card-header">
+                <div class="ag-card-nome">${a.nome}</div>
+                <span class="badge ${badgeCls(a.status)}">${a.status}</span>
+            </div>
+            <div class="ag-card-row">📅 ${fmtData(a.data)} &nbsp;·&nbsp; 🕐 ${a.hora}</div>
+            <div class="ag-card-row">💇 ${a.servico.split('—')[0].trim()}</div>
+            <div class="ag-card-row">📱 ${a.tel}${a.obs ? ` &nbsp;·&nbsp; 📝 ${a.obs}` : ''}</div>
+            ${a.valor ? `<div class="ag-card-row">💰 R$ ${a.valor.toFixed(2).replace('.', ',')}</div>` : ''}
+            <div class="ag-card-actions">
+                ${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓ Confirmar</button>` : ''}
+                ${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕ Cancelar</button>` : ''}
+            </div>
+        </div>`).join('') || '<div class="empty-state">Nenhum agendamento</div>';
         }
 
         async function confirmarAg(id) { const a = agendamentos.find(x => x.id === id); if (a) { a.status = 'confirmado'; await salvar(); carregarAdmin(); toast('✓ Agendamento confirmado!'); } }
@@ -2400,7 +2853,6 @@
         function carregarBloqueados() {
             document.getElementById('tbody-bloqueados').innerHTML = bloqueados.map((b, i) => `<tr><td>${fmtData(b.data)}</td><td>${b.hora}</td><td>${b.motivo || '—'}</td><td><button class="btn-action btn-desbloquear" onclick="desbloquear(${i})">🔓 Desbloquear</button></td></tr>`).join('') || '<tr><td colspan="4" class="empty-state">Nenhum horário bloqueado</td></tr>';
         }
-
         async function bloquearHorario() {
             const data = document.getElementById('blq-data').value; const hora = document.getElementById('blq-hora').value; const motivo = document.getElementById('blq-motivo').value;
             if (!data) { toast('⚠ Selecione uma data.'); return; }
@@ -2410,7 +2862,6 @@
             bloqueados.push({ data, hora, motivo: motivo || 'Bloqueado' });
             await salvar(); carregarBloqueados(); document.getElementById('blq-data').value = ''; document.getElementById('blq-motivo').value = ''; toast('🔒 Horário bloqueado com sucesso!');
         }
-
         async function desbloquear(i) { bloqueados.splice(i, 1); await salvar(); carregarBloqueados(); toast('🔓 Horário desbloqueado!'); }
 
         function carregarRelatorio() {
