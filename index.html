@@ -6,44 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Estúdio Rosane Matos — Especialista em Cabelos</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
         rel="stylesheet">
     <style>
+        /* ─── RESET & TOKENS ─── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%
+        }
+
         :root {
-            --brown-dark: #1e1209;
-            --brown-mid: #3d2010;
-            --brown-warm: #5c3018;
-            --gold: #c9963a;
-            --gold-bright: #e8b95a;
-            --gold-pale: #f2dfa8;
-            --gold-muted: rgba(201, 150, 58, 0.18);
-            --cream: #faf4ea;
-            --cream-mid: #f0e4ce;
-            --cream-dark: #e4d0b4;
-            --text: #180e05;
-            --text-mid: #3d2010;
-            --text-muted: #7a5535;
-            --white: #ffffff;
-            --success: #166534;
+            --brown-dark: #1a1008;
+            --brown-mid: #3a1e0e;
+            --brown-warm: #5a2e14;
+            --gold: #c8913a;
+            --gold-bright: #e8b550;
+            --gold-pale: #f3e2b0;
+            --gold-muted: rgba(200, 145, 58, .16);
+            --cream: #faf5ec;
+            --cream-mid: #f0e5d0;
+            --cream-dark: #e2cead;
+            --text: #170d04;
+            --text-mid: #3a1e0e;
+            --text-muted: #7a5030;
+            --white: #fff;
+            --success: #15803d;
             --success-bg: #dcfce7;
             --danger: #991b1b;
             --danger-bg: #fee2e2;
             --warn-bg: #fef9c3;
             --warn: #854d0e;
-            --radius: 3px;
-            --shadow: 0 4px 24px rgba(30, 18, 9, 0.10);
-            --shadow-lg: 0 12px 48px rgba(30, 18, 9, 0.18);
-            --nav-h: 60px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
+            --r: 4px;
+            --shadow: 0 2px 20px rgba(26, 16, 8, .09);
+            --shadow-lg: 0 8px 48px rgba(26, 16, 8, .18);
+            --nav-h: 62px;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+            --ease-out: cubic-bezier(0, 0, .2, 1);
+            --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
         }
 
         body {
@@ -51,94 +58,147 @@
             background: var(--cream);
             color: var(--text);
             overflow-x: hidden;
+            line-height: 1.6
         }
 
+        /* ─── SCROLLBAR ─── */
         ::-webkit-scrollbar {
-            width: 5px;
+            width: 4px
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--brown-dark);
+            background: var(--brown-dark)
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--gold);
-            border-radius: 3px;
+            border-radius: 4px
         }
 
-        /* ══ NAV ══ */
+        /* ─── FOCUS ─── */
+        :focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 3px
+        }
+
+        /* ─── NAV ─── */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 100;
-            background: rgba(30, 18, 9, 0.97);
-            backdrop-filter: blur(12px);
-            padding: 0 1.5rem;
+            background: rgba(26, 16, 8, .96);
+            backdrop-filter: blur(20px) saturate(1.2);
+            -webkit-backdrop-filter: blur(20px) saturate(1.2);
+            padding: 0 clamp(1rem, 4vw, 2rem);
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: var(--nav-h);
-            border-bottom: 1px solid rgba(201, 150, 58, 0.2);
+            border-bottom: 1px solid rgba(200, 145, 58, .15);
+            transition: box-shadow .3s var(--ease);
+        }
+
+        nav.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, .25)
         }
 
         .nav-logo {
             font-family: 'Cormorant Garamond', serif;
             color: var(--gold);
-            font-size: 1.25rem;
-            letter-spacing: 0.06em;
+            font-size: 1.2rem;
+            letter-spacing: .08em;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: .45rem;
+            user-select: none;
         }
 
         .nav-logo-dot {
-            width: 6px;
-            height: 6px;
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
             background: var(--gold);
+            animation: pulse-dot 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .5;
+                transform: scale(.7)
+            }
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.8rem
         }
 
         .nav-links a {
-            color: var(--gold-pale);
+            color: rgba(243, 226, 176, .7);
             text-decoration: none;
-            font-size: 0.76rem;
-            letter-spacing: 0.14em;
+            font-size: .73rem;
+            letter-spacing: .16em;
             text-transform: uppercase;
-            opacity: 0.75;
-            transition: color 0.2s;
+            transition: color .2s var(--ease);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .25s var(--ease);
         }
 
         .nav-links a:hover {
-            color: var(--gold-bright);
-            opacity: 1;
+            color: var(--gold-bright)
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1)
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: .7rem
         }
 
         .nav-admin-btn {
             background: transparent;
-            border: 1px solid var(--gold);
+            border: 1px solid rgba(200, 145, 58, .6);
             color: var(--gold);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.72rem;
-            letter-spacing: 0.1em;
+            padding: 6px 16px;
+            border-radius: 24px;
+            font-size: .7rem;
+            letter-spacing: .12em;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            transition: all 0.2s;
+            transition: background .2s var(--ease), color .2s var(--ease), border-color .2s;
             white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .nav-admin-btn:hover {
             background: var(--gold);
             color: var(--brown-dark);
+            border-color: var(--gold)
         }
 
-        /* Mobile nav hamburger */
         .nav-menu-btn {
             display: none;
             background: none;
@@ -146,16 +206,31 @@
             cursor: pointer;
             flex-direction: column;
             gap: 5px;
-            padding: 4px;
+            padding: 6px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .nav-menu-btn span {
             display: block;
             width: 22px;
-            height: 2px;
+            height: 1.5px;
             background: var(--gold);
             border-radius: 2px;
-            transition: all 0.3s;
+            transition: transform .3s var(--ease), opacity .3s var(--ease), width .3s var(--ease);
+            transform-origin: center;
+        }
+
+        .nav-menu-btn.open span:nth-child(1) {
+            transform: translateY(6.5px) rotate(45deg)
+        }
+
+        .nav-menu-btn.open span:nth-child(2) {
+            opacity: 0;
+            width: 0
+        }
+
+        .nav-menu-btn.open span:nth-child(3) {
+            transform: translateY(-6.5px) rotate(-45deg)
         }
 
         .nav-mobile {
@@ -163,43 +238,46 @@
             top: var(--nav-h);
             left: 0;
             right: 0;
-            background: rgba(22, 13, 6, 0.98);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+            background: rgba(20, 12, 5, .98);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(200, 145, 58, .12);
             z-index: 99;
             display: flex;
             flex-direction: column;
-            padding: 1.2rem 1.5rem 1.5rem;
-            transform: translateY(-12px);
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            padding: 0 clamp(1rem, 4vw, 1.5rem);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s var(--ease-out), padding .3s;
         }
 
         .nav-mobile.open {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: auto;
+            max-height: 420px;
+            padding: 1rem clamp(1rem, 4vw, 1.5rem) 1.5rem
         }
 
         .nav-mobile a {
-            color: var(--gold-pale);
+            color: rgba(243, 226, 176, .8);
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 0.1em;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(201, 150, 58, 0.08);
-            opacity: 0.8;
+            font-size: .88rem;
+            letter-spacing: .1em;
+            padding: .8rem 0;
+            border-bottom: 1px solid rgba(200, 145, 58, .07);
+            transition: color .2s;
         }
 
         .nav-mobile a:last-of-type {
-            border-bottom: none;
+            border-bottom: none
         }
 
-        /* ══ HERO ══ */
+        .nav-mobile a:hover {
+            color: var(--gold)
+        }
+
+        /* ─── HERO ─── */
         #hero {
             min-height: 100svh;
-            background: linear-gradient(135deg, #1e1209 0%, #3d2010 45%, #120b04 100%);
+            background: linear-gradient(150deg, #160d05 0%, #2e1508 40%, #100804 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -208,58 +286,53 @@
             padding-top: var(--nav-h);
         }
 
-        .hero-lines {
+        .hero-bg-grid {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            background-image: repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(201, 150, 58, 0.03) 60px, rgba(201, 150, 58, 0.03) 61px), repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(201, 150, 58, 0.03) 60px, rgba(201, 150, 58, 0.03) 61px);
-            animation: heroPan 30s linear infinite;
+            background-image:
+                linear-gradient(rgba(200, 145, 58, .03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 145, 58, .03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: grid-shift 60s linear infinite;
         }
 
-        @keyframes heroPan {
-            0% { background-position: 0 0; }
-            100% { background-position: 120px 120px; }
+        @keyframes grid-shift {
+            to {
+                background-position: 80px 80px
+            }
         }
 
         .hero-glow {
             position: absolute;
-            width: 600px;
-            height: 600px;
+            width: min(700px, 100vw);
+            aspect-ratio: 1;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(201, 150, 58, 0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(200, 145, 58, .07) 0%, transparent 65%);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            animation: glowPulse 4s ease-in-out infinite alternate;
+            animation: glow-breathe 6s ease-in-out infinite alternate;
         }
 
-        @keyframes glowPulse {
-            0% { transform: translate(-50%, -50%) scale(0.85); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+        @keyframes glow-breathe {
+            0% {
+                opacity: .6;
+                transform: translate(-50%, -50%) scale(.85)
+            }
+
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1)
+            }
         }
 
         .hero-ring {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(201, 150, 58, 0.08);
+            border: 1px solid rgba(200, 145, 58, .06);
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .hero-ring:nth-child(3) {
-            animation: ringSpin 20s linear infinite;
-        }
-        .hero-ring:nth-child(4) {
-            animation: ringSpin 30s linear infinite reverse;
-        }
-        .hero-ring:nth-child(5) {
-            animation: ringSpin 40s linear infinite;
-        }
-
-        @keyframes ringSpin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
 
         #hero-particles {
@@ -267,78 +340,105 @@
             inset: 0;
             pointer-events: none;
             overflow: hidden;
-            z-index: 1;
+            z-index: 1
         }
 
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(201, 150, 58, var(--opacity));
-            width: var(--size);
-            height: var(--size);
-            animation: particleFloat var(--duration) ease-in-out infinite alternate;
+            background: rgba(200, 145, 58, var(--op));
+            width: var(--s);
+            height: var(--s);
+            animation: particle-float var(--dur) ease-in-out infinite alternate;
             animation-delay: var(--delay);
         }
 
-        @keyframes particleFloat {
-            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-            20% { opacity: var(--opacity); }
-            80% { opacity: var(--opacity); }
-            100% { transform: translateY(calc(var(--drift-y) * 1px)) translateX(calc(var(--drift-x) * 1px)) scale(1.4); opacity: 0; }
+        @keyframes particle-float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0
+            }
+
+            20% {
+                opacity: var(--op)
+            }
+
+            80% {
+                opacity: var(--op)
+            }
+
+            100% {
+                transform: translateY(var(--dy)) translateX(var(--dx));
+                opacity: 0
+            }
         }
 
         .hero-content {
             text-align: center;
             z-index: 2;
-            padding: 1.5rem;
+            padding: 1.5rem clamp(1rem, 5vw, 2rem);
+            animation: hero-enter .9s var(--ease-out) both;
+        }
+
+        @keyframes hero-enter {
+            from {
+                opacity: 0;
+                transform: translateY(24px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 0.68rem;
-            letter-spacing: 0.4em;
+            gap: .9rem;
+            font-size: .65rem;
+            letter-spacing: .45em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.4rem;
+            opacity: .9;
         }
 
         .hero-eyebrow::before,
         .hero-eyebrow::after {
             content: '';
             display: block;
-            width: 36px;
+            width: 32px;
             height: 1px;
-            background: var(--gold);
+            background: currentColor;
         }
 
         .hero-name {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3.5rem, 12vw, 8rem);
+            font-size: clamp(3.2rem, 13vw, 8.5rem);
             font-weight: 300;
-            line-height: 0.9;
+            line-height: .88;
             color: var(--white);
-            margin-bottom: 0.5rem;
+            letter-spacing: -.01em;
         }
 
         .hero-name .gold {
             color: var(--gold);
-            font-style: italic;
+            font-style: italic
         }
 
         .hero-sub {
-            font-size: 0.72rem;
-            letter-spacing: 0.35em;
+            font-size: .68rem;
+            letter-spacing: .38em;
             text-transform: uppercase;
             color: var(--gold-pale);
-            opacity: 0.6;
-            margin: 1.2rem 0 2.5rem;
+            opacity: .5;
+            margin: 1.4rem 0 2.4rem;
         }
 
         .hero-cta {
-            display: inline-flex;
-            gap: 0.75rem;
+            display: flex;
+            gap: .75rem;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -347,140 +447,162 @@
             background: var(--gold);
             color: var(--brown-dark);
             border: none;
-            padding: 13px 32px;
+            padding: 13px 30px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.76rem;
-            letter-spacing: 0.18em;
+            font-size: .75rem;
+            letter-spacing: .2em;
             text-transform: uppercase;
             font-weight: 600;
             cursor: pointer;
-            border-radius: var(--radius);
-            transition: all 0.25s;
+            border-radius: var(--r);
+            transition: background .2s var(--ease), transform .2s var(--ease-spring), box-shadow .2s var(--ease);
             -webkit-tap-highlight-color: transparent;
+            min-height: 46px;
         }
 
         .btn-primary:hover {
             background: var(--gold-bright);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(201, 150, 58, 0.35);
+            box-shadow: 0 8px 28px rgba(200, 145, 58, .35)
+        }
+
+        .btn-primary:active {
+            transform: translateY(0)
         }
 
         .btn-outline {
             background: transparent;
-            color: var(--gold-pale);
-            border: 1px solid rgba(201, 150, 58, 0.4);
-            padding: 13px 32px;
+            color: rgba(243, 226, 176, .85);
+            border: 1px solid rgba(200, 145, 58, .38);
+            padding: 13px 30px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.76rem;
-            letter-spacing: 0.18em;
+            font-size: .75rem;
+            letter-spacing: .2em;
             text-transform: uppercase;
             cursor: pointer;
-            border-radius: var(--radius);
-            transition: all 0.25s;
+            border-radius: var(--r);
+            transition: border-color .2s, color .2s, background .2s, transform .2s var(--ease-spring);
             -webkit-tap-highlight-color: transparent;
+            min-height: 46px;
         }
 
         .btn-outline:hover {
             border-color: var(--gold);
             color: var(--gold);
+            background: var(--gold-muted);
+            transform: translateY(-2px)
+        }
+
+        .btn-outline:active {
+            transform: translateY(0)
         }
 
         .hero-stats {
             display: flex;
-            gap: 2rem;
+            gap: clamp(1.2rem, 4vw, 2.5rem);
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 3rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(201, 150, 58, 0.12);
+            border-top: 1px solid rgba(200, 145, 58, .1);
+        }
+
+        .hero-stat {
+            text-align: center
         }
 
         .hero-stat-val {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
             color: var(--gold);
             font-weight: 600;
         }
 
         .hero-stat-label {
-            font-size: 0.68rem;
-            letter-spacing: 0.15em;
+            font-size: .62rem;
+            letter-spacing: .16em;
             text-transform: uppercase;
             color: var(--gold-pale);
-            opacity: 0.5;
-            margin-top: 0.2rem;
+            opacity: .45;
+            margin-top: .2rem;
         }
 
+        /* ─── SECTIONS ─── */
         section {
-            padding: 5rem 1.5rem;
+            padding: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 4vw, 1.5rem)
         }
 
         .container {
-            max-width: 1120px;
-            margin: 0 auto;
+            max-width: 1100px;
+            margin: 0 auto
+        }
+
+        .section-header {
+            margin-bottom: clamp(1.8rem, 5vw, 3rem)
         }
 
         .section-eyebrow {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-            font-size: 0.68rem;
-            letter-spacing: 0.35em;
+            gap: .75rem;
+            font-size: .63rem;
+            letter-spacing: .38em;
             text-transform: uppercase;
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: .9rem;
         }
 
         .section-eyebrow::before {
             content: '';
             display: block;
-            width: 20px;
+            width: 16px;
             height: 1px;
-            background: var(--gold);
+            background: currentColor
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 6vw, 3.8rem);
+            font-size: clamp(1.9rem, 5.5vw, 3.6rem);
             font-weight: 300;
-            line-height: 1.05;
+            line-height: 1.06;
             color: var(--text);
-            margin-bottom: 1rem;
         }
 
         .section-title em {
             color: var(--gold);
-            font-style: italic;
+            font-style: italic
         }
 
         .section-desc {
             color: var(--text-muted);
-            max-width: 500px;
-            line-height: 1.85;
-            font-size: 0.9rem;
+            max-width: 480px;
+            line-height: 1.9;
+            font-size: .88rem;
+            margin-top: .8rem;
         }
 
-        /* ══ SERVIÇOS ══ */
+        /* ─── SERVIÇOS ─── */
         #servicos {
-            background: var(--white);
+            background: var(--white)
         }
 
         .servicos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1px;
-            margin-top: 3rem;
-            background: rgba(201, 150, 58, 0.12);
-            border: 1px solid rgba(201, 150, 58, 0.12);
+            background: rgba(200, 145, 58, .1);
+            border: 1px solid rgba(200, 145, 58, .1);
+            border-radius: var(--r);
+            overflow: hidden;
         }
 
         .servico-card {
             background: var(--white);
-            padding: 2rem 1.8rem;
+            padding: 1.8rem 1.6rem;
             cursor: pointer;
-            transition: background 0.2s;
             position: relative;
             overflow: hidden;
+            transition: background .25s var(--ease);
         }
 
         .servico-card::after {
@@ -490,88 +612,90 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: var(--gold);
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.3s;
+            transition: transform .35s var(--ease);
         }
 
         .servico-card:hover {
-            background: var(--cream);
+            background: var(--cream)
         }
 
         .servico-card:hover::after {
-            transform: scaleX(1);
+            transform: scaleX(1)
         }
 
         .servico-icon {
-            width: 42px;
-            height: 42px;
-            border: 1px solid rgba(201, 150, 58, 0.3);
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(200, 145, 58, .28);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.2rem;
-            font-size: 1rem;
+            margin-bottom: 1.1rem;
+            font-size: .95rem;
             color: var(--gold);
-            transition: all 0.2s;
+            transition: background .2s, color .2s, border-color .2s, transform .3s var(--ease-spring);
         }
 
         .servico-card:hover .servico-icon {
             background: var(--gold);
             color: var(--brown-dark);
             border-color: var(--gold);
+            transform: scale(1.1) rotate(-5deg);
         }
 
         .servico-nome {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
-            color: var(--text);
+            margin-bottom: .35rem;
+            color: var(--text)
         }
 
         .servico-desc {
-            font-size: 0.8rem;
+            font-size: .78rem;
             color: var(--text-muted);
-            line-height: 1.65;
-            margin-bottom: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 1.1rem
         }
 
         .servico-footer {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            gap: 0.5rem;
+            gap: .5rem
         }
 
         .servico-partir {
-            font-size: 0.65rem;
+            font-size: .62rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: .1em;
             color: var(--text-muted);
             display: block;
+            margin-bottom: .15rem
         }
 
         .servico-preco {
             color: var(--gold);
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 1.05rem;
+            font-weight: 600
         }
 
         .btn-agendar-card {
             background: transparent;
-            border: 1px solid rgba(201, 150, 58, 0.35);
+            border: 1px solid rgba(200, 145, 58, .3);
             color: var(--gold);
-            padding: 7px 14px;
-            font-size: 0.72rem;
-            letter-spacing: 0.1em;
+            padding: 7px 13px;
+            font-size: .7rem;
+            letter-spacing: .1em;
             text-transform: uppercase;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            border-radius: var(--radius);
-            transition: all 0.2s;
+            border-radius: var(--r);
+            transition: background .2s, color .2s, border-color .2s, transform .2s var(--ease-spring);
             white-space: nowrap;
             -webkit-tap-highlight-color: transparent;
         }
@@ -579,164 +703,163 @@
         .btn-agendar-card:hover {
             background: var(--gold);
             color: var(--brown-dark);
+            border-color: var(--gold);
+            transform: scale(1.03)
         }
 
-        /* ══ PRODUTOS ══ */
+        /* ─── PRODUTOS ─── */
         #produtos {
-            background: var(--cream);
+            background: var(--cream)
         }
 
         .produtos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
-            margin-top: 3rem;
         }
 
         .produto-card {
             background: var(--white);
-            border: 1px solid rgba(201, 150, 58, 0.15);
-            padding: 1.5rem;
-            border-radius: var(--radius);
-            transition: box-shadow 0.2s, transform 0.2s;
+            border: 1px solid rgba(200, 145, 58, .12);
+            padding: 1.4rem;
+            border-radius: var(--r);
+            transition: box-shadow .25s var(--ease), transform .25s var(--ease-spring);
         }
 
         .produto-card:hover {
             box-shadow: var(--shadow);
-            transform: translateY(-2px);
+            transform: translateY(-3px)
         }
 
         .produto-card h4 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.4rem;
-            color: var(--text);
+            font-size: 1.08rem;
+            margin-bottom: .35rem;
+            color: var(--text)
         }
 
         .produto-card p {
-            font-size: 0.8rem;
+            font-size: .78rem;
             color: var(--text-muted);
-            line-height: 1.65;
+            line-height: 1.7
         }
 
-        /* ══ AGENDAMENTO ══ */
+        /* ─── AGENDAMENTO ─── */
         #agendar {
-            background: var(--brown-dark);
+            background: var(--brown-dark)
         }
 
         #agendar .section-title {
-            color: var(--white);
+            color: var(--white)
         }
 
         #agendar .section-desc {
             color: var(--gold-pale);
-            opacity: 0.65;
+            opacity: .6
         }
 
         .agendar-layout {
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.15fr;
+            gap: clamp(2rem, 6vw, 4.5rem);
             align-items: start;
         }
 
         .agendar-steps {
-            margin-top: 2rem;
+            margin-top: 1.8rem;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1rem
         }
 
         .agendar-step {
             display: flex;
-            gap: 0.9rem;
-            align-items: flex-start;
+            gap: .85rem;
+            align-items: flex-start
         }
 
         .step-num {
-            width: 30px;
-            height: 30px;
+            width: 28px;
+            height: 28px;
+            flex-shrink: 0;
             border-radius: 50%;
-            border: 1px solid rgba(201, 150, 58, 0.4);
+            border: 1px solid rgba(200, 145, 58, .38);
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 0.95rem;
+            font-size: .9rem;
             color: var(--gold);
-            flex-shrink: 0;
         }
 
         .step-text {
-            color: var(--gold-pale);
-            font-size: 0.86rem;
-            line-height: 1.6;
-            opacity: 0.75;
-            padding-top: 0.25rem;
+            color: rgba(243, 226, 176, .65);
+            font-size: .84rem;
+            line-height: 1.65;
+            padding-top: .2rem
         }
 
         .agendar-horario-info {
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(201, 150, 58, 0.12);
+            margin-top: 1.8rem;
+            padding-top: 1.4rem;
+            border-top: 1px solid rgba(200, 145, 58, .1);
         }
 
         .agendar-horario-info p {
-            color: var(--gold-pale);
-            font-size: 0.8rem;
-            opacity: 0.5;
-            line-height: 1.8;
+            color: rgba(243, 226, 176, .45);
+            font-size: .78rem;
+            line-height: 1.9
         }
 
         .agendar-horario-info span {
-            color: var(--gold);
-            opacity: 1;
+            color: var(--gold)
         }
 
         .agendamento-box {
-            background: rgba(255, 255, 255, 0.035);
-            border: 1px solid rgba(201, 150, 58, 0.18);
-            border-radius: 4px;
-            padding: 2rem;
-            backdrop-filter: blur(4px);
+            background: rgba(255, 255, 255, .03);
+            border: 1px solid rgba(200, 145, 58, .16);
+            border-radius: 6px;
+            padding: clamp(1.2rem, 4vw, 2rem);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 0.9rem;
-            margin-bottom: 0.9rem;
+            gap: .85rem;
+            margin-bottom: .85rem
         }
 
         .form-row.full {
-            grid-template-columns: 1fr;
+            grid-template-columns: 1fr
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: .38rem
         }
 
         .form-group label {
-            font-size: 0.68rem;
-            letter-spacing: 0.16em;
+            font-size: .64rem;
+            letter-spacing: .18em;
             text-transform: uppercase;
-            color: rgba(242, 223, 168, 0.6);
+            color: rgba(243, 226, 176, .5);
         }
 
         .form-group input,
         .form-group select,
         .form-group textarea {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(201, 150, 58, 0.18);
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(200, 145, 58, .16);
             color: var(--white);
             padding: 11px 13px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.88rem;
-            border-radius: var(--radius);
+            font-size: .88rem;
+            border-radius: var(--r);
             outline: none;
-            transition: border 0.2s;
+            transition: border-color .2s, background .2s;
             -webkit-appearance: none;
             appearance: none;
         }
@@ -744,85 +867,101 @@
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
-            border-color: var(--gold);
-            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(200, 145, 58, .7);
+            background: rgba(255, 255, 255, .07);
         }
 
         .form-group select option {
             background: var(--brown-mid);
+            color: var(--white)
         }
 
         .form-group textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 78px
         }
 
         .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, .18)
+        }
+
+        /* iOS font-size fix */
+        @supports (-webkit-touch-callout:none) {
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 16px
+            }
         }
 
         .horarios-legenda {
             display: flex;
-            gap: 1rem;
+            gap: .9rem;
             flex-wrap: wrap;
-            margin-bottom: 0.7rem;
-            margin-top: 0.3rem;
+            margin-bottom: .6rem;
+            margin-top: .25rem
         }
 
         .legenda-item {
             display: flex;
             align-items: center;
-            gap: 0.4rem;
-            font-size: 0.72rem;
-            color: rgba(242, 223, 168, 0.55);
+            gap: .38rem;
+            font-size: .7rem;
+            color: rgba(243, 226, 176, .5)
         }
 
         .legenda-dot {
             width: 10px;
             height: 10px;
             border-radius: 2px;
-            flex-shrink: 0;
+            flex-shrink: 0
         }
 
         .legenda-dot.disponivel {
-            background: rgba(201, 150, 58, 0.25);
-            border: 1px solid rgba(201, 150, 58, 0.4);
+            background: rgba(200, 145, 58, .18);
+            border: 1px solid rgba(200, 145, 58, .38)
         }
 
         .legenda-dot.ocupado {
-            background: rgba(153, 27, 27, 0.3);
-            border: 1px solid rgba(153, 27, 27, 0.5);
+            background: rgba(153, 27, 27, .28);
+            border: 1px solid rgba(153, 27, 27, .45)
         }
 
         .legenda-dot.selecionado {
-            background: var(--gold);
+            background: var(--gold)
         }
 
         .horarios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-            gap: 0.45rem;
+            grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+            gap: .4rem
         }
 
         .horario-btn {
-            background: rgba(201, 150, 58, 0.07);
-            border: 1px solid rgba(201, 150, 58, 0.22);
+            background: rgba(200, 145, 58, .06);
+            border: 1px solid rgba(200, 145, 58, .2);
             color: var(--gold-pale);
-            padding: 10px 6px;
-            font-size: 0.82rem;
+            padding: 10px 5px;
+            font-size: .82rem;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            border-radius: var(--radius);
-            transition: all 0.18s;
+            border-radius: var(--r);
+            transition: border-color .18s, color .18s, background .18s, transform .18s var(--ease-spring);
             text-align: center;
             font-weight: 500;
+            min-height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             -webkit-tap-highlight-color: transparent;
         }
 
         .horario-btn:hover:not(.ocupado) {
             border-color: var(--gold);
             color: var(--gold);
-            background: rgba(201, 150, 58, 0.14);
+            background: rgba(200, 145, 58, .14);
+            transform: scale(1.04);
         }
 
         .horario-btn.selected {
@@ -830,65 +969,80 @@
             color: var(--brown-dark);
             border-color: var(--gold);
             font-weight: 600;
+            transform: scale(1.04);
         }
 
         .horario-btn.ocupado {
-            background: rgba(153, 27, 27, 0.12);
-            border-color: rgba(153, 27, 27, 0.3);
-            color: rgba(248, 113, 113, 0.6);
+            background: rgba(153, 27, 27, .09);
+            border-color: rgba(153, 27, 27, .25);
+            color: rgba(248, 113, 113, .5);
             cursor: not-allowed;
             text-decoration: line-through;
-            font-size: 0.76rem;
+            font-size: .76rem;
+            opacity: .7;
         }
 
         .horarios-placeholder {
-            color: rgba(242, 223, 168, 0.3);
-            font-size: 0.8rem;
-            padding: 1rem 0;
+            color: rgba(243, 226, 176, .25);
+            font-size: .78rem;
+            padding: 1.2rem 0;
             text-align: center;
             grid-column: 1/-1;
         }
 
         .form-submit {
-            margin-top: 1.2rem;
+            margin-top: 1.1rem
         }
 
         .form-success {
-            background: rgba(21, 128, 61, 0.12);
+            background: rgba(21, 128, 61, .1);
             color: #86efac;
-            border: 1px solid rgba(134, 239, 172, 0.15);
-            padding: 0.8rem 1rem;
-            border-radius: var(--radius);
-            font-size: 0.83rem;
+            border: 1px solid rgba(134, 239, 172, .15);
+            padding: .75rem 1rem;
+            border-radius: var(--r);
+            font-size: .82rem;
             margin-bottom: 1rem;
             display: none;
+            animation: fade-in .4s var(--ease);
         }
 
-        /* ══ GALERIA ══ */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(-6px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* ─── GALERIA ─── */
         #galeria {
-            background: var(--white);
+            background: var(--white)
         }
 
         .galeria-grid {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-top: 2.5rem;
+            gap: 5px;
+            margin-top: 2.2rem
         }
 
         .galeria-row {
             display: grid;
-            gap: 6px;
+            gap: 5px
         }
 
         .galeria-row-1 {
             grid-template-columns: 2fr 1fr;
-            height: 380px;
+            height: 370px
         }
 
         .galeria-row-2 {
             grid-template-columns: repeat(5, 1fr);
-            height: 220px;
+            height: 210px
         }
 
         .galeria-item {
@@ -904,26 +1058,26 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform .6s var(--ease);
             display: block;
         }
 
         .galeria-item:hover img,
         .galeria-item:hover video {
-            transform: scale(1.04);
+            transform: scale(1.05)
         }
 
         .galeria-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(transparent 40%, rgba(30, 18, 9, 0.88));
+            background: linear-gradient(transparent 40%, rgba(26, 16, 8, .85));
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity .3s var(--ease);
             pointer-events: none;
         }
 
         .galeria-item:hover .galeria-overlay {
-            opacity: 1;
+            opacity: 1
         }
 
         .galeria-label {
@@ -932,27 +1086,27 @@
             left: 0;
             right: 0;
             color: var(--gold-pale);
-            font-size: 0.78rem;
-            padding: 1.2rem 0.9rem 0.9rem;
-            letter-spacing: 0.06em;
-            transform: translateY(4px);
-            transition: transform 0.3s;
+            font-size: .75rem;
+            padding: 1.1rem .85rem .85rem;
+            letter-spacing: .05em;
+            transform: translateY(5px);
+            transition: transform .3s var(--ease);
             z-index: 2;
         }
 
         .galeria-item:hover .galeria-label {
-            transform: translateY(0);
+            transform: translateY(0)
         }
 
         .galeria-video-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(201, 150, 58, 0.92);
+            top: 9px;
+            left: 9px;
+            background: rgba(200, 145, 58, .92);
             color: var(--brown-dark);
-            font-size: 0.66rem;
+            font-size: .63rem;
             font-weight: 700;
-            letter-spacing: 0.1em;
+            letter-spacing: .1em;
             text-transform: uppercase;
             padding: 3px 9px;
             border-radius: 20px;
@@ -962,66 +1116,67 @@
             gap: 3px;
         }
 
-        /* hover hint */
         .galeria-zoom-hint {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.68rem;
+            top: 9px;
+            right: 9px;
+            background: rgba(0, 0, 0, .45);
+            color: rgba(255, 255, 255, .75);
+            font-size: .65rem;
             padding: 3px 8px;
-            border-radius: 12px;
+            border-radius: 10px;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity .3s;
             z-index: 3;
             pointer-events: none;
         }
 
         .galeria-item:hover .galeria-zoom-hint {
-            opacity: 1;
+            opacity: 1
         }
 
-        /* ══ LIGHTBOX ══ */
+        /* ─── LIGHTBOX ─── */
         #lightbox {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 500;
-            background: rgba(10, 5, 2, 0.96);
-            backdrop-filter: blur(10px);
+            background: rgba(8, 4, 2, .97);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         #lightbox.open {
             display: flex;
             flex-direction: column;
+            animation: fade-in .25s var(--ease)
         }
 
         .lb-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem 1.5rem;
-            border-bottom: 1px solid rgba(201, 150, 58, 0.12);
+            padding: .9rem clamp(1rem, 4vw, 1.5rem);
+            border-bottom: 1px solid rgba(200, 145, 58, .1);
             flex-shrink: 0;
         }
 
         .lb-title {
             font-family: 'Cormorant Garamond', serif;
             color: var(--gold-pale);
-            font-size: 1rem;
-            letter-spacing: 0.06em;
+            font-size: .95rem;
+            letter-spacing: .06em
         }
 
         .lb-counter {
-            font-size: 0.72rem;
-            color: rgba(201, 150, 58, 0.5);
-            letter-spacing: 0.1em;
+            font-size: .68rem;
+            color: rgba(200, 145, 58, .45);
+            letter-spacing: .12em
         }
 
         .lb-close {
             background: none;
-            border: 1px solid rgba(201, 150, 58, 0.3);
+            border: 1px solid rgba(200, 145, 58, .28);
             color: var(--gold-pale);
             width: 36px;
             height: 36px;
@@ -1031,13 +1186,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: border-color .2s, color .2s, background .2s;
             -webkit-tap-highlight-color: transparent;
         }
 
         .lb-close:hover {
             border-color: var(--gold);
             color: var(--gold);
+            background: var(--gold-muted)
         }
 
         .lb-stage {
@@ -1050,7 +1206,8 @@
             min-height: 0;
         }
 
-        .lb-media {
+        .lb-media,
+        .lb-video {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
@@ -1058,249 +1215,254 @@
             border-radius: 2px;
         }
 
-        .lb-video {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 2px;
-        }
-
         .lb-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(30, 18, 9, 0.7);
-            border: 1px solid rgba(201, 150, 58, 0.25);
+            background: rgba(26, 16, 8, .65);
+            border: 1px solid rgba(200, 145, 58, .22);
             color: var(--gold-pale);
-            width: 44px;
-            height: 44px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: background .2s, border-color .2s, color .2s, transform .2s var(--ease-spring);
             -webkit-tap-highlight-color: transparent;
             z-index: 2;
         }
 
         .lb-nav:hover {
-            background: rgba(201, 150, 58, 0.15);
+            background: var(--gold-muted);
             border-color: var(--gold);
             color: var(--gold);
+            transform: translateY(-50%) scale(1.08)
         }
 
         .lb-prev {
-            left: 1rem;
+            left: .75rem
         }
 
         .lb-next {
-            right: 1rem;
+            right: .75rem
         }
 
         .lb-info {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid rgba(201, 150, 58, 0.1);
-            flex-shrink: 0;
+            padding: .8rem clamp(1rem, 4vw, 1.5rem);
+            border-top: 1px solid rgba(200, 145, 58, .08);
+            flex-shrink: 0
         }
 
         .lb-label-text {
             color: var(--gold-pale);
-            font-size: 0.85rem;
-            opacity: 0.7;
+            font-size: .83rem;
+            opacity: .65
         }
 
         .lb-thumbs {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             overflow-x: auto;
-            padding: 0.8rem 1.5rem 1rem;
+            padding: .7rem clamp(1rem, 4vw, 1.5rem) .9rem;
             flex-shrink: 0;
             scrollbar-width: thin;
             scrollbar-color: var(--gold) transparent;
-            border-top: 1px solid rgba(201, 150, 58, 0.08);
+            border-top: 1px solid rgba(200, 145, 58, .07);
         }
 
         .lb-thumbs::-webkit-scrollbar {
-            height: 4px;
+            height: 3px
         }
 
         .lb-thumbs::-webkit-scrollbar-thumb {
             background: var(--gold);
-            border-radius: 2px;
+            border-radius: 2px
         }
 
         .lb-thumb {
-            width: 60px;
-            height: 50px;
+            width: 58px;
+            height: 48px;
             flex-shrink: 0;
             border-radius: 2px;
             overflow: hidden;
             cursor: pointer;
             border: 2px solid transparent;
-            transition: border-color 0.2s;
+            transition: border-color .2s, transform .2s var(--ease-spring);
             -webkit-tap-highlight-color: transparent;
         }
 
         .lb-thumb.active {
             border-color: var(--gold);
+            transform: scale(1.06)
         }
 
         .lb-thumb img,
         .lb-thumb video {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover
         }
 
-        /* ══ DEPOIMENTOS ══ */
+        /* ─── DEPOIMENTOS ─── */
         #depoimentos {
-            background: var(--cream);
+            background: var(--cream)
         }
 
         .depoimentos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
         }
 
         .depoimento-card {
             background: var(--white);
-            padding: 1.8rem;
+            padding: 1.7rem;
             border-left: 3px solid var(--gold);
-            border-radius: 0 var(--radius) var(--radius) 0;
-            transition: box-shadow 0.2s;
+            border-radius: 0 var(--r) var(--r) 0;
+            transition: box-shadow .25s var(--ease), transform .25s var(--ease);
         }
 
         .depoimento-card:hover {
             box-shadow: var(--shadow);
+            transform: translateX(3px)
         }
 
         .depoimento-stars {
             color: var(--gold);
-            font-size: 0.85rem;
-            letter-spacing: 0.12em;
-            margin-bottom: 0.9rem;
+            font-size: .82rem;
+            letter-spacing: .14em;
+            margin-bottom: .85rem
         }
 
         .depoimento-text {
-            font-size: 0.88rem;
-            line-height: 1.75;
+            font-size: .86rem;
+            line-height: 1.8;
             color: var(--text-mid);
             font-style: italic;
-            margin-bottom: 1.1rem;
+            margin-bottom: 1rem
         }
 
         .depoimento-nome {
-            font-size: 0.74rem;
+            font-size: .7rem;
             font-weight: 600;
-            letter-spacing: 0.12em;
+            letter-spacing: .14em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: var(--text-muted)
         }
 
-        /* ══ CONTATO ══ */
+        /* ─── CONTATO ─── */
         #contato {
             background: var(--brown-dark);
-            text-align: center;
+            text-align: center
         }
 
         #contato .section-title {
-            color: var(--white);
+            color: var(--white)
         }
 
         #contato .section-eyebrow {
-            justify-content: center;
+            justify-content: center
         }
 
         .contato-infos {
             display: flex;
-            gap: 2rem;
+            gap: clamp(1rem, 4vw, 2rem);
             justify-content: center;
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-top: 1.8rem;
         }
 
         .contato-item {
-            color: var(--gold-pale);
-            font-size: 0.86rem;
+            color: rgba(243, 226, 176, .6);
+            font-size: .84rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            opacity: 0.7;
+            gap: .45rem;
         }
 
         .contato-item a {
             color: var(--gold);
             text-decoration: none;
-            opacity: 1;
+            transition: color .2s
+        }
+
+        .contato-item a:hover {
+            color: var(--gold-bright)
         }
 
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: .7rem;
             background: #25D366;
-            color: white;
+            color: #fff;
             padding: 14px 32px;
-            border-radius: var(--radius);
+            border-radius: var(--r);
             text-decoration: none;
-            font-size: 0.82rem;
+            font-size: .8rem;
             font-weight: 600;
             margin-top: 2rem;
-            letter-spacing: 0.05em;
-            transition: all 0.2s;
+            letter-spacing: .06em;
+            transition: background .2s, transform .2s var(--ease-spring), box-shadow .2s;
         }
 
         .whatsapp-btn:hover {
             background: #1ebe5d;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, .3)
         }
 
+        .whatsapp-btn:active {
+            transform: translateY(0)
+        }
+
+        /* ─── FOOTER ─── */
         footer {
-            background: #0e0805;
+            background: #0c0704;
             text-align: center;
-            padding: 1.5rem;
-            color: rgba(201, 150, 58, 0.3);
-            font-size: 0.72rem;
-            letter-spacing: 0.12em;
+            padding: 1.4rem;
+            color: rgba(200, 145, 58, .28);
+            font-size: .68rem;
+            letter-spacing: .14em;
         }
 
-        /* ══ TOAST ══ */
+        /* ─── TOAST ─── */
         .toast {
             position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
+            bottom: clamp(1rem, 3vw, 1.5rem);
+            right: clamp(1rem, 3vw, 1.5rem);
             z-index: 999;
             background: var(--brown-dark);
-            border: 1px solid rgba(201, 150, 58, 0.3);
+            border: 1px solid rgba(200, 145, 58, .28);
             color: var(--gold-pale);
-            padding: 0.9rem 1.2rem;
+            padding: .85rem 1.1rem;
             border-radius: 5px;
-            font-size: 0.83rem;
+            font-size: .82rem;
             box-shadow: var(--shadow-lg);
-            transform: translateY(12px);
+            transform: translateY(12px) scale(.96);
             opacity: 0;
-            transition: all 0.3s;
+            transition: transform .3s var(--ease-spring), opacity .3s var(--ease);
             pointer-events: none;
-            max-width: calc(100vw - 3rem);
+            max-width: calc(100vw - 2rem);
         }
 
         .toast.show {
-            transform: translateY(0);
-            opacity: 1;
+            transform: translateY(0) scale(1);
+            opacity: 1
         }
 
-        /* ══ MODAL LOGIN ══ */
+        /* ─── LOGIN MODAL ─── */
         .modal-overlay {
             display: none;
             position: fixed;
             inset: 0;
             z-index: 200;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, .78);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             align-items: center;
             justify-content: center;
             padding: 1rem;
@@ -1308,15 +1470,16 @@
 
         .modal-overlay.open {
             display: flex;
+            animation: fade-in .2s var(--ease)
         }
 
         .modal {
             background: var(--brown-dark);
-            border: 1px solid rgba(201, 150, 58, 0.25);
-            border-radius: 6px;
+            border: 1px solid rgba(200, 145, 58, .22);
+            border-radius: 8px;
             width: 100%;
-            max-width: 420px;
-            padding: 2.5rem;
+            max-width: 400px;
+            padding: 2.2rem;
             position: relative;
             box-shadow: var(--shadow-lg);
         }
@@ -1324,77 +1487,77 @@
         .modal-close {
             position: absolute;
             top: 1rem;
-            right: 1.2rem;
+            right: 1.1rem;
             background: none;
             border: none;
-            color: rgba(242, 223, 168, 0.4);
-            font-size: 1.5rem;
+            color: rgba(243, 226, 176, .35);
+            font-size: 1.4rem;
             cursor: pointer;
             line-height: 1;
-            transition: color 0.2s;
+            transition: color .2s;
         }
 
         .modal-close:hover {
-            color: var(--gold);
+            color: var(--gold)
         }
 
         .modal-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.7rem;
+            font-size: 1.65rem;
             color: var(--white);
-            margin-bottom: 0.3rem;
+            margin-bottom: .25rem
         }
 
         .modal-sub {
-            font-size: 0.73rem;
+            font-size: .68rem;
             color: var(--gold-pale);
-            opacity: 0.5;
-            margin-bottom: 1.8rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+            opacity: .45;
+            margin-bottom: 1.7rem;
+            letter-spacing: .14em;
+            text-transform: uppercase
         }
 
         .modal-fg {
-            margin-bottom: 1rem;
+            margin-bottom: .9rem
         }
 
         .modal-fg label {
             display: block;
-            font-size: 0.68rem;
-            letter-spacing: 0.14em;
+            font-size: .64rem;
+            letter-spacing: .16em;
             text-transform: uppercase;
-            color: rgba(242, 223, 168, 0.55);
-            margin-bottom: 0.4rem;
+            color: rgba(243, 226, 176, .5);
+            margin-bottom: .38rem
         }
 
         .modal-fg input {
             width: 100%;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(201, 150, 58, 0.18);
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(200, 145, 58, .16);
             color: var(--white);
             padding: 11px 13px;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.9rem;
-            border-radius: var(--radius);
+            font-size: .9rem;
+            border-radius: var(--r);
             outline: none;
-            transition: border 0.2s;
+            transition: border-color .2s;
         }
 
         .modal-fg input:focus {
-            border-color: var(--gold);
+            border-color: rgba(200, 145, 58, .6)
         }
 
         .modal-error {
             color: #f87171;
-            font-size: 0.8rem;
-            margin-top: 0.8rem;
+            font-size: .78rem;
+            margin-top: .75rem;
             display: none;
-            padding: 0.6rem 0.8rem;
-            background: rgba(248, 113, 113, 0.08);
-            border-radius: var(--radius);
+            padding: .55rem .8rem;
+            background: rgba(248, 113, 113, .07);
+            border-radius: var(--r);
         }
 
-        /* ══ ADMIN PANEL ══ */
+        /* ─── ADMIN ─── */
         #admin-panel {
             display: none;
             position: fixed;
@@ -1407,16 +1570,17 @@
 
         #admin-panel.open {
             display: block;
+            animation: fade-in .25s var(--ease)
         }
 
         .admin-header {
             background: var(--brown-dark);
-            padding: 0 1.2rem;
-            height: 56px;
+            padding: 0 clamp(.75rem, 3vw, 1.2rem);
+            height: 54px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid rgba(201, 150, 58, 0.15);
+            border-bottom: 1px solid rgba(200, 145, 58, .15);
             position: sticky;
             top: 0;
             z-index: 10;
@@ -1425,81 +1589,80 @@
         .admin-logo {
             font-family: 'Cormorant Garamond', serif;
             color: var(--gold);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: .5rem
         }
 
         .admin-right {
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: .6rem
         }
 
         .admin-user-badge {
-            background: rgba(201, 150, 58, 0.1);
-            border: 1px solid rgba(201, 150, 58, 0.2);
+            background: rgba(200, 145, 58, .1);
+            border: 1px solid rgba(200, 145, 58, .2);
             color: var(--gold-pale);
-            padding: 4px 11px;
+            padding: 3px 11px;
             border-radius: 20px;
-            font-size: 0.7rem;
-            letter-spacing: 0.06em;
+            font-size: .68rem;
+            letter-spacing: .05em;
         }
 
         .admin-close-btn {
             background: none;
-            border: 1px solid rgba(201, 150, 58, 0.3);
+            border: 1px solid rgba(200, 145, 58, .28);
             color: var(--gold-pale);
-            padding: 6px 14px;
+            padding: 5px 13px;
             border-radius: 20px;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.08em;
-            transition: all 0.2s;
+            font-size: .68rem;
+            letter-spacing: .08em;
+            transition: border-color .2s, color .2s;
             -webkit-tap-highlight-color: transparent;
         }
 
         .admin-close-btn:hover {
             border-color: var(--danger);
-            color: #f87171;
+            color: #f87171
         }
 
         .admin-body {
-            max-width: 1160px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 1.5rem 1rem;
+            padding: 1.2rem clamp(.75rem, 3vw, 1rem)
         }
 
-        /* Admin tabs — scrollable horizontal */
         .admin-tabs {
             display: flex;
             gap: 0;
-            border-bottom: 2px solid rgba(201, 150, 58, 0.12);
-            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(200, 145, 58, .1);
+            margin-bottom: 1.8rem;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
             scrollbar-width: none;
         }
 
         .admin-tabs::-webkit-scrollbar {
-            display: none;
+            display: none
         }
 
         .admin-tab {
-            padding: 10px 16px;
+            padding: 9px 14px;
             background: none;
             border: none;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.76rem;
-            letter-spacing: 0.06em;
+            font-size: .72rem;
+            letter-spacing: .06em;
             text-transform: uppercase;
             cursor: pointer;
             color: var(--text-muted);
             border-bottom: 2px solid transparent;
             margin-bottom: -2px;
-            transition: all 0.2s;
+            transition: color .2s, border-color .2s;
             white-space: nowrap;
             flex-shrink: 0;
             -webkit-tap-highlight-color: transparent;
@@ -1507,83 +1670,85 @@
 
         .admin-tab.active {
             color: var(--gold);
-            border-bottom-color: var(--gold);
+            border-bottom-color: var(--gold)
         }
 
         .admin-tab-panel {
-            display: none;
+            display: none
         }
 
         .admin-tab-panel.active {
             display: block;
+            animation: fade-in .2s var(--ease)
         }
 
         .admin-section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             color: var(--text);
-            margin-bottom: 1.2rem;
-            padding-bottom: 0.7rem;
-            border-bottom: 1px solid rgba(201, 150, 58, 0.2);
+            margin-bottom: 1.1rem;
+            padding-bottom: .65rem;
+            border-bottom: 1px solid rgba(200, 145, 58, .18);
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: .65rem;
             flex-wrap: wrap;
         }
 
         /* KPIs */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 0.75rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: .7rem;
+            margin-bottom: 1.8rem
         }
 
         .kpi-card {
             background: var(--white);
-            border: 1px solid rgba(201, 150, 58, 0.15);
-            padding: 1.2rem;
+            border: 1px solid rgba(200, 145, 58, .13);
+            padding: 1.1rem;
             border-radius: 5px;
-            transition: box-shadow 0.2s;
+            transition: box-shadow .2s, transform .2s var(--ease-spring);
         }
 
         .kpi-card:hover {
             box-shadow: var(--shadow);
+            transform: translateY(-2px)
         }
 
         .kpi-label {
-            font-size: 0.66rem;
-            letter-spacing: 0.14em;
+            font-size: .62rem;
+            letter-spacing: .15em;
             text-transform: uppercase;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
+            margin-bottom: .45rem
         }
 
         .kpi-value {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 1.9rem;
             color: var(--text);
             font-weight: 600;
-            line-height: 1;
+            line-height: 1
         }
 
         .kpi-sub {
-            font-size: 0.72rem;
+            font-size: .7rem;
             color: var(--text-muted);
-            margin-top: 0.3rem;
+            margin-top: .28rem
         }
 
         .kpi-card.kpi-gold .kpi-value {
-            color: var(--gold);
+            color: var(--gold)
         }
 
-        /* Tables — mobile scroll */
+        /* Tables */
         .table-wrap {
             background: var(--white);
-            border: 1px solid rgba(201, 150, 58, 0.12);
+            border: 1px solid rgba(200, 145, 58, .1);
             border-radius: 5px;
             overflow: hidden;
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem;
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -1591,91 +1756,96 @@
         .admin-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.82rem;
-            min-width: 500px;
+            font-size: .8rem;
+            min-width: 480px
         }
 
         .admin-table th {
             background: var(--brown-dark);
             color: var(--gold);
-            padding: 11px 14px;
+            padding: 10px 13px;
             text-align: left;
-            font-size: 0.67rem;
-            letter-spacing: 0.14em;
+            font-size: .63rem;
+            letter-spacing: .15em;
             text-transform: uppercase;
             font-weight: 500;
             white-space: nowrap;
         }
 
         .admin-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid rgba(201, 150, 58, 0.08);
-            color: var(--text-mid);
+            padding: 9px 13px;
+            border-bottom: 1px solid rgba(200, 145, 58, .07);
+            color: var(--text-mid)
         }
 
         .admin-table tr:last-child td {
-            border-bottom: none;
+            border-bottom: none
+        }
+
+        .admin-table tbody tr {
+            transition: background .15s
         }
 
         .admin-table tbody tr:hover td {
-            background: var(--cream);
+            background: var(--cream)
         }
 
         .admin-table td.actions {
-            white-space: nowrap;
+            white-space: nowrap
         }
 
-        /* Mobile card layout for agendamentos */
+        /* Mobile cards */
         .ag-cards {
-            display: none;
+            display: none
         }
 
         .ag-card {
             background: var(--white);
-            border: 1px solid rgba(201, 150, 58, 0.15);
+            border: 1px solid rgba(200, 145, 58, .13);
             border-radius: 6px;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
+            padding: .95rem;
+            margin-bottom: .65rem;
         }
 
         .ag-card-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 0.6rem;
+            margin-bottom: .55rem
         }
 
         .ag-card-nome {
             font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text);
+            font-size: .88rem;
+            color: var(--text)
         }
 
         .ag-card-row {
             display: flex;
-            gap: 0.5rem;
+            gap: .45rem;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: .78rem;
             color: var(--text-muted);
-            margin-bottom: 0.3rem;
-            flex-wrap: wrap;
+            margin-bottom: .28rem;
+            flex-wrap: wrap
         }
 
         .ag-card-actions {
             display: flex;
-            gap: 0.5rem;
-            margin-top: 0.8rem;
-            flex-wrap: wrap;
+            gap: .45rem;
+            margin-top: .75rem;
+            flex-wrap: wrap
         }
 
+        /* Badge */
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.3rem;
+            gap: .3rem;
             padding: 3px 9px;
             border-radius: 20px;
-            font-size: 0.68rem;
-            letter-spacing: 0.04em;
+            font-size: .65rem;
+            letter-spacing: .04em;
             font-weight: 600;
         }
 
@@ -1685,607 +1855,418 @@
             height: 5px;
             border-radius: 50%;
             background: currentColor;
-            opacity: 0.8;
+            opacity: .8
         }
 
         .badge-ok {
             background: var(--success-bg);
-            color: var(--success);
+            color: var(--success)
         }
 
         .badge-pending {
             background: var(--warn-bg);
-            color: var(--warn);
+            color: var(--warn)
         }
 
         .badge-cancel {
             background: var(--danger-bg);
-            color: var(--danger);
+            color: var(--danger)
         }
 
         /* Charts */
         .chart-wrap {
-            margin-bottom: 2rem;
+            margin-bottom: 1.8rem
         }
 
         .chart-row {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.7rem;
+            gap: .7rem;
+            margin-bottom: .65rem
         }
 
         .chart-label {
-            width: 140px;
-            font-size: 0.78rem;
+            width: 130px;
+            font-size: .76rem;
             color: var(--text-mid);
             flex-shrink: 0;
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;
+            text-overflow: ellipsis
         }
 
         .chart-track {
             flex: 1;
-            background: rgba(201, 150, 58, 0.08);
-            height: 20px;
+            background: rgba(200, 145, 58, .07);
+            height: 18px;
             border-radius: 2px;
             overflow: hidden;
-            min-width: 40px;
+            min-width: 40px
         }
 
         .chart-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--gold), var(--gold-bright));
             border-radius: 2px;
-            transition: width 0.6s cubic-bezier(.4, 0, .2, 1);
+            transition: width .7s var(--ease-out)
         }
 
         .chart-val {
-            width: 52px;
+            width: 50px;
             text-align: right;
             color: var(--text-muted);
-            font-size: 0.76rem;
-            flex-shrink: 0;
+            font-size: .73rem;
+            flex-shrink: 0
         }
 
-        /* Bloquear form */
+        /* Bloquear */
         .bloquear-form {
             display: flex;
-            gap: 0.75rem;
+            gap: .7rem;
             flex-wrap: wrap;
             align-items: flex-end;
             background: var(--white);
-            padding: 1.2rem;
-            border: 1px solid rgba(201, 150, 58, 0.15);
+            padding: 1.1rem;
+            border: 1px solid rgba(200, 145, 58, .13);
             border-radius: 5px;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.1rem;
         }
 
         .bloquear-form label {
-            font-size: 0.68rem;
-            letter-spacing: 0.1em;
+            font-size: .64rem;
+            letter-spacing: .1em;
             text-transform: uppercase;
             color: var(--text-muted);
             display: block;
-            margin-bottom: 0.25rem;
+            margin-bottom: .22rem
         }
 
         .bloquear-form input,
         .bloquear-form select {
-            padding: 9px 11px;
-            border: 1px solid rgba(201, 150, 58, 0.25);
+            padding: 8px 11px;
+            border: 1px solid rgba(200, 145, 58, .22);
             background: var(--cream);
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.86rem;
+            font-size: .84rem;
             color: var(--text);
-            border-radius: var(--radius);
+            border-radius: var(--r);
             outline: none;
-            transition: border 0.2s;
+            transition: border-color .2s;
             -webkit-appearance: none;
             appearance: none;
         }
 
         .bloquear-form input:focus,
         .bloquear-form select:focus {
-            border-color: var(--gold);
+            border-color: var(--gold)
         }
 
         .btn-bloquear {
             background: var(--brown-dark);
             color: var(--gold);
             border: 1px solid var(--gold);
-            padding: 9px 18px;
+            padding: 8px 17px;
             cursor: pointer;
             font-family: 'DM Sans', sans-serif;
-            font-size: 0.76rem;
-            letter-spacing: 0.1em;
-            border-radius: var(--radius);
-            transition: all 0.2s;
+            font-size: .73rem;
+            letter-spacing: .1em;
+            border-radius: var(--r);
+            transition: background .2s, color .2s;
             -webkit-tap-highlight-color: transparent;
         }
 
         .btn-bloquear:hover {
             background: var(--gold);
-            color: var(--brown-dark);
+            color: var(--brown-dark)
         }
 
         .btn-action {
             background: none;
-            padding: 5px 11px;
+            padding: 5px 10px;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 0.72rem;
-            letter-spacing: 0.04em;
+            font-size: .7rem;
+            letter-spacing: .04em;
             font-family: 'DM Sans', sans-serif;
-            transition: all 0.15s;
+            transition: background .15s, color .15s, transform .15s var(--ease-spring);
             margin-right: 3px;
             -webkit-tap-highlight-color: transparent;
         }
 
+        .btn-action:hover {
+            transform: scale(1.05)
+        }
+
         .btn-confirmar {
             border: 1px solid var(--success);
-            color: var(--success);
+            color: var(--success)
         }
 
         .btn-confirmar:hover {
             background: var(--success);
-            color: white;
+            color: #fff
         }
 
         .btn-cancelar {
             border: 1px solid var(--danger);
-            color: var(--danger);
+            color: var(--danger)
         }
 
         .btn-cancelar:hover {
             background: var(--danger);
-            color: white;
+            color: #fff
         }
 
         .btn-desbloquear {
             border: 1px solid var(--danger);
-            color: var(--danger);
+            color: var(--danger)
         }
 
         .btn-desbloquear:hover {
             background: var(--danger);
-            color: white;
+            color: #fff
         }
 
         .empty-state {
             text-align: center;
             padding: 2rem;
             color: var(--text-muted);
-            font-size: 0.86rem;
+            font-size: .84rem
         }
 
         /* Agenda dia */
         .agenda-horarios-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 0.75rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(128px, 1fr));
+            gap: .7rem;
+            margin-top: .9rem
         }
 
         .agenda-slot {
-            padding: 0.8rem;
-            border-radius: var(--radius);
+            padding: .75rem;
+            border-radius: var(--r);
             border: 1px solid;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: .78rem;
+            transition: transform .2s var(--ease-spring)
+        }
+
+        .agenda-slot:hover {
+            transform: scale(1.03)
         }
 
         .agenda-slot.livre {
-            background: rgba(21, 128, 61, 0.06);
-            border-color: rgba(21, 128, 61, 0.3);
-            color: var(--success);
+            background: rgba(21, 128, 61, .05);
+            border-color: rgba(21, 128, 61, .28);
+            color: var(--success)
         }
 
         .agenda-slot.ocupado-ag {
-            background: rgba(153, 27, 27, 0.06);
-            border-color: rgba(153, 27, 27, 0.3);
-            color: var(--danger);
+            background: rgba(153, 27, 27, .05);
+            border-color: rgba(153, 27, 27, .28);
+            color: var(--danger)
         }
 
         .agenda-slot.bloqueado-slot {
-            background: rgba(133, 77, 14, 0.06);
-            border-color: rgba(133, 77, 14, 0.3);
-            color: var(--warn);
+            background: rgba(133, 77, 14, .05);
+            border-color: rgba(133, 77, 14, .28);
+            color: var(--warn)
         }
 
         .agenda-slot-hora {
             font-weight: 600;
-            font-size: 0.88rem;
-            margin-bottom: 0.2rem;
+            font-size: .86rem;
+            margin-bottom: .18rem
         }
 
         .agenda-slot-info {
-            font-size: 0.72rem;
-            opacity: 0.75;
+            font-size: .7rem;
+            opacity: .7
         }
 
-        /* ══ RESPONSIVE ══ */
-        @media(max-width:1024px) {
-            .hero-stat-val {
-                font-size: 1.6rem;
-            }
+        /* ─── SCROLL REVEAL ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s var(--ease-out), transform .6s var(--ease-out)
         }
 
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        /* ─── RESPONSIVE ─── */
         @media(max-width:900px) {
             .nav-links {
-                display: none;
+                display: none
             }
 
             .nav-menu-btn {
-                display: flex;
+                display: flex
             }
 
             .agendar-layout {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 2.2rem
             }
 
             .galeria-row-1 {
                 grid-template-columns: 1fr;
-                height: auto;
+                height: auto
             }
 
             .galeria-row-1 .galeria-item {
-                height: 300px;
+                height: 280px
             }
 
             .galeria-row-2 {
                 grid-template-columns: repeat(3, 1fr);
-                height: auto;
+                height: auto
             }
 
             .galeria-row-2 .galeria-item {
-                height: 180px;
-            }
-
-            section {
-                padding: 4rem 1.2rem;
-            }
-
-            .hero-stats {
-                gap: 1.5rem;
+                height: 170px
             }
         }
 
         @media(max-width:768px) {
-            .hero-name {
-                font-size: clamp(2.8rem, 14vw, 4.5rem);
-            }
-
-            .hero-glow {
-                width: 400px;
-                height: 400px;
-            }
-
-            .hero-ring:nth-child(3) {
-                width: 350px !important;
-                height: 350px !important;
-            }
-            .hero-ring:nth-child(4) {
-                width: 500px !important;
-                height: 500px !important;
-            }
-            .hero-ring:nth-child(5) {
-                width: 650px !important;
-                height: 650px !important;
-            }
-
-            .servicos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            }
-
-            .section-title {
-                font-size: clamp(1.6rem, 5vw, 2.6rem);
-            }
-
             .depoimentos-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
             }
 
             .produtos-grid {
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr))
             }
         }
 
         @media(max-width:640px) {
             nav {
-                padding: 0 1rem;
-            }
-
-            .nav-logo {
-                font-size: 1.05rem;
-            }
-
-            .nav-admin-btn {
-                padding: 5px 10px;
-                font-size: 0.65rem;
+                padding: 0 .9rem
             }
 
             .galeria-row-2 {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr)
             }
 
             .galeria-row-2 .galeria-item {
-                height: 160px;
+                height: 150px
             }
 
             .galeria-row-1 .galeria-item {
-                height: 240px;
+                height: 220px
             }
 
             .form-row {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
             }
 
             .kpi-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr
             }
 
-            .admin-table {
-                font-size: 0.78rem;
-            }
-
-            /* Show card layout, hide table for agendamentos on mobile */
             .mobile-table-hide {
-                display: none !important;
+                display: none !important
             }
 
             .ag-cards {
-                display: block;
+                display: block
             }
 
             .chart-label {
-                width: 80px;
-                font-size: 0.68rem;
-            }
-
-            .chart-val {
-                width: 40px;
-                font-size: 0.68rem;
+                width: 75px;
+                font-size: .65rem
             }
 
             .agenda-horarios-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr)
             }
 
             .bloquear-form {
-                flex-direction: column;
+                flex-direction: column
             }
 
             .bloquear-form input[type="text"] {
-                width: 100% !important;
+                width: 100% !important
             }
 
-            .hero-stats {
-                gap: 1rem;
-                margin-top: 2rem;
-                padding-top: 1.5rem;
-            }
-
-            .hero-stat-val {
-                font-size: 1.4rem;
-            }
-
-            .hero-stat-label {
-                font-size: 0.6rem;
+            .hero-cta {
+                flex-direction: column;
+                align-items: center
             }
 
             .hero-cta .btn-primary,
             .hero-cta .btn-outline {
                 width: 100%;
-                max-width: 280px;
-                padding: 14px 20px;
-                font-size: 0.74rem;
+                max-width: 280px
             }
 
             .contato-infos {
                 flex-direction: column;
                 align-items: center;
-                gap: 0.8rem;
-            }
-
-            .contato-item {
-                font-size: 0.82rem;
-            }
-
-            .lb-thumbs {
-                padding: 0.6rem 1rem 0.8rem;
-            }
-
-            .lb-thumb {
-                width: 50px;
-                height: 42px;
-            }
-
-            .lb-nav {
-                width: 38px;
-                height: 38px;
-                font-size: 0.9rem;
-            }
-
-            .lb-prev {
-                left: 0.5rem;
-            }
-
-            .lb-next {
-                right: 0.5rem;
+                gap: .7rem
             }
 
             .whatsapp-btn {
                 width: 100%;
-                max-width: 320px;
-                justify-content: center;
-                padding: 14px 24px;
-            }
-
-            .modal {
-                padding: 1.8rem 1.5rem;
-            }
-
-            section {
-                padding: 3rem 1rem;
-            }
-
-            .servico-card {
-                padding: 1.5rem 1.2rem;
-            }
-
-            .produto-card {
-                padding: 1.2rem;
-            }
-
-            .depoimento-card {
-                padding: 1.4rem;
-            }
-
-            .btn-primary,
-            .btn-outline {
-                -webkit-tap-highlight-color: transparent;
-                min-height: 44px;
-            }
-
-            .horario-btn {
-                min-height: 44px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .nav-mobile a {
-                padding: 0.9rem 0;
-                font-size: 0.95rem;
+                max-width: 300px;
+                justify-content: center
             }
 
             .agendamento-box {
-                padding: 1.2rem;
+                padding: 1.1rem
             }
 
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                font-size: 16px;
-                padding: 12px 13px;
+            .modal {
+                padding: 1.6rem 1.3rem
             }
         }
 
         @media(max-width:400px) {
             .kpi-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
             }
 
             .galeria-row-2 {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr
             }
 
             .galeria-row-2 .galeria-item {
-                height: 130px;
+                height: 120px
             }
 
             .galeria-row-1 .galeria-item {
-                height: 200px;
-            }
-
-            .hero-name {
-                font-size: clamp(2.2rem, 12vw, 3rem);
-            }
-
-            .hero-eyebrow {
-                font-size: 0.6rem;
-                gap: 0.6rem;
-            }
-
-            .hero-eyebrow::before,
-            .hero-eyebrow::after {
-                width: 24px;
-            }
-
-            .hero-sub {
-                font-size: 0.65rem;
-            }
-
-            .hero-glow {
-                width: 280px;
-                height: 280px;
-            }
-
-            section {
-                padding: 2.5rem 0.8rem;
+                height: 190px
             }
 
             .servicos-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr
             }
 
             .produtos-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .lb-stage {
-                padding: 0;
-            }
-
-            .lb-media,
-            .lb-video {
-                border-radius: 0;
+                grid-template-columns: 1fr
             }
 
             .chart-label {
-                width: 60px;
-                font-size: 0.6rem;
+                width: 55px;
+                font-size: .6rem
             }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-            .hero-lines,
-            .hero-glow,
-            .hero-ring,
-            .particle,
-            .servico-card::after,
-            .galeria-item img,
-            .galeria-item video,
-            .chart-fill {
-                animation: none !important;
-                transition: none !important;
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important
             }
 
             .particle {
-                display: none !important;
+                display: none !important
             }
 
-            .hero-glow {
-                transform: translate(-50%, -50%) scale(1) !important;
-            }
-        }
-
-        @media(max-width:360px) {
-            .nav-logo {
-                font-size: 0.9rem;
-            }
-
-            .nav-admin-btn {
-                font-size: 0.58rem;
-                padding: 4px 8px;
-            }
-
-            .contato-item {
-                font-size: 0.76rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .agenda-horarios-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .agenda-slot {
-                padding: 0.6rem;
-                font-size: 0.72rem;
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important
             }
         }
     </style>
@@ -2293,9 +2274,11 @@
 
 <body>
 
-    <!-- ══ NAV ══ -->
-    <nav>
-        <div class="nav-logo"><span class="nav-logo-dot"></span>Rosane Matos</div>
+    <!-- NAV -->
+    <nav id="main-nav">
+        <div class="nav-logo">
+            <span class="nav-logo-dot"></span>Rosane Matos
+        </div>
         <div class="nav-links">
             <a href="#servicos">Serviços</a>
             <a href="#produtos">Produtos</a>
@@ -2303,28 +2286,46 @@
             <a href="#galeria">Galeria</a>
             <a href="#contato">Contato</a>
         </div>
-        <div style="display:flex;align-items:center;gap:0.75rem;">
+        <div class="nav-right">
             <button class="nav-admin-btn" onclick="abrirLogin()">Área da Dona</button>
-            <button class="nav-menu-btn" onclick="toggleMenu()" id="menu-btn" aria-label="Menu">
+            <button class="nav-menu-btn" id="menu-btn" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
-    <div class="nav-mobile" id="nav-mobile">
+    <nav class="nav-mobile" id="nav-mobile" aria-hidden="true">
         <a href="#servicos" onclick="fecharMenu()">Serviços</a>
         <a href="#produtos" onclick="fecharMenu()">Produtos</a>
         <a href="#agendar" onclick="fecharMenu()">Agendar</a>
         <a href="#galeria" onclick="fecharMenu()">Galeria</a>
         <a href="#contato" onclick="fecharMenu()">Contato</a>
-    </div>
+    </nav>
 
-    <!-- ══ HERO ══ -->
+    <!-- HERO -->
     <section id="hero">
-        <div class="hero-lines"></div>
+        <div class="hero-bg-grid"></div>
         <div class="hero-glow"></div>
-        <div class="hero-ring" style="width:500px;height:500px;"></div>
-        <div class="hero-ring" style="width:750px;height:750px;opacity:0.5;"></div>
-        <div class="hero-ring" style="width:1000px;height:1000px;opacity:0.25;"></div>
+        <div class="hero-ring" style="width:520px;height:520px;animation:ring-spin 22s linear infinite"></div>
+        <div class="hero-ring"
+            style="width:780px;height:780px;opacity:.45;animation:ring-spin 34s linear infinite reverse"></div>
+        <div class="hero-ring" style="width:1050px;height:1050px;opacity:.2;animation:ring-spin 46s linear infinite">
+        </div>
+        <style>
+            @keyframes ring-spin {
+                to {
+                    transform: translate(-50%, -50%) rotate(360deg)
+                }
+            }
+
+            .hero-ring {
+                position: absolute;
+                border-radius: 50%;
+                border: 1px solid rgba(200, 145, 58, .06);
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%)
+            }
+        </style>
         <div id="hero-particles"></div>
         <div class="hero-content">
             <div class="hero-eyebrow">Estúdio de Beleza</div>
@@ -2339,15 +2340,15 @@
                     Serviços</button>
             </div>
             <div class="hero-stats">
-                <div>
+                <div class="hero-stat">
                     <div class="hero-stat-val">8+</div>
                     <div class="hero-stat-label">Anos de experiência</div>
                 </div>
-                <div>
+                <div class="hero-stat">
                     <div class="hero-stat-val">500+</div>
                     <div class="hero-stat-label">Clientes atendidas</div>
                 </div>
-                <div>
+                <div class="hero-stat">
                     <div class="hero-stat-val">8</div>
                     <div class="hero-stat-label">Serviços especializados</div>
                 </div>
@@ -2355,164 +2356,45 @@
         </div>
     </section>
 
-    <!-- ══ SERVIÇOS ══ -->
+    <!-- SERVIÇOS -->
     <section id="servicos">
         <div class="container">
-            <div class="section-eyebrow">O que oferecemos</div>
-            <h2 class="section-title">Nossos <em>Serviços</em></h2>
-            <p class="section-desc">Cada serviço é realizado com produtos premium e técnica especializada para
-                transformar e nutrir os seus cabelos.</p>
-            <div class="servicos-grid">
-                <div class="servico-card">
-                    <div class="servico-icon">✂</div>
-                    <div class="servico-nome">Escova + Prancha</div>
-                    <div class="servico-desc">Alinhamento perfeito com finalização profissional, deixando os fios lisos,
-                        brilhantes e sedosos.</div>
-                    <div class="servico-footer">
-                        <div>
-                            <div class="servico-preco">R$ 35,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Escova + Prancha — R$ 35')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">💧</div>
-                    <div class="servico-nome">Hidratação + Finalização</div>
-                    <div class="servico-desc">Tratamento intensivo de hidratação que restaura o brilho e a maciez dos
-                        fios ressecados.</div>
-                    <div class="servico-footer">
-                        <div>
-                            <div class="servico-preco">R$ 40,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Hidratação + Finalização — R$ 40')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">⚗</div>
-                    <div class="servico-nome">Reconstrução + Finalização</div>
-                    <div class="servico-desc">Recomposição da estrutura capilar danificada com proteínas e aminoácidos
-                        de alta concentração.</div>
-                    <div class="servico-footer">
-                        <div>
-                            <div class="servico-preco">R$ 55,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Reconstrução + Finalização — R$ 55')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">🎨</div>
-                    <div class="servico-nome">Coloração</div>
-                    <div class="servico-desc">Coloração profissional com técnica precisa para realçar a beleza natural
-                        dos seus fios.</div>
-                    <div class="servico-footer">
-                        <div>
-                            <div class="servico-preco">R$ 20,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Coloração — R$ 20')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">📅</div>
-                    <div class="servico-nome">Cronograma Capilar</div>
-                    <div class="servico-desc">Programa de 3 sessões personalizadas de hidratação, nutrição e
-                        reconstrução para cabelos saudáveis.</div>
-                    <div class="servico-footer">
-                        <div><span class="servico-partir">a partir de</span>
-                            <div class="servico-preco">R$ 170,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Cronograma Capilar (3 sessões) — a partir de R$ 170')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">✨</div>
-                    <div class="servico-nome">Botox Capilar</div>
-                    <div class="servico-desc">Tratamento que elimina frizz, sela os fios e devolve brilho intenso sem
-                        alterar a estrutura.</div>
-                    <div class="servico-footer">
-                        <div><span class="servico-partir">a partir de</span>
-                            <div class="servico-preco">R$ 80,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Botox Capilar — a partir de R$ 80')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">💆</div>
-                    <div class="servico-nome">Progressiva</div>
-                    <div class="servico-desc">Alisamento duradouro com fórmula de alta performance que elimina frizz e
-                        proporciona maciez.</div>
-                    <div class="servico-footer">
-                        <div><span class="servico-partir">a partir de</span>
-                            <div class="servico-preco">R$ 110,00</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Progressiva — a partir de R$ 110')">Agendar</button>
-                    </div>
-                </div>
-                <div class="servico-card">
-                    <div class="servico-icon">🌿</div>
-                    <div class="servico-nome">Tratamento Personalizado</div>
-                    <div class="servico-desc">Diagnóstico personalizado e tratamento sob medida para as necessidades
-                        únicas do seu cabelo.</div>
-                    <div class="servico-footer">
-                        <div>
-                            <div class="servico-preco">Consulte</div>
-                        </div><button class="btn-agendar-card"
-                            onclick="selecionarServico('Tratamento Capilar Personalizado')">Agendar</button>
-                    </div>
-                </div>
+            <div class="section-header reveal">
+                <div class="section-eyebrow">O que oferecemos</div>
+                <h2 class="section-title">Nossos <em>Serviços</em></h2>
+                <p class="section-desc">Cada serviço é realizado com produtos premium e técnica especializada para
+                    transformar e nutrir os seus cabelos.</p>
             </div>
+            <div class="servicos-grid reveal" id="servicos-grid"></div>
         </div>
     </section>
 
-    <!-- ══ PRODUTOS ══ -->
+    <!-- PRODUTOS -->
     <section id="produtos">
         <div class="container">
-            <div class="section-eyebrow">Utilizados no estúdio</div>
-            <h2 class="section-title">Produtos <em>Premium</em></h2>
-            <p class="section-desc">Trabalhamos apenas com linhas profissionais selecionadas para garantir o melhor
-                resultado nos seus cabelos.</p>
-            <div class="produtos-grid">
-                <div class="produto-card">
-                    <h4>Wella Professionals</h4>
-                    <p>Linha de coloração e cuidados capilares de referência mundial, com pigmentos de longa duração.
-                    </p>
-                </div>
-                <div class="produto-card">
-                    <h4>Inoar Botox</h4>
-                    <p>Fórmula de Botox capilar sem formol que sela cutículas e proporciona brilho espelhado.</p>
-                </div>
-                <div class="produto-card">
-                    <h4>Cadiveu Plástica dos Fios</h4>
-                    <p>Tratamento progressivo de alta performance que combina alisamento e nutrição profunda.</p>
-                </div>
-                <div class="produto-card">
-                    <h4>L'Oréal Professionnel</h4>
-                    <p>Máscaras e tratamentos de reconstrução com tecnologia francesa para fios danificados.</p>
-                </div>
-                <div class="produto-card">
-                    <h4>Kérastase Nutritive</h4>
-                    <p>Linha de nutrição intensiva para cabelos secos, devolvendo maciez e luminosidade.</p>
-                </div>
-                <div class="produto-card">
-                    <h4>Redken Extreme</h4>
-                    <p>Linha de reconstrução com proteínas interligadas que repara a estrutura dos fios.</p>
-                </div>
+            <div class="section-header reveal">
+                <div class="section-eyebrow">Utilizados no estúdio</div>
+                <h2 class="section-title">Produtos <em>Premium</em></h2>
+                <p class="section-desc">Trabalhamos apenas com linhas profissionais selecionadas para garantir o melhor
+                    resultado.</p>
             </div>
+            <div class="produtos-grid reveal" id="produtos-grid"></div>
         </div>
     </section>
 
-    <!-- ══ AGENDAMENTO ══ -->
+    <!-- AGENDAMENTO -->
     <section id="agendar">
         <div class="container">
             <div class="agendar-layout">
-                <div>
-                    <div class="section-eyebrow" style="color:var(--gold);">Marque seu horário</div>
-                    <h2 class="section-title">Agende <em style="color:var(--gold-bright);">Online</em></h2>
+                <div class="reveal">
+                    <div class="section-eyebrow" style="color:var(--gold)">Marque seu horário</div>
+                    <h2 class="section-title">Agende <em style="color:var(--gold-bright)">Online</em></h2>
                     <p class="section-desc">Escolha o dia, o horário e o serviço. Confirmaremos via WhatsApp em até 1
                         hora.</p>
                     <div class="agendar-steps">
                         <div class="agendar-step">
                             <div class="step-num">1</div>
-                            <div class="step-text">Escolha o serviço desejado no campo abaixo</div>
+                            <div class="step-text">Escolha o serviço desejado</div>
                         </div>
                         <div class="agendar-step">
                             <div class="step-num">2</div>
@@ -2520,59 +2402,49 @@
                         </div>
                         <div class="agendar-step">
                             <div class="step-num">3</div>
-                            <div class="step-text">Preencha seu nome e WhatsApp para contato</div>
+                            <div class="step-text">Preencha seu nome e WhatsApp</div>
                         </div>
                         <div class="agendar-step">
                             <div class="step-num">4</div>
-                            <div class="step-text">Aguarde a confirmação via WhatsApp em até 1h</div>
+                            <div class="step-text">Aguarde confirmação via WhatsApp em até 1h</div>
                         </div>
                     </div>
                     <div class="agendar-horario-info">
                         <p>Horário de atendimento:<br><span>Segunda a Sábado — 8h às 19h</span></p>
                     </div>
                 </div>
-                <div class="agendamento-box">
-                    <div id="form-success" class="form-success">✓ Agendamento enviado com sucesso! Confirmaremos via
-                        WhatsApp em breve.</div>
+                <div class="agendamento-box reveal">
+                    <div id="form-success" class="form-success">✓ Agendamento enviado! Confirmaremos via WhatsApp em
+                        breve.</div>
                     <div class="form-row">
                         <div class="form-group"><label>Seu Nome *</label><input type="text" id="ag-nome"
-                                placeholder="Maria Silva"></div>
+                                placeholder="Maria Silva" autocomplete="name"></div>
                         <div class="form-group"><label>WhatsApp *</label><input type="tel" id="ag-tel"
-                                placeholder="(21) 99999-9999"></div>
+                                placeholder="(21) 99999-9999" autocomplete="tel"></div>
                     </div>
                     <div class="form-row full">
-                        <div class="form-group"><label>Serviço *</label>
-                            <select id="ag-servico">
-                                <option value="">— Selecione o serviço —</option>
-                                <option>Escova + Prancha — R$ 35</option>
-                                <option>Hidratação + Finalização — R$ 40</option>
-                                <option>Reconstrução + Finalização — R$ 55</option>
-                                <option>Coloração — R$ 20</option>
-                                <option>Cronograma Capilar (3 sessões) — a partir de R$ 170</option>
-                                <option>Botox Capilar — a partir de R$ 80</option>
-                                <option>Progressiva — a partir de R$ 110</option>
-                                <option>Tratamento Capilar Personalizado</option>
-                            </select>
-                        </div>
+                        <div class="form-group"><label>Serviço *</label><select id="ag-servico">
+                                <option value="">— Selecione —</option>
+                            </select></div>
                     </div>
                     <div class="form-row">
                         <div class="form-group"><label>Data *</label><input type="date" id="ag-data"
                                 onchange="atualizarHorarios()"></div>
                         <div class="form-group"><label>Horário selecionado</label><input type="text"
-                                id="ag-horario-display" placeholder="Escolha abaixo ↓" readonly style="cursor:default;">
+                                id="ag-horario-display" placeholder="Escolha abaixo ↓" readonly style="cursor:default">
                         </div>
                     </div>
-                    <div class="form-group" style="margin-bottom:1rem;">
+                    <div class="form-group" style="margin-bottom:1rem">
                         <label>Horários Disponíveis</label>
                         <div class="horarios-legenda">
                             <div class="legenda-item">
-                                <div class="legenda-dot disponivel"></div> Disponível
+                                <div class="legenda-dot disponivel"></div>Disponível
                             </div>
                             <div class="legenda-item">
-                                <div class="legenda-dot ocupado"></div> Ocupado
+                                <div class="legenda-dot ocupado"></div>Ocupado
                             </div>
                             <div class="legenda-item">
-                                <div class="legenda-dot selecionado"></div> Selecionado
+                                <div class="legenda-dot selecionado"></div>Selecionado
                             </div>
                         </div>
                         <div class="horarios-grid" id="horarios-grid">
@@ -2584,7 +2456,7 @@
                                 placeholder="Ex: cabelo tingido, comprimento médio..."></textarea></div>
                     </div>
                     <div class="form-submit">
-                        <button class="btn-primary" style="width:100%;padding:15px;font-size:0.83rem;"
+                        <button class="btn-primary" style="width:100%;padding:15px;font-size:.82rem"
                             onclick="enviarAgendamento()">Confirmar Agendamento →</button>
                     </div>
                 </div>
@@ -2592,81 +2464,32 @@
         </div>
     </section>
 
-    <!-- ══ GALERIA ══ -->
+    <!-- GALERIA -->
     <section id="galeria">
         <div class="container">
-            <div class="section-eyebrow">Transformações reais</div>
-            <h2 class="section-title">Nossa <em>Galeria</em></h2>
-            <div class="galeria-grid">
-                <!-- LINHA 1 -->
-                <div class="galeria-row galeria-row-1">
-                    <div class="galeria-item" onclick="abrirLightbox(0)">
-                        <video src="./photos/video 1.mp4" muted loop playsinline preload="metadata"
-                            style="width:100%;height:100%;object-fit:cover;"></video>
-                        <div class="galeria-video-badge">▶ Vídeo</div>
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Progressiva · Resultado Final</div>
-                        <div class="galeria-zoom-hint">Clique para ver</div>
-                    </div>
-                    <div class="galeria-item" onclick="abrirLightbox(1)">
-                        <img src="./photos/img 1.jpg" alt="Progressiva cabelo longo">
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Progressiva</div>
-                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
-                    </div>
-                </div>
-                <!-- LINHA 2 -->
-                <div class="galeria-row galeria-row-2">
-                    <div class="galeria-item" onclick="abrirLightbox(2)">
-                        <img src="./photos/img 11.jpg" alt="Coloração vinho">
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Coloração + Progressiva</div>
-                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
-                    </div>
-                    <div class="galeria-item" onclick="abrirLightbox(3)">
-                        <img src="./photos/img 4.jpeg" alt="Escova com cachos">
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Escova com Finalização</div>
-                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
-                    </div>
-                    <div class="galeria-item" onclick="abrirLightbox(4)">
-                        <img src="./photos/img 5.jpeg" alt="Chanel liso escuro">
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Progressiva · Chanel</div>
-                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
-                    </div>
-                    <div class="galeria-item" onclick="abrirLightbox(5)">
-                        <img src="./photos/img 6.jpeg" alt="Botox capilar brilho">
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Botox Capilar</div>
-                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
-                    </div>
-                    <div class="galeria-item" onclick="abrirLightbox(6)">
-                        <img src="./photos/img 7.jpeg" alt="Hidratação + finalização">
-                        <div class="galeria-overlay"></div>
-                        <div class="galeria-label">Hidratação + Finalização</div>
-                        <div class="galeria-zoom-hint">🔍 Ampliar</div>
-                    </div>
-                </div>
+            <div class="section-header reveal">
+                <div class="section-eyebrow">Transformações reais</div>
+                <h2 class="section-title">Nossa <em>Galeria</em></h2>
             </div>
+            <div class="galeria-grid reveal" id="galeria-grid"></div>
         </div>
     </section>
 
-    <!-- ══ LIGHTBOX ══ -->
-    <div id="lightbox">
+    <!-- LIGHTBOX -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Visualizador de imagens">
         <div class="lb-header">
             <div>
                 <div class="lb-title" id="lb-label">Galeria</div>
-                <div class="lb-counter" id="lb-counter">1 / 7</div>
+                <div class="lb-counter" id="lb-counter">1 / 1</div>
             </div>
-            <button class="lb-close" onclick="fecharLightbox()">×</button>
+            <button class="lb-close" onclick="fecharLightbox()" aria-label="Fechar">×</button>
         </div>
         <div class="lb-stage">
-            <button class="lb-nav lb-prev" onclick="lbNav(-1)">‹</button>
+            <button class="lb-nav lb-prev" onclick="lbNav(-1)" aria-label="Anterior">‹</button>
             <div id="lb-media-wrap"
-                style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:1rem;">
+                style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:1rem">
             </div>
-            <button class="lb-nav lb-next" onclick="lbNav(1)">›</button>
+            <button class="lb-nav lb-next" onclick="lbNav(1)" aria-label="Próximo">›</button>
         </div>
         <div class="lb-info">
             <div class="lb-label-text" id="lb-label-info"></div>
@@ -2674,81 +2497,65 @@
         <div class="lb-thumbs" id="lb-thumbs"></div>
     </div>
 
-    <!-- ══ DEPOIMENTOS ══ -->
+    <!-- DEPOIMENTOS -->
     <section id="depoimentos">
         <div class="container">
-            <div class="section-eyebrow">O que dizem nossas clientes</div>
-            <h2 class="section-title">Depoimentos</h2>
-            <div class="depoimentos-grid">
-                <div class="depoimento-card">
-                    <div class="depoimento-stars">★★★★★</div>
-                    <p class="depoimento-text">"Fiz a progressiva e ficou incrível! O cabelo ficou liso, brilhante e
-                        muito macio. A Rosane é super atenciosa e cuidadosa."</p>
-                    <div class="depoimento-nome">Ana Paula · Progressiva</div>
-                </div>
-                <div class="depoimento-card">
-                    <div class="depoimento-stars">★★★★★</div>
-                    <p class="depoimento-text">"Realizei o cronograma de 3 sessões e a transformação foi absurda. Meu
-                        cabelo estava destruído e agora está cheio de vida."</p>
-                    <div class="depoimento-nome">Fernanda · Cronograma Capilar</div>
-                </div>
-                <div class="depoimento-card">
-                    <div class="depoimento-stars">★★★★★</div>
-                    <p class="depoimento-text">"Melhor estúdio que já fui! Ambiente aconchegante, atendimento
-                        personalizado e resultado sempre impecável."</p>
-                    <div class="depoimento-nome">Camila · Botox Capilar</div>
-                </div>
+            <div class="section-header reveal">
+                <div class="section-eyebrow">O que dizem nossas clientes</div>
+                <h2 class="section-title">Depoimentos</h2>
             </div>
+            <div class="depoimentos-grid reveal" id="depoimentos-grid"></div>
         </div>
     </section>
 
-    <!-- ══ CONTATO ══ -->
+    <!-- CONTATO -->
     <section id="contato">
         <div class="container">
-            <div class="section-eyebrow" style="justify-content:center;">Fale conosco</div>
-            <h2 class="section-title" style="text-align:center;">Estamos <em style="color:var(--gold-bright);">aqui</em>
-                para você</h2>
-            <div class="contato-infos">
-                <div class="contato-item">📍 Queimados, Rio de Janeiro — RJ</div>
-                <div class="contato-item">📱 <a href="tel:+5521985291781">(21) 98529-1781</a></div>
-                <div class="contato-item">🕐 Seg–Sáb: 8h às 19h</div>
-            </div>
-            <div style="text-align:center;">
-                <a class="whatsapp-btn" href="https://wa.me/5521985291781" target="_blank">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                        <path
-                            d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.28 7.043L.787 23.246l4.306-1.478A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.034-1.387l-.36-.214-3.735 1.282 1.244-3.638-.234-.374A9.797 9.797 0 012.182 12C2.182 6.567 6.567 2.182 12 2.182S21.818 6.567 21.818 12 17.433 21.818 12 21.818z" />
-                    </svg>
-                    Chamar no WhatsApp
-                </a>
+            <div class="reveal">
+                <div class="section-eyebrow" style="justify-content:center">Fale conosco</div>
+                <h2 class="section-title" style="text-align:center">Estamos <em
+                        style="color:var(--gold-bright)">aqui</em> para você</h2>
+                <div class="contato-infos">
+                    <div class="contato-item">📍 Queimados, Rio de Janeiro — RJ</div>
+                    <div class="contato-item">📱 <a href="tel:+5521985291781">(21) 98529-1781</a></div>
+                    <div class="contato-item">🕐 Seg–Sáb: 8h às 19h</div>
+                </div>
+                <div style="text-align:center">
+                    <a class="whatsapp-btn" href="https://wa.me/5521985291781" target="_blank" rel="noopener">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                            <path
+                                d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.28 7.043L.787 23.246l4.306-1.478A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.808 9.808 0 01-5.034-1.387l-.36-.214-3.735 1.282 1.244-3.638-.234-.374A9.797 9.797 0 012.182 12C2.182 6.567 6.567 2.182 12 2.182S21.818 6.567 21.818 12 17.433 21.818 12 21.818z" />
+                        </svg>
+                        Chamar no WhatsApp
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <footer>© 2025 Estúdio Rosane Matos · Todos os direitos reservados · (21) 98529-1781</footer>
+    <div class="toast" id="toast" role="alert" aria-live="polite"></div>
 
-    <div class="toast" id="toast"></div>
-
-    <!-- ══ MODAL LOGIN ══ -->
-    <div class="modal-overlay" id="modal-login">
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="modal-login" role="dialog" aria-modal="true" aria-label="Login">
         <div class="modal">
-            <button class="modal-close" onclick="fecharLogin()">×</button>
+            <button class="modal-close" onclick="fecharLogin()" aria-label="Fechar">×</button>
             <div class="modal-title">Área Restrita</div>
             <div class="modal-sub">Acesso exclusivo — Dona do estúdio</div>
             <div class="modal-fg"><label>Usuário</label><input type="text" id="login-user" placeholder="Rosane"
                     autocomplete="off"></div>
             <div class="modal-fg"><label>Senha</label><input type="password" id="login-pass" placeholder="••••••••"
-                    onkeydown="if(event.key==='Enter')fazerLogin()"></div>
-            <div id="login-error" class="modal-error">Usuário ou senha incorretos.</div>
-            <button class="btn-primary" style="width:100%;margin-top:1.2rem;padding:13px;" onclick="fazerLogin()">Entrar
-                no Painel →</button>
+                    autocomplete="current-password" onkeydown="if(event.key==='Enter')fazerLogin()"></div>
+            <div id="login-error" class="modal-error" role="alert">Usuário ou senha incorretos.</div>
+            <button class="btn-primary" style="width:100%;margin-top:1.1rem;padding:13px" onclick="fazerLogin()">Entrar
+                →</button>
         </div>
     </div>
 
-    <!-- ══ ADMIN PANEL ══ -->
-    <div id="admin-panel">
+    <!-- ADMIN PANEL -->
+    <div id="admin-panel" role="main">
         <div class="admin-header">
             <div class="admin-logo">✦ Painel — Rosane Matos</div>
             <div class="admin-right">
@@ -2765,7 +2572,6 @@
                 <button class="admin-tab" onclick="trocarTab(this,'relatorio')">📈 Relatórios</button>
             </div>
 
-            <!-- DASHBOARD -->
             <div id="tab-dashboard" class="admin-tab-panel active">
                 <div class="admin-section-title">📊 Visão Geral — Este mês</div>
                 <div class="kpi-grid">
@@ -2791,7 +2597,7 @@
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-label">Serviço Top</div>
-                        <div class="kpi-value" style="font-size:1rem;line-height:1.3;" id="kpi-top">—</div>
+                        <div class="kpi-value" style="font-size:1rem;line-height:1.3" id="kpi-top">—</div>
                         <div class="kpi-sub">mais solicitado</div>
                     </div>
                 </div>
@@ -2815,10 +2621,8 @@
                 </div>
             </div>
 
-            <!-- AGENDAMENTOS -->
             <div id="tab-agendamentos" class="admin-tab-panel">
                 <div class="admin-section-title">📋 Todos os Agendamentos</div>
-                <!-- Table (desktop) -->
                 <div class="table-wrap mobile-table-hide">
                     <table class="admin-table">
                         <thead>
@@ -2836,20 +2640,18 @@
                         <tbody id="tbody-todos"></tbody>
                     </table>
                 </div>
-                <!-- Cards (mobile) -->
                 <div class="ag-cards" id="ag-cards-mobile"></div>
             </div>
 
-            <!-- AGENDA DIA -->
             <div id="tab-agenda" class="admin-tab-panel">
                 <div class="admin-section-title">📆 Agenda do Dia</div>
-                <div style="display:flex;align-items:flex-end;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;">
+                <div style="display:flex;align-items:flex-end;gap:.7rem;margin-bottom:1.3rem;flex-wrap:wrap">
                     <div>
                         <label
-                            style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:0.25rem;">Visualizar
+                            style="font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:.22rem">Visualizar
                             data</label>
                         <input type="date" id="agenda-data-view"
-                            style="padding:9px 12px;border:1px solid rgba(201,150,58,0.25);background:var(--white);font-family:'DM Sans',sans-serif;font-size:0.86rem;border-radius:var(--radius);"
+                            style="padding:8px 12px;border:1px solid rgba(200,145,58,.22);background:var(--white);font-family:'DM Sans',sans-serif;font-size:.84rem;border-radius:var(--r)"
                             onchange="renderAgendaDia()">
                     </div>
                     <button class="btn-bloquear" onclick="irParaHoje()">Ver Hoje</button>
@@ -2857,7 +2659,6 @@
                 <div id="agenda-dia-grid" class="agenda-horarios-grid"></div>
             </div>
 
-            <!-- BLOQUEAR -->
             <div id="tab-horarios" class="admin-tab-panel">
                 <div class="admin-section-title">🔒 Bloquear Horários</div>
                 <div class="bloquear-form">
@@ -2878,7 +2679,7 @@
                         </select>
                     </div>
                     <div><label>Motivo</label><input type="text" id="blq-motivo" placeholder="Ex: compromisso pessoal"
-                            style="width:180px;"></div>
+                            style="width:180px"></div>
                     <button class="btn-bloquear" onclick="bloquearHorario()">🔒 Bloquear</button>
                 </div>
                 <div class="admin-section-title">Horários Bloqueados</div>
@@ -2897,7 +2698,6 @@
                 </div>
             </div>
 
-            <!-- RELATÓRIOS -->
             <div id="tab-relatorio" class="admin-tab-panel">
                 <div class="admin-section-title">📊 Relatório por Serviço</div>
                 <div class="table-wrap">
@@ -2920,47 +2720,30 @@
     </div>
 
     <script>
-        // ── HERO PARTICLES ──
-        (function criarParticulas() {
-            const container = document.getElementById('hero-particles');
-            if (!container) return;
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                const size = 2 + Math.random() * 4;
-                p.style.setProperty('--size', size + 'px');
-                p.style.setProperty('--opacity', (0.2 + Math.random() * 0.4).toFixed(2));
-                p.style.setProperty('--duration', (6 + Math.random() * 10).toFixed(1) + 's');
-                p.style.setProperty('--delay', (-Math.random() * 14).toFixed(1) + 's');
-                p.style.setProperty('--drift-y', (-80 - Math.random() * 120).toFixed(0));
-                p.style.setProperty('--drift-x', (-40 + Math.random() * 80).toFixed(0));
-                p.style.left = Math.random() * 100 + '%';
-                p.style.bottom = '-10px';
-                container.appendChild(p);
-            }
-        })();
-
-        // ── NAV MOBILE ──
-        function toggleMenu() {
-            const m = document.getElementById('nav-mobile');
-            m.classList.toggle('open');
-        }
-        function fecharMenu() {
-            document.getElementById('nav-mobile').classList.remove('open');
-        }
-        document.addEventListener('click', function (e) {
-            const m = document.getElementById('nav-mobile');
-            const btn = document.getElementById('menu-btn');
-            if (m.classList.contains('open') && !m.contains(e.target) && !btn.contains(e.target)) fecharMenu();
-        });
-
-        // ── GALERIA VIDEO AUTOPLAY ──
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => { const v = e.target; if (e.isIntersecting) { v.play().catch(() => { }); } else { v.pause(); } });
-        }, { threshold: 0.4 });
-        document.querySelectorAll('.galeria-item video').forEach(v => videoObserver.observe(v));
-
-        // ── LIGHTBOX ──
+        // ── DADOS ──
+        const SERVICOS = [
+            { icon: '✂', nome: 'Escova + Prancha', desc: 'Alinhamento perfeito com finalização profissional, deixando os fios lisos, brilhantes e sedosos.', preco: 'R$ 35,00', label: 'Escova + Prancha — R$ 35' },
+            { icon: '💧', nome: 'Hidratação + Finalização', desc: 'Tratamento intensivo que restaura o brilho e a maciez dos fios ressecados.', preco: 'R$ 40,00', label: 'Hidratação + Finalização — R$ 40' },
+            { icon: '⚗', nome: 'Reconstrução + Finalização', desc: 'Recomposição da estrutura capilar danificada com proteínas e aminoácidos de alta concentração.', preco: 'R$ 55,00', label: 'Reconstrução + Finalização — R$ 55' },
+            { icon: '🎨', nome: 'Coloração', desc: 'Coloração profissional com técnica precisa para realçar a beleza natural dos seus fios.', preco: 'R$ 20,00', label: 'Coloração — R$ 20' },
+            { icon: '📅', nome: 'Cronograma Capilar', desc: 'Programa de 3 sessões personalizadas de hidratação, nutrição e reconstrução.', preco: 'a partir de R$ 170,00', label: 'Cronograma Capilar (3 sessões) — a partir de R$ 170', partir: true },
+            { icon: '✨', nome: 'Botox Capilar', desc: 'Elimina frizz, sela os fios e devolve brilho intenso sem alterar a estrutura.', preco: 'a partir de R$ 80,00', label: 'Botox Capilar — a partir de R$ 80', partir: true },
+            { icon: '💆', nome: 'Progressiva', desc: 'Alisamento duradouro com fórmula de alta performance que elimina frizz e proporciona maciez.', preco: 'a partir de R$ 110,00', label: 'Progressiva — a partir de R$ 110', partir: true },
+            { icon: '🌿', nome: 'Tratamento Personalizado', desc: 'Diagnóstico e tratamento sob medida para as necessidades únicas do seu cabelo.', preco: 'Consulte', label: 'Tratamento Capilar Personalizado' },
+        ];
+        const PRODUTOS = [
+            { nome: 'Wella Professionals', desc: 'Linha de coloração e cuidados capilares de referência mundial, com pigmentos de longa duração.' },
+            { nome: 'Inoar Botox', desc: 'Fórmula de Botox capilar sem formol que sela cutículas e proporciona brilho espelhado.' },
+            { nome: 'Cadiveu Plástica dos Fios', desc: 'Tratamento progressivo de alta performance que combina alisamento e nutrição profunda.' },
+            { nome: "L'Oréal Professionnel", desc: 'Máscaras e tratamentos de reconstrução com tecnologia francesa para fios danificados.' },
+            { nome: 'Kérastase Nutritive', desc: 'Linha de nutrição intensiva para cabelos secos, devolvendo maciez e luminosidade.' },
+            { nome: 'Redken Extreme', desc: 'Linha de reconstrução com proteínas interligadas que repara a estrutura dos fios.' },
+        ];
+        const DEPOIMENTOS = [
+            { texto: '"Fiz a progressiva e ficou incrível! O cabelo ficou liso, brilhante e muito macio. A Rosane é super atenciosa e cuidadosa."', nome: 'Ana Paula · Progressiva' },
+            { texto: '"Realizei o cronograma de 3 sessões e a transformação foi absurda. Meu cabelo estava destruído e agora está cheio de vida."', nome: 'Fernanda · Cronograma Capilar' },
+            { texto: '"Melhor estúdio que já fui! Ambiente aconchegante, atendimento personalizado e resultado sempre impecável."', nome: 'Camila · Botox Capilar' },
+        ];
         const MEDIA = [
             { type: 'video', src: './photos/video 1.mp4', label: 'Progressiva · Resultado Final' },
             { type: 'img', src: './photos/img 1.jpg', label: 'Progressiva' },
@@ -2970,35 +2753,118 @@
             { type: 'img', src: './photos/img 6.jpeg', label: 'Botox Capilar' },
             { type: 'img', src: './photos/img 7.jpeg', label: 'Hidratação + Finalização' },
         ];
+        const HORARIOS = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+        const CRED = { user: 'Rosane', pass: 'Judite157751' };
+
+        // ── PARTICLES ──
+        (() => {
+            const c = document.getElementById('hero-particles');
+            if (!c) return;
+            for (let i = 0; i < 28; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                const s = 2 + Math.random() * 4;
+                p.style.cssText = `--s:${s}px;--op:${(0.15 + Math.random() * .4).toFixed(2)};--dur:${(7 + Math.random() * 10).toFixed(1)}s;--delay:${(-Math.random() * 14).toFixed(1)}s;--dy:${(-90 - Math.random() * 130).toFixed(0)}px;--dx:${(-45 + Math.random() * 90).toFixed(0)}px;left:${Math.random() * 100}%;bottom:-10px`;
+                c.appendChild(p);
+            }
+        })();
+
+        // ── SCROLL REVEAL ──
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target) } });
+        }, { threshold: .12 });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ── NAV SCROLL ──
+        const mainNav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => { mainNav.classList.toggle('scrolled', window.scrollY > 30) }, { passive: true });
+
+        // ── RENDER ──
+        function renderServicos() {
+            document.getElementById('servicos-grid').innerHTML = SERVICOS.map(s => `
+    <div class="servico-card">
+      <div class="servico-icon">${s.icon}</div>
+      <div class="servico-nome">${s.nome}</div>
+      <div class="servico-desc">${s.desc}</div>
+      <div class="servico-footer">
+        <div>${s.partir ? '<span class="servico-partir">a partir de</span>' : ''}<div class="servico-preco">${s.preco}</div></div>
+        <button class="btn-agendar-card" onclick="selecionarServico('${s.label}')">Agendar</button>
+      </div>
+    </div>`).join('');
+        }
+        function renderProdutos() {
+            document.getElementById('produtos-grid').innerHTML = PRODUTOS.map(p => `<div class="produto-card"><h4>${p.nome}</h4><p>${p.desc}</p></div>`).join('');
+        }
+        function renderDepoimentos() {
+            document.getElementById('depoimentos-grid').innerHTML = DEPOIMENTOS.map(d => `<div class="depoimento-card"><div class="depoimento-stars">★★★★★</div><p class="depoimento-text">${d.texto}</p><div class="depoimento-nome">${d.nome}</div></div>`).join('');
+        }
+        function renderGaleria() {
+            const grid = document.getElementById('galeria-grid');
+            const mkItem = (m, i) => {
+                const el = m.type === 'video'
+                    ? `<video src="${m.src}" muted loop playsinline preload="metadata"></video><div class="galeria-video-badge">▶ Vídeo</div>`
+                    : `<img src="${m.src}" alt="${m.label}" loading="lazy">`;
+                return `<div class="galeria-item" onclick="abrirLightbox(${i})" tabindex="0" role="button" aria-label="${m.label}" onkeydown="if(event.key==='Enter')abrirLightbox(${i})">${el}<div class="galeria-overlay"></div><div class="galeria-label">${m.label}</div><div class="galeria-zoom-hint">🔍 Ver</div></div>`;
+            };
+            grid.innerHTML = `
+    <div class="galeria-row galeria-row-1">${MEDIA.slice(0, 2).map((m, i) => mkItem(m, i)).join('')}</div>
+    <div class="galeria-row galeria-row-2">${MEDIA.slice(2).map((m, i) => mkItem(m, i + 2)).join('')}</div>`;
+            const vObs = new IntersectionObserver(entries => entries.forEach(e => { const v = e.target; e.isIntersecting ? v.play().catch(() => { }) : v.pause() }), { threshold: .4 });
+            document.querySelectorAll('.galeria-item video').forEach(v => vObs.observe(v));
+        }
+        function renderSelectServicos() {
+            const sel = document.getElementById('ag-servico');
+            sel.innerHTML = '<option value="">— Selecione o serviço —</option>' + SERVICOS.map(s => `<option>${s.label}</option>`).join('');
+        }
+        renderServicos(); renderProdutos(); renderDepoimentos(); renderGaleria(); renderSelectServicos();
+
+        // ── NAV MENU ──
+        function toggleMenu() {
+            const m = document.getElementById('nav-mobile');
+            const btn = document.getElementById('menu-btn');
+            const isOpen = m.classList.toggle('open');
+            btn.classList.toggle('open', isOpen);
+            btn.setAttribute('aria-expanded', isOpen);
+            m.setAttribute('aria-hidden', !isOpen);
+        }
+        function fecharMenu() {
+            const m = document.getElementById('nav-mobile');
+            const btn = document.getElementById('menu-btn');
+            m.classList.remove('open'); btn.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false'); m.setAttribute('aria-hidden', 'true');
+        }
+        document.addEventListener('click', e => {
+            const m = document.getElementById('nav-mobile');
+            const btn = document.getElementById('menu-btn');
+            if (m.classList.contains('open') && !m.contains(e.target) && !btn.contains(e.target)) fecharMenu();
+        });
+
+        // ── LIGHTBOX ──
         let lbIdx = 0;
         function abrirLightbox(i) {
             lbIdx = i;
             document.getElementById('lightbox').classList.add('open');
             document.body.style.overflow = 'hidden';
-            renderLb();
-            buildThumbs();
+            renderLb(); buildThumbs();
         }
         function fecharLightbox() {
             const lb = document.getElementById('lightbox');
             lb.classList.remove('open');
             document.body.style.overflow = '';
-            // pause any video
             lb.querySelectorAll('video').forEach(v => v.pause());
         }
         function lbNav(dir) {
             lbIdx = (lbIdx + dir + MEDIA.length) % MEDIA.length;
-            renderLb();
-            scrollThumb();
+            renderLb(); scrollThumb();
         }
         function renderLb() {
             const m = MEDIA[lbIdx];
             const wrap = document.getElementById('lb-media-wrap');
-            // pause previous video
             wrap.querySelectorAll('video').forEach(v => v.pause());
             if (m.type === 'video') {
-                wrap.innerHTML = `<video class="lb-video" src="${m.src}" controls autoplay playsinline style="max-width:100%;max-height:calc(100svh - 220px);border-radius:2px;"></video>`;
+                wrap.innerHTML = `<video class="lb-video" src="${m.src}" controls autoplay playsinline style="max-width:100%;max-height:calc(100svh - 220px);border-radius:2px"></video>`;
             } else {
-                wrap.innerHTML = `<img class="lb-media" src="${m.src}" alt="${m.label}" style="max-height:calc(100svh - 220px);">`;
+                wrap.innerHTML = `<img class="lb-media" src="${m.src}" alt="${m.label}" style="max-height:calc(100svh - 220px)">`;
             }
             document.getElementById('lb-label').textContent = m.label;
             document.getElementById('lb-label-info').textContent = m.label;
@@ -3009,46 +2875,37 @@
             const c = document.getElementById('lb-thumbs');
             c.innerHTML = MEDIA.map((m, i) => {
                 const el = m.type === 'video'
-                    ? `<video src="${m.src}" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;pointer-events:none;"></video>`
-                    : `<img src="${m.src}" alt="${m.label}" style="width:100%;height:100%;object-fit:cover;">`;
-                return `<div class="lb-thumb${i === lbIdx ? ' active' : ''}" onclick="lbGoTo(${i})">${el}</div>`;
+                    ? `<video src="${m.src}" muted playsinline preload="metadata" style="width:100%;height:100%;object-fit:cover;pointer-events:none"></video>`
+                    : `<img src="${m.src}" alt="${m.label}" style="width:100%;height:100%;object-fit:cover">`;
+                return `<div class="lb-thumb${i === lbIdx ? ' active' : ''}" onclick="lbGoTo(${i})" tabindex="0" role="button" aria-label="${m.label}" onkeydown="if(event.key==='Enter')lbGoTo(${i})">${el}</div>`;
             }).join('');
         }
-        function lbGoTo(i) { lbIdx = i; renderLb(); scrollThumb(); }
-        function scrollThumb() {
-            const c = document.getElementById('lb-thumbs');
-            const t = c.querySelectorAll('.lb-thumb')[lbIdx];
-            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-        // keyboard nav
-        document.addEventListener('keydown', function (e) {
+        function lbGoTo(i) { lbIdx = i; renderLb(); scrollThumb() }
+        function scrollThumb() { const t = document.querySelectorAll('.lb-thumb')[lbIdx]; if (t) t.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }) }
+        document.addEventListener('keydown', e => {
             if (!document.getElementById('lightbox').classList.contains('open')) return;
             if (e.key === 'ArrowLeft') lbNav(-1);
             else if (e.key === 'ArrowRight') lbNav(1);
             else if (e.key === 'Escape') fecharLightbox();
         });
-        // swipe support
         let tsX = 0;
-        document.getElementById('lightbox').addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, { passive: true });
-        document.getElementById('lightbox').addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - tsX;
-            if (Math.abs(dx) > 50) { lbNav(dx < 0 ? 1 : -1); }
-        }, { passive: true });
+        document.getElementById('lightbox').addEventListener('touchstart', e => { tsX = e.touches[0].clientX }, { passive: true });
+        document.getElementById('lightbox').addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tsX; if (Math.abs(dx) > 50) lbNav(dx < 0 ? 1 : -1) }, { passive: true });
 
         // ── DB ──
         const DB = {
-            async get(key) { try { const r = await window.storage.get(key); return r ? JSON.parse(r.value) : null; } catch { return null; } },
-            async set(key, val) { try { await window.storage.set(key, JSON.stringify(val)); } catch (e) { console.warn('storage', e); } }
+            async get(k) { try { const r = await window.storage.get(k); return r ? JSON.parse(r.value) : null } catch { return null } },
+            async set(k, v) { try { await window.storage.set(k, JSON.stringify(v)) } catch { } }
         };
-        const CRED = { user: 'Rosane', pass: 'Judite157751' };
-        const HORARIOS = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
-        let agendamentos = [], bloqueados = [];
 
-        async function inicializar() {
+        let agendamentos = [], bloqueados = [], horarioSel = '';
+
+        async function init() {
             agendamentos = await DB.get('rm_agendamentos') || [];
             bloqueados = await DB.get('rm_bloqueados') || [];
             if (agendamentos.length === 0) {
-                const hoje = new Date(); const fmt = d => d.toISOString().split('T')[0];
+                const hoje = new Date();
+                const fmt = d => d.toISOString().split('T')[0];
                 agendamentos = [
                     { id: 1, data: fmt(new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1)), hora: '09:00', nome: 'Ana Paula', tel: '(21) 98765-4321', servico: 'Escova + Prancha — R$ 35', valor: 35, obs: '', status: 'confirmado' },
                     { id: 2, data: fmt(new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1)), hora: '11:00', nome: 'Fernanda Lima', tel: '(21) 97654-3210', servico: 'Progressiva — a partir de R$ 110', valor: 110, obs: 'cabelo longo', status: 'confirmado' },
@@ -3063,157 +2920,193 @@
             }
             document.getElementById('ag-data').min = new Date().toISOString().split('T')[0];
         }
-        async function salvar() { await DB.set('rm_agendamentos', agendamentos); await DB.set('rm_bloqueados', bloqueados); }
-        inicializar();
+        async function salvar() { await DB.set('rm_agendamentos', agendamentos); await DB.set('rm_bloqueados', bloqueados) }
+        init();
 
-        function toast(msg, dur = 3000) { const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), dur); }
+        function toast(msg, dur = 3200) {
+            const el = document.getElementById('toast');
+            el.textContent = msg; el.classList.add('show');
+            setTimeout(() => el.classList.remove('show'), dur);
+        }
 
-        let horarioSel = '';
         function selecionarServico(nome) {
             const sel = document.getElementById('ag-servico');
-            for (let i = 0; i < sel.options.length; i++) { if (sel.options[i].value.startsWith(nome.split('—')[0].trim()) || sel.options[i].text.startsWith(nome.split('—')[0].trim())) { sel.selectedIndex = i; break; } }
+            for (let i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].text.startsWith(nome.split('—')[0].trim())) { sel.selectedIndex = i; break }
+            }
             document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
         }
+
         function atualizarHorarios() {
             const data = document.getElementById('ag-data').value;
             const grid = document.getElementById('horarios-grid');
-            if (!data) { grid.innerHTML = '<div class="horarios-placeholder">Selecione uma data para ver os horários</div>'; return; }
+            if (!data) { grid.innerHTML = '<div class="horarios-placeholder">Selecione uma data para ver os horários</div>'; return }
             const ocup = agendamentos.filter(a => a.data === data && a.status !== 'cancelado').map(a => a.hora);
             const blq = bloqueados.filter(b => b.data === data).map(b => b.hora);
             const indispon = [...new Set([...ocup, ...blq])];
-            horarioSel = ''; document.getElementById('ag-horario-display').value = ''; grid.innerHTML = '';
+            horarioSel = '';
+            document.getElementById('ag-horario-display').value = '';
+            grid.innerHTML = '';
             HORARIOS.forEach(h => {
                 const btn = document.createElement('button');
                 const isOcup = indispon.includes(h);
                 btn.className = 'horario-btn' + (isOcup ? ' ocupado' : '');
                 btn.textContent = h; btn.type = 'button';
-                if (!isOcup) { btn.onclick = () => { document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); horarioSel = h; document.getElementById('ag-horario-display').value = h; }; }
+                if (!isOcup) btn.onclick = () => {
+                    document.querySelectorAll('.horario-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected'); horarioSel = h;
+                    document.getElementById('ag-horario-display').value = h;
+                };
                 grid.appendChild(btn);
             });
         }
+
         async function enviarAgendamento() {
             const nome = document.getElementById('ag-nome').value.trim();
             const tel = document.getElementById('ag-tel').value.trim();
             const servico = document.getElementById('ag-servico').value;
             const data = document.getElementById('ag-data').value;
             const obs = document.getElementById('ag-obs').value.trim();
-            if (!nome || !tel || !servico || !data || !horarioSel) { toast('⚠ Preencha todos os campos e selecione um horário.'); return; }
-            const conflito = agendamentos.find(a => a.data === data && a.hora === horarioSel && a.status !== 'cancelado');
-            const bloqConflito = bloqueados.find(b => b.data === data && b.hora === horarioSel);
-            if (conflito || bloqConflito) { toast('⚠ Este horário não está mais disponível. Escolha outro.'); atualizarHorarios(); return; }
-            const match = servico.match(/R\$\s*(\d+)/); const valor = match ? parseInt(match[1]) : 0;
+            if (!nome || !tel || !servico || !data || !horarioSel) { toast('⚠ Preencha todos os campos e selecione um horário.'); return }
+            if (agendamentos.find(a => a.data === data && a.hora === horarioSel && a.status !== 'cancelado') || bloqueados.find(b => b.data === data && b.hora === horarioSel)) {
+                toast('⚠ Este horário não está mais disponível.'); atualizarHorarios(); return;
+            }
+            const match = servico.match(/R\$\s*(\d+)/);
+            const valor = match ? parseInt(match[1]) : 0;
             agendamentos.push({ id: Date.now(), data, hora: horarioSel, nome, tel, servico, valor, obs, status: 'pendente' });
             await salvar(); atualizarHorarios();
             ['ag-nome', 'ag-tel', 'ag-obs', 'ag-horario-display'].forEach(id => document.getElementById(id).value = '');
-            document.getElementById('ag-servico').selectedIndex = 0; document.getElementById('ag-data').value = ''; horarioSel = '';
-            const msg = document.getElementById('form-success'); msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 6000);
+            document.getElementById('ag-servico').selectedIndex = 0;
+            document.getElementById('ag-data').value = '';
+            horarioSel = '';
+            const msg = document.getElementById('form-success');
+            msg.style.display = 'block'; setTimeout(() => msg.style.display = 'none', 6000);
         }
 
-        function abrirLogin() { document.getElementById('modal-login').classList.add('open'); }
-        function fecharLogin() { document.getElementById('modal-login').classList.remove('open'); document.getElementById('login-error').style.display = 'none'; }
+        // ── LOGIN / ADMIN ──
+        function abrirLogin() { document.getElementById('modal-login').classList.add('open') }
+        function fecharLogin() { document.getElementById('modal-login').classList.remove('open'); document.getElementById('login-error').style.display = 'none' }
         function fazerLogin() {
             const u = document.getElementById('login-user').value.trim();
             const p = document.getElementById('login-pass').value.trim();
-            if (u === CRED.user && p === CRED.pass) { fecharLogin(); document.getElementById('admin-panel').classList.add('open'); carregarAdmin(); }
-            else { document.getElementById('login-error').style.display = 'block'; }
+            if (u === CRED.user && p === CRED.pass) { fecharLogin(); document.getElementById('admin-panel').classList.add('open'); carregarAdmin() }
+            else { document.getElementById('login-error').style.display = 'block' }
         }
-        function fecharAdmin() { document.getElementById('admin-panel').classList.remove('open'); }
+        function fecharAdmin() { document.getElementById('admin-panel').classList.remove('open') }
         function trocarTab(btn, tab) {
             document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-' + tab).classList.add('active'); btn.classList.add('active');
+            document.getElementById('tab-' + tab).classList.add('active');
+            btn.classList.add('active');
             if (tab === 'agenda') renderAgendaDia();
         }
-        function carregarAdmin() { carregarDashboard(); carregarTodos(); carregarBloqueados(); carregarRelatorio(); }
+        function carregarAdmin() { carregarDashboard(); carregarTodos(); carregarBloqueados(); carregarRelatorio() }
 
         function carregarDashboard() {
-            const hoje = new Date(); const mes = hoje.getMonth(), ano = hoje.getFullYear(); const todayStr = hoje.toISOString().split('T')[0];
-            const doMes = agendamentos.filter(a => { const d = new Date(a.data + 'T12:00'); return d.getMonth() === mes && d.getFullYear() === ano && a.status === 'confirmado'; });
+            const hoje = new Date();
+            const mes = hoje.getMonth(), ano = hoje.getFullYear();
+            const todayStr = hoje.toISOString().split('T')[0];
+            const doMes = agendamentos.filter(a => { const d = new Date(a.data + 'T12:00'); return d.getMonth() === mes && d.getFullYear() === ano && a.status === 'confirmado' });
             const fat = doMes.reduce((s, a) => s + a.valor, 0);
             const pend = agendamentos.filter(a => a.status === 'pendente').length;
             document.getElementById('kpi-fat').textContent = 'R$ ' + fat.toFixed(2).replace('.', ',');
             document.getElementById('kpi-ags').textContent = doMes.length;
             document.getElementById('kpi-ticket').textContent = doMes.length ? 'R$ ' + (fat / doMes.length).toFixed(2).replace('.', ',') : '—';
             document.getElementById('kpi-pend').textContent = pend;
-            const cont = {}; doMes.forEach(a => { const k = a.servico.split('—')[0].trim(); cont[k] = (cont[k] || 0) + 1; });
+            const cont = {};
+            doMes.forEach(a => { const k = a.servico.split('—')[0].trim(); cont[k] = (cont[k] || 0) + 1 });
             const top = Object.entries(cont).sort((a, b) => b[1] - a[1])[0];
             document.getElementById('kpi-top').textContent = top ? top[0].split('(')[0].trim() : '—';
-            const todos = {}; agendamentos.filter(a => a.status === 'confirmado').forEach(a => { const k = a.servico.split('—')[0].trim(); todos[k] = (todos[k] || 0) + 1; });
-            const sorted = Object.entries(todos).sort((a, b) => b[1] - a[1]); const max = sorted[0]?.[1] || 1;
-            document.getElementById('chart-servicos').innerHTML = sorted.map(([n, q]) => `<div class="chart-row"><div class="chart-label">${n.split('+')[0].trim()}</div><div class="chart-track"><div class="chart-fill" style="width:${(q / max * 100).toFixed(0)}%"></div></div><div class="chart-val">${q}x</div></div>`).join('');
+            const todos = {};
+            agendamentos.filter(a => a.status === 'confirmado').forEach(a => { const k = a.servico.split('—')[0].trim(); todos[k] = (todos[k] || 0) + 1 });
+            const sorted = Object.entries(todos).sort((a, b) => b[1] - a[1]);
+            const max = sorted[0]?.[1] || 1;
+            document.getElementById('chart-servicos').innerHTML = sorted.map(([n, q]) =>
+                `<div class="chart-row"><div class="chart-label">${n.split('+')[0].trim()}</div><div class="chart-track"><div class="chart-fill" style="width:${(q / max * 100).toFixed(0)}%"></div></div><div class="chart-val">${q}x</div></div>`).join('');
             const prox = agendamentos.filter(a => a.data >= todayStr && a.status !== 'cancelado').sort((a, b) => a.data.localeCompare(b.data) || a.hora.localeCompare(b.hora)).slice(0, 10);
-            document.getElementById('tbody-proximos').innerHTML = prox.map(a => `<tr><td>${fmtData(a.data)}</td><td>${a.hora}</td><td><strong>${a.nome}</strong></td><td>${a.servico.split('—')[0].trim()}</td><td>R$ ${a.valor ? a.valor.toFixed(2).replace('.', ',') : '—'}</td><td><span class="badge ${badgeCls(a.status)}">${a.status}</span></td></tr>`).join('') || '<tr><td colspan="6" class="empty-state">Nenhum agendamento próximo</td></tr>';
+            document.getElementById('tbody-proximos').innerHTML = prox.map(a =>
+                `<tr><td>${fmtData(a.data)}</td><td>${a.hora}</td><td><strong>${a.nome}</strong></td><td>${a.servico.split('—')[0].trim()}</td><td>R$ ${a.valor ? a.valor.toFixed(2).replace('.', ',') : '—'}</td><td><span class="badge ${badgeCls(a.status)}">${a.status}</span></td></tr>`).join('') ||
+                '<tr><td colspan="6" class="empty-state">Nenhum agendamento próximo</td></tr>';
         }
 
         function carregarTodos() {
             const sorted = [...agendamentos].sort((a, b) => b.data.localeCompare(a.data) || b.hora.localeCompare(a.hora));
-            // Desktop table
-            document.getElementById('tbody-todos').innerHTML = sorted.map(a => `<tr><td>${fmtData(a.data)}</td><td>${a.hora}</td><td><strong>${a.nome}</strong></td><td>${a.tel}</td><td>${a.servico.split('—')[0].trim()}</td><td>${a.obs || '—'}</td><td><span class="badge ${badgeCls(a.status)}">${a.status}</span></td><td class="actions">${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓</button>` : ''}${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty-state">Nenhum agendamento</td></tr>';
-            // Mobile cards
-            document.getElementById('ag-cards-mobile').innerHTML = sorted.map(a => `
-        <div class="ag-card">
-            <div class="ag-card-header">
-                <div class="ag-card-nome">${a.nome}</div>
-                <span class="badge ${badgeCls(a.status)}">${a.status}</span>
-            </div>
-            <div class="ag-card-row">📅 ${fmtData(a.data)} &nbsp;·&nbsp; 🕐 ${a.hora}</div>
-            <div class="ag-card-row">💇 ${a.servico.split('—')[0].trim()}</div>
-            <div class="ag-card-row">📱 ${a.tel}${a.obs ? ` &nbsp;·&nbsp; 📝 ${a.obs}` : ''}</div>
-            ${a.valor ? `<div class="ag-card-row">💰 R$ ${a.valor.toFixed(2).replace('.', ',')}</div>` : ''}
-            <div class="ag-card-actions">
-                ${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓ Confirmar</button>` : ''}
-                ${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕ Cancelar</button>` : ''}
-            </div>
-        </div>`).join('') || '<div class="empty-state">Nenhum agendamento</div>';
+            document.getElementById('tbody-todos').innerHTML = sorted.map(a =>
+                `<tr><td>${fmtData(a.data)}</td><td>${a.hora}</td><td><strong>${a.nome}</strong></td><td>${a.tel}</td><td>${a.servico.split('—')[0].trim()}</td><td>${a.obs || '—'}</td><td><span class="badge ${badgeCls(a.status)}">${a.status}</span></td><td class="actions">${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓</button>` : ''}${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕</button>` : ''}</td></tr>`).join('') ||
+                '<tr><td colspan="8" class="empty-state">Nenhum agendamento</td></tr>';
+            document.getElementById('ag-cards-mobile').innerHTML = sorted.map(a =>
+                `<div class="ag-card"><div class="ag-card-header"><div class="ag-card-nome">${a.nome}</div><span class="badge ${badgeCls(a.status)}">${a.status}</span></div><div class="ag-card-row">📅 ${fmtData(a.data)} &nbsp;·&nbsp; 🕐 ${a.hora}</div><div class="ag-card-row">💇 ${a.servico.split('—')[0].trim()}</div><div class="ag-card-row">📱 ${a.tel}${a.obs ? ' &nbsp;·&nbsp; 📝 ' + a.obs : ''}</div>${a.valor ? '<div class="ag-card-row">💰 R$ ' + a.valor.toFixed(2).replace('.', ',') + '</div>' : ''}<div class="ag-card-actions">${a.status === 'pendente' ? `<button class="btn-action btn-confirmar" onclick="confirmarAg(${a.id})">✓ Confirmar</button>` : ''}${a.status !== 'cancelado' ? `<button class="btn-action btn-cancelar" onclick="cancelarAg(${a.id})">✕ Cancelar</button>` : ''}</div></div>`).join('') ||
+                '<div class="empty-state">Nenhum agendamento</div>';
         }
 
-        async function confirmarAg(id) { const a = agendamentos.find(x => x.id === id); if (a) { a.status = 'confirmado'; await salvar(); carregarAdmin(); toast('✓ Agendamento confirmado!'); } }
-        async function cancelarAg(id) { if (!confirm('Cancelar este agendamento?')) return; const a = agendamentos.find(x => x.id === id); if (a) { a.status = 'cancelado'; await salvar(); carregarAdmin(); toast('Agendamento cancelado.'); } }
+        async function confirmarAg(id) { const a = agendamentos.find(x => x.id === id); if (a) { a.status = 'confirmado'; await salvar(); carregarAdmin(); toast('✓ Agendamento confirmado!') } }
+        async function cancelarAg(id) { if (!confirm('Cancelar este agendamento?')) return; const a = agendamentos.find(x => x.id === id); if (a) { a.status = 'cancelado'; await salvar(); carregarAdmin(); toast('Agendamento cancelado.') } }
 
-        function irParaHoje() { const hoje = new Date().toISOString().split('T')[0]; document.getElementById('agenda-data-view').value = hoje; renderAgendaDia(); }
+        function irParaHoje() { const hoje = new Date().toISOString().split('T')[0]; document.getElementById('agenda-data-view').value = hoje; renderAgendaDia() }
         function renderAgendaDia() {
             const data = document.getElementById('agenda-data-view').value;
-            if (!data) { document.getElementById('agenda-dia-grid').innerHTML = '<div class="empty-state">Selecione uma data</div>'; return; }
+            if (!data) { document.getElementById('agenda-dia-grid').innerHTML = '<div class="empty-state">Selecione uma data</div>'; return }
             const ags = agendamentos.filter(a => a.data === data && a.status !== 'cancelado');
             const blqs = bloqueados.filter(b => b.data === data);
             document.getElementById('agenda-dia-grid').innerHTML = HORARIOS.map(h => {
-                const ag = ags.find(a => a.hora === h); const blq = blqs.find(b => b.hora === h);
-                if (ag) return `<div class="agenda-slot ocupado-ag"><div class="agenda-slot-hora">🔴 ${h}</div><div class="agenda-slot-info">${ag.nome}</div><div class="agenda-slot-info" style="opacity:0.55;font-size:0.7rem;">${ag.servico.split('—')[0].trim()}</div></div>`;
-                if (blq) return `<div class="agenda-slot bloqueado-slot"><div class="agenda-slot-hora">⚠ ${h}</div><div class="agenda-slot-info">Bloqueado</div><div class="agenda-slot-info" style="opacity:0.55;font-size:0.7rem;">${blq.motivo || '—'}</div></div>`;
+                const ag = ags.find(a => a.hora === h);
+                const blq = blqs.find(b => b.hora === h);
+                if (ag) return `<div class="agenda-slot ocupado-ag"><div class="agenda-slot-hora">🔴 ${h}</div><div class="agenda-slot-info">${ag.nome}</div><div class="agenda-slot-info" style="opacity:.5;font-size:.68rem">${ag.servico.split('—')[0].trim()}</div></div>`;
+                if (blq) return `<div class="agenda-slot bloqueado-slot"><div class="agenda-slot-hora">⚠ ${h}</div><div class="agenda-slot-info">Bloqueado</div><div class="agenda-slot-info" style="opacity:.5;font-size:.68rem">${blq.motivo || '—'}</div></div>`;
                 return `<div class="agenda-slot livre"><div class="agenda-slot-hora">🟢 ${h}</div><div class="agenda-slot-info">Disponível</div></div>`;
             }).join('');
         }
 
         function carregarBloqueados() {
-            document.getElementById('tbody-bloqueados').innerHTML = bloqueados.map((b, i) => `<tr><td>${fmtData(b.data)}</td><td>${b.hora}</td><td>${b.motivo || '—'}</td><td><button class="btn-action btn-desbloquear" onclick="desbloquear(${i})">🔓 Desbloquear</button></td></tr>`).join('') || '<tr><td colspan="4" class="empty-state">Nenhum horário bloqueado</td></tr>';
+            document.getElementById('tbody-bloqueados').innerHTML = bloqueados.map((b, i) =>
+                `<tr><td>${fmtData(b.data)}</td><td>${b.hora}</td><td>${b.motivo || '—'}</td><td><button class="btn-action btn-desbloquear" onclick="desbloquear(${i})">🔓 Desbloquear</button></td></tr>`).join('') ||
+                '<tr><td colspan="4" class="empty-state">Nenhum horário bloqueado</td></tr>';
         }
+
         async function bloquearHorario() {
-            const data = document.getElementById('blq-data').value; const hora = document.getElementById('blq-hora').value; const motivo = document.getElementById('blq-motivo').value;
-            if (!data) { toast('⚠ Selecione uma data.'); return; }
+            const data = document.getElementById('blq-data').value;
+            const hora = document.getElementById('blq-hora').value;
+            const motivo = document.getElementById('blq-motivo').value;
+            if (!data) { toast('⚠ Selecione uma data.'); return }
             const conflito = agendamentos.find(a => a.data === data && a.hora === hora && a.status !== 'cancelado');
-            if (conflito) { toast('⚠ Já existe um agendamento neste horário: ' + conflito.nome); return; }
-            if (bloqueados.find(b => b.data === data && b.hora === hora)) { toast('⚠ Horário já bloqueado.'); return; }
+            if (conflito) { toast('⚠ Já existe agendamento neste horário: ' + conflito.nome); return }
+            if (bloqueados.find(b => b.data === data && b.hora === hora)) { toast('⚠ Horário já bloqueado.'); return }
             bloqueados.push({ data, hora, motivo: motivo || 'Bloqueado' });
-            await salvar(); carregarBloqueados(); document.getElementById('blq-data').value = ''; document.getElementById('blq-motivo').value = ''; toast('🔒 Horário bloqueado com sucesso!');
+            await salvar(); carregarBloqueados();
+            document.getElementById('blq-data').value = ''; document.getElementById('blq-motivo').value = '';
+            toast('🔒 Horário bloqueado com sucesso!');
         }
-        async function desbloquear(i) { bloqueados.splice(i, 1); await salvar(); carregarBloqueados(); toast('🔓 Horário desbloqueado!'); }
+
+        async function desbloquear(i) { bloqueados.splice(i, 1); await salvar(); carregarBloqueados(); toast('🔓 Horário desbloqueado!') }
 
         function carregarRelatorio() {
             const rel = {};
-            agendamentos.filter(a => a.status === 'confirmado').forEach(a => { const k = a.servico.split('—')[0].trim(); if (!rel[k]) rel[k] = { qtd: 0, fat: 0 }; rel[k].qtd++; rel[k].fat += a.valor; });
+            agendamentos.filter(a => a.status === 'confirmado').forEach(a => {
+                const k = a.servico.split('—')[0].trim();
+                if (!rel[k]) rel[k] = { qtd: 0, fat: 0 }; rel[k].qtd++; rel[k].fat += a.valor;
+            });
             const totalFat = Object.values(rel).reduce((s, r) => s + r.fat, 0) || 1;
             const sorted = Object.entries(rel).sort((a, b) => b[1].fat - a[1].fat);
-            document.getElementById('tbody-relatorio').innerHTML = sorted.map(([n, r]) => `<tr><td>${n}</td><td>${r.qtd}</td><td>R$ ${r.fat.toFixed(2).replace('.', ',')}</td><td>${(r.fat / totalFat * 100).toFixed(1)}%</td></tr>`).join('') || '<tr><td colspan="4" class="empty-state">Sem dados</td></tr>';
+            document.getElementById('tbody-relatorio').innerHTML = sorted.map(([n, r]) =>
+                `<tr><td>${n}</td><td>${r.qtd}</td><td>R$ ${r.fat.toFixed(2).replace('.', ',')}</td><td>${(r.fat / totalFat * 100).toFixed(1)}%</td></tr>`).join('') ||
+                '<tr><td colspan="4" class="empty-state">Sem dados</td></tr>';
             const sems = {};
-            agendamentos.filter(a => a.status === 'confirmado').forEach(a => { const d = new Date(a.data + 'T12:00'); const s = `Sem. ${getSemana(d)} (${d.getFullYear()})`; sems[s] = (sems[s] || 0) + a.valor; });
-            const semArr = Object.entries(sems).slice(-8); const maxV = semArr.reduce((m, [, v]) => Math.max(m, v), 1);
-            document.getElementById('chart-semanas').innerHTML = semArr.map(([s, v]) => `<div class="chart-row"><div class="chart-label">${s}</div><div class="chart-track"><div class="chart-fill" style="width:${(v / maxV * 100).toFixed(0)}%"></div></div><div class="chart-val">R$${v}</div></div>`).join('');
+            agendamentos.filter(a => a.status === 'confirmado').forEach(a => {
+                const d = new Date(a.data + 'T12:00');
+                const s = `Sem. ${getSemana(d)} (${d.getFullYear()})`;
+                sems[s] = (sems[s] || 0) + a.valor;
+            });
+            const semArr = Object.entries(sems).slice(-8);
+            const maxV = semArr.reduce((m, [, v]) => Math.max(m, v), 1);
+            document.getElementById('chart-semanas').innerHTML = semArr.map(([s, v]) =>
+                `<div class="chart-row"><div class="chart-label">${s}</div><div class="chart-track"><div class="chart-fill" style="width:${(v / maxV * 100).toFixed(0)}%"></div></div><div class="chart-val">R$${v}</div></div>`).join('');
         }
 
-        function badgeCls(s) { return s === 'confirmado' ? 'badge-ok' : s === 'pendente' ? 'badge-pending' : 'badge-cancel'; }
-        function fmtData(s) { if (!s) return '—'; const [y, m, d] = s.split('-'); return `${d}/${m}/${y}`; }
-        function getSemana(d) { const j = new Date(d.getFullYear(), 0, 1); return Math.ceil(((d - j) / 86400000 + j.getDay() + 1) / 7); }
-        document.getElementById('modal-login').addEventListener('click', function (e) { if (e.target === this) fecharLogin(); });
+        function badgeCls(s) { return s === 'confirmado' ? 'badge-ok' : s === 'pendente' ? 'badge-pending' : 'badge-cancel' }
+        function fmtData(s) { if (!s) return '—'; const [y, m, d] = s.split('-'); return `${d}/${m}/${y}` }
+        function getSemana(d) { const j = new Date(d.getFullYear(), 0, 1); return Math.ceil(((d - j) / 86400000 + j.getDay() + 1) / 7) }
+
+        document.getElementById('modal-login').addEventListener('click', function (e) { if (e.target === this) fecharLogin() });
     </script>
 </body>
 
